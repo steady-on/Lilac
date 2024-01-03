@@ -89,8 +89,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-# 프로젝트의 모든 경로에서 .DS_Store 파일을 포함하지 않도록 함
+# 프로젝트의 모든 경로에서 다음 파일을 포함하지 않도록 함
 **/.DS_Store
-
-# 프로젝트의 모든 경로에서 APIKey.swift 파일을 포함하지 않도록 함
 **/APIKey.swift
+**/BaseURL.swift
