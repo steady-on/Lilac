@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6317EE742B470F90007662A5 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE732B470F90007662A5 /* UIFont+.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6317EE732B470F90007662A5 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6317EE722B470F7F007662A5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6317EE732B470F90007662A5 /* UIFont+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		633CB4522B46B6E900448E9B = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +73,7 @@
 				633CB45E2B46B6E900448E9B /* AppDelegate.swift */,
 				633CB4602B46B6E900448E9B /* SceneDelegate.swift */,
 				633CB4622B46B6E900448E9B /* ViewController.swift */,
+				6317EE722B470F7F007662A5 /* Extension */,
 				633CB4672B46B6EA00448E9B /* Assets.xcassets */,
 				633CB4692B46B6EA00448E9B /* LaunchScreen.storyboard */,
 				633CB46C2B46B6EA00448E9B /* Info.plist */,
@@ -151,6 +162,7 @@
 			files = (
 				633CB4632B46B6E900448E9B /* ViewController.swift in Sources */,
 				633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */,
+				6317EE742B470F90007662A5 /* UIFont+.swift in Sources */,
 				633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
