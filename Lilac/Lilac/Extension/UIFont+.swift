@@ -39,4 +39,8 @@ extension UIFont {
             }
         }
     }
+    
+    static func brandedFont(_ style: Style) -> UIFont {
+        return .systemFont(ofSize: style.size, weight: style.weight)
+    }
 }
