@@ -11,4 +11,13 @@ struct Responder {
     struct Auth: Decodable {
         let accessToken: String
     }
+    
+    struct SignUp: Decodable {
+        let token: Token
+        
+        struct Token: Decodable {
+            let accessToken, refreshToken: String
+        }
+    }
+
 }
