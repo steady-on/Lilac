@@ -13,6 +13,7 @@
 		6317EE842B480C83007662A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6317EE832B480C83007662A5 /* Alamofire */; };
 		6317EE882B480D20007662A5 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE872B480D20007662A5 /* APIKey.swift */; };
 		6317EE8A2B480D84007662A5 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE892B480D84007662A5 /* BaseURL.swift */; };
+		6317EE922B487414007662A5 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6317EE912B487414007662A5 /* Moya */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 				633CB4792B46B83F00448E9B /* SnapKit in Frameworks */,
 				6317EE842B480C83007662A5 /* Alamofire in Frameworks */,
 				633CB4762B46B82F00448E9B /* RxSwift in Frameworks */,
+				6317EE922B487414007662A5 /* Moya in Frameworks */,
 				633CB4742B46B82F00448E9B /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +142,7 @@
 				633CB4752B46B82F00448E9B /* RxSwift */,
 				633CB4782B46B83F00448E9B /* SnapKit */,
 				6317EE832B480C83007662A5 /* Alamofire */,
+				6317EE912B487414007662A5 /* Moya */,
 			);
 			productName = Lilac;
 			productReference = 633CB45B2B46B6E900448E9B /* Lilac.app */;
@@ -173,6 +176,7 @@
 				633CB4722B46B82F00448E9B /* XCRemoteSwiftPackageReference "RxSwift" */,
 				633CB4772B46B83F00448E9B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6317EE822B480C83007662A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 633CB45C2B46B6E900448E9B /* Products */;
 			projectDirPath = "";
@@ -440,6 +444,14 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		633CB4722B46B82F00448E9B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -463,6 +475,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6317EE822B480C83007662A5 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		6317EE912B487414007662A5 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 		633CB4732B46B82F00448E9B /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
