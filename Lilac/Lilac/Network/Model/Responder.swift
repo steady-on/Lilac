@@ -20,4 +20,7 @@ struct Responder {
         }
     }
 
+    struct Error: Decodable {
+        let errorCode: String
+    }
 }
