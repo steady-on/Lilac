@@ -12,7 +12,6 @@ struct Requester {
         let email: String
         let password: String
         let nickname: String
-        let phone: String
-        let deviceToken: String
+        let phone: String?
     }
 }
