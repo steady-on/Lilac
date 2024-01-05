@@ -15,6 +15,7 @@
 		6317EE8A2B480D84007662A5 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE892B480D84007662A5 /* BaseURL.swift */; };
 		6317EE922B487414007662A5 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6317EE912B487414007662A5 /* Moya */; };
 		6317EE942B487543007662A5 /* LilacAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE932B487543007662A5 /* LilacAPI.swift */; };
+		6317EE972B487812007662A5 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE962B487812007662A5 /* Requester.swift */; };
 		6317EE992B487890007662A5 /* Responder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE982B487890007662A5 /* Responder.swift */; };
 		6317EE9B2B487BE5007662A5 /* LilacAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE9A2B487BE5007662A5 /* LilacAPIError.swift */; };
 		6317EE9E2B487DD8007662A5 /* Auth + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EE9D2B487DD8007662A5 /* Auth + TargetType.swift */; };
@@ -34,6 +35,7 @@
 		6317EE7D2B480063007662A5 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		6317EE872B480D20007662A5 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		6317EE892B480D84007662A5 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		6317EE932B487543007662A5 /* LilacAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacAPI.swift; sourceTree = "<group>"; };
 		6317EE962B487812007662A5 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
 		6317EE982B487890007662A5 /* Responder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responder.swift; sourceTree = "<group>"; };
 		6317EE9A2B487BE5007662A5 /* LilacAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacAPIError.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		6317EE952B4877EF007662A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				6317EE962B487812007662A5 /* Requester.swift */,
