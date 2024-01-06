@@ -14,13 +14,19 @@ struct Responder {
     
     struct SignUp: Decodable {
         let token: Token
-        
-        struct Token: Decodable {
-            let accessToken, refreshToken: String
-        }
+    }
+    
+    struct SignIn: Decodable {
+        let nickname, accessToken, refreshToken: String
     }
 
     struct Error: Decodable {
         let errorCode: String
+    }
+}
+
+extension Responder {
+    struct Token: Decodable {
+        let accessToken, refreshToken: String
     }
 }
