@@ -12,7 +12,11 @@ extension String {
         return NSLocalizedString(self, comment: "")
     }
     
-    func localized(value: [String]) -> String {
-        return String(format: self.localized, arguments: value)
+    func localized(value: String) -> String {
+        return String(format: self.localized, value)
+    }
+    
+    func localized(values: [String]) -> String {
+        return String(format: self.localized, arguments: values)
     }
 }
