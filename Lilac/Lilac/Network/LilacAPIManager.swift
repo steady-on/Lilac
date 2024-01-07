@@ -13,6 +13,27 @@ struct LilacAPIManager<T: TargetType> {
     
     private let provider = MoyaProvider<T>()
     
+    
+    func request(_ api: T) -> Completable {
+        return Completable.create { completable in
+            self.provider.request(api) { result in
+                switch result {
+                case .success(let response):
+                    guard response.statusCode == 200 else {
+                        let error = parseErrorData(response.data)
+                        completable(.error(error))
+                        return
+                    }
+                    
+                    completable(.completed)
+                case .failure(let moyaError):
+                    completable(.error(moyaError))
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
 }
 
 extension LilacAPIManager {
