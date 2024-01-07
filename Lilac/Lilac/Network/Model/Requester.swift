@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Requester {
+enum Requester {
     struct NewUser: Encodable {
         let email: String
         let password: String

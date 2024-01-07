@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Responder {
+enum Responder {
     struct Auth: Decodable {
         let accessToken: String
     }
