@@ -1,5 +1,5 @@
 //
-//  Label.swift
+//  BasicLabel.swift
 //  Lilac
 //
 //  Created by Roen White on 1/5/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Label: UILabel {
+class BasicLabel: UILabel {
     var fontStyle: UIFont.Style {
         didSet {
             font = .brandedFont(fontStyle)
