@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class BaseViewController: UIViewController {
     
@@ -36,5 +37,22 @@ class BaseViewController: UIViewController {
     func bind() {}
     
     func configureNavigationBar() {}
+    
+    func showToast(message: String, style: ToastMessage.ToastStyle, bottonInset: ConstraintInsetTarget) {
+        let toastMessage = ToastMessage(message: message, style: style)
+        
+        view.addSubview(toastMessage)
+        
+        toastMessage.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottonInset)
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 2, options: .curveLinear) {
+            toastMessage.alpha = 0
+        } completion: { _ in
+            toastMessage.removeFromSuperview()
+        }
+    }
 }
 
