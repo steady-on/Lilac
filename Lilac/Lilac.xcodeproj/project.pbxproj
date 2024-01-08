@@ -27,6 +27,7 @@
 		6317EEB12B4AD89C007662A5 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEB02B4AD89C007662A5 /* BaseTableViewCell.swift */; };
 		6317EEB32B4AD8C6007662A5 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEB22B4AD8C6007662A5 /* BaseCollectionViewCell.swift */; };
 		6317EEBB2B4AEA24007662A5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6317EEBA2B4AEA24007662A5 /* Localizable.xcstrings */; };
+		6317EEC02B4BE878007662A5 /* SecItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEBF2B4BE878007662A5 /* SecItem.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 		6317EEB22B4AD8C6007662A5 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		6317EEB92B4AE9F3007662A5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		6317EEBA2B4AEA24007662A5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		6317EEBF2B4BE878007662A5 /* SecItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecItem.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		6317EE7C2B480045007662A5 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6317EEBE2B4BE866007662A5 /* Keychain */,
 				6317EE7D2B480063007662A5 /* NetworkMonitor.swift */,
 			);
 			path = Tools;
@@ -148,6 +151,14 @@
 				6317EEB22B4AD8C6007662A5 /* BaseCollectionViewCell.swift */,
 			);
 			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		6317EEBE2B4BE866007662A5 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				6317EEBF2B4BE878007662A5 /* SecItem.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		633CB4522B46B6E900448E9B = {
@@ -279,6 +290,7 @@
 				6317EEA42B4A93FE007662A5 /* LilacAPIManager.swift in Sources */,
 				633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */,
 				6317EEAD2B4AD557007662A5 /* BaseViewController.swift in Sources */,
+				6317EEC02B4BE878007662A5 /* SecItem.swift in Sources */,
 				6317EEA02B488A35007662A5 /* User + TargetType.swift in Sources */,
 				6317EE742B470F90007662A5 /* UIFont+.swift in Sources */,
 				6317EE942B487543007662A5 /* LilacAPI.swift in Sources */,
