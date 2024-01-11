@@ -37,7 +37,9 @@ class BaseViewController: UIViewController {
     func bind() {}
     
     func configureNavigationBar() {}
-    
+}
+
+extension BaseViewController {
     func showToast(message: String, style: ToastMessage.ToastStyle, bottonInset: ConstraintInsetTarget) {
         let toastMessage = ToastMessage(message: message, style: style)
         
@@ -54,5 +56,14 @@ class BaseViewController: UIViewController {
             toastMessage.removeFromSuperview()
         }
     }
+    
+    func showPopUpAlert(title: String, message: String, firstAction: AlertAction, secondAction: AlertAction? = nil) {
+        let alert = PopUpAlertViewController(titleText: title, messageText: message)
+        alert.addAction(firstAction)
+        
+        guard let secondAction else { return }
+        alert.addAction(secondAction)
+        
+        present(alert, animated: false)
+    }
 }
-
