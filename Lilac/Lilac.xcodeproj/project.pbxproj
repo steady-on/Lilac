@@ -32,6 +32,7 @@
 		6317EEC42B4BE8AF007662A5 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEC32B4BE8AF007662A5 /* KeychainError.swift */; };
 		6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEC52B4BEE7E007662A5 /* UserDefault.swift */; };
 		6317EECA2B4BF370007662A5 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEC92B4BF370007662A5 /* ToastMessage.swift */; };
+		6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 		6317EEC32B4BE8AF007662A5 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		6317EEC52B4BEE7E007662A5 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		6317EEC92B4BF370007662A5 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
+		6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertViewController.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				6317EEC92B4BF370007662A5 /* ToastMessage.swift */,
+				6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				6317EE8A2B480D84007662A5 /* BaseURL.swift in Sources */,
 				6317EEC22B4BE895007662A5 /* KeychainManager.swift in Sources */,
 				6317EE992B487890007662A5 /* Responder.swift in Sources */,
+				6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */,
 				6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
