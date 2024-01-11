@@ -32,7 +32,7 @@ extension LilacAPI.User: TargetType {
         case .myProfile(let type):
             return switch type {
             case .askForMyInfo, .editInfo: "my"
-            case .editImage(let image): "my/image"
+            case .editImage: "my/image"
             }
         case .askForOtherUserProfile(let id):
             return "\(id)"
@@ -103,7 +103,7 @@ extension LilacAPI.User: TargetType {
             case .editImage(let image):
                 ["image" : image]
             }
-        case .askForOtherUserProfile(let id):
+        case .askForOtherUserProfile:
             [:]
         }
         return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
