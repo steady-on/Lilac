@@ -20,6 +20,10 @@ final class PopUpAlertViewController: BaseViewController {
         modalPresentationStyle = .overFullScreen
     }
     
+//    deinit {
+//        print("deinit PopUpAlertViewController")
+//    }
+    
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .Background.secondary
@@ -147,7 +151,7 @@ final class PopUpAlertViewController: BaseViewController {
         
         
         guard let handler = action.handler else {
-            button.addAction(UIAction { _ in self.dismiss(animated: false) }, for: .touchUpInside)
+            button.addAction(UIAction { [weak self] _ in self?.dismiss(animated: false) }, for: .touchUpInside)
             return
         }
         
