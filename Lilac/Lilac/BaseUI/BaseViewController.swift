@@ -61,8 +61,9 @@ extension BaseViewController {
         let alert = PopUpAlertViewController(titleText: title, messageText: message)
         alert.addAction(firstAction)
         
-        guard let secondAction else { return }
-        alert.addAction(secondAction)
+        if let secondAction {
+            alert.addAction(secondAction)            
+        }
         
         present(alert, animated: false)
     }
