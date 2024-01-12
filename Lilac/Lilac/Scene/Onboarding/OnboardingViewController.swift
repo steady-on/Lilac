@@ -23,7 +23,6 @@ final class OnboardingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func configureHiararchy() {
@@ -33,6 +32,8 @@ final class OnboardingViewController: BaseViewController {
         components.forEach { component in
             view.addSubview(component)
         }
+        
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
     override func setConstraints() {
@@ -50,5 +51,10 @@ final class OnboardingViewController: BaseViewController {
         startButton.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
+    }
+    
+    @objc func startButtonTapped() {
+        let authViewController = AuthViewController()
+        present(authViewController, animated: true)
     }
 }
