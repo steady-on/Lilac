@@ -77,7 +77,22 @@ final class AuthViewController: BaseViewController {
     
     override func setConstraints() {
         buttonStackView.snp.makeConstraints { make in
-            make.edges.equalTo(view.layoutMarginsGuide)
+            make.horizontalEdges.equalTo(view.layoutMarginsGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(42)
         }
+        
+        appleLoginButton.snp.makeConstraints { make in
+            make.height.equalTo(44)
+        }
+        
+        kakaoLoginButton.snp.makeConstraints { make in
+            make.height.equalTo(44)
+        }
+        
+        emailLoginButton.snp.makeConstraints { make in
+            make.height.equalTo(44)
+        }
+        
+        
     }
 }
