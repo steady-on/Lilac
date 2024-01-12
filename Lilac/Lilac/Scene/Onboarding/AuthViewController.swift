@@ -92,7 +92,5 @@ final class AuthViewController: BaseViewController {
         emailLoginButton.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
-        
-        
     }
 }
