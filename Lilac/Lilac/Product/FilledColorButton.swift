@@ -21,6 +21,12 @@ final class FilledColorButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height = 44
+        return size
+    }
+    
     private func configureButton(color: UIColor) {
         var config = UIButton.Configuration.filled()
         config.background.cornerRadius = 8
