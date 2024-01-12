@@ -34,6 +34,7 @@
 		6317EECA2B4BF370007662A5 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEC92B4BF370007662A5 /* ToastMessage.swift */; };
 		6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
+		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
@@ -72,6 +73,7 @@
 		6317EEC92B4BF370007662A5 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertViewController.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,22 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		633190B52B506496005289E1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				633190B62B5064AE005289E1 /* Onboarding */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		633190B62B5064AE005289E1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				633190B72B5064CA005289E1 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		633CB4522B46B6E900448E9B = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +222,7 @@
 				633CB45E2B46B6E900448E9B /* AppDelegate.swift */,
 				633CB4602B46B6E900448E9B /* SceneDelegate.swift */,
 				633CB4622B46B6E900448E9B /* ViewController.swift */,
+				633190B52B506496005289E1 /* Scene */,
 				6317EE6F2B470EAC007662A5 /* Product */,
 				6317EEAB2B4AD540007662A5 /* BaseUI */,
 				6317EE862B480D00007662A5 /* Network */,
@@ -312,6 +331,7 @@
 				6317EEA42B4A93FE007662A5 /* LilacAPIManager.swift in Sources */,
 				6317EEC42B4BE8AF007662A5 /* KeychainError.swift in Sources */,
 				633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */,
+				633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */,
 				6317EEAD2B4AD557007662A5 /* BaseViewController.swift in Sources */,
 				633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */,
 				6317EEC02B4BE878007662A5 /* SecItem.swift in Sources */,
