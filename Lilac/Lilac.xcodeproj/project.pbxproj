@@ -37,6 +37,7 @@
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
 		633190BD2B51B818005289E1 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190BC2B51B818005289E1 /* AuthViewController.swift */; };
+		633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -91,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */,
 				633CB4792B46B83F00448E9B /* SnapKit in Frameworks */,
 				6317EE842B480C83007662A5 /* Alamofire in Frameworks */,
 				633CB4762B46B82F00448E9B /* RxSwift in Frameworks */,
@@ -261,6 +263,7 @@
 				633CB4782B46B83F00448E9B /* SnapKit */,
 				6317EE832B480C83007662A5 /* Alamofire */,
 				6317EE912B487414007662A5 /* Moya */,
+				633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */,
 			);
 			productName = Lilac;
 			productReference = 633CB45B2B46B6E900448E9B /* Lilac.app */;
@@ -295,6 +298,7 @@
 				633CB4772B46B83F00448E9B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6317EE822B480C83007662A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */,
+				633190CD2B53DBEA005289E1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 			);
 			productRefGroup = 633CB45C2B46B6E900448E9B /* Products */;
 			projectDirPath = "";
@@ -507,6 +511,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,6 +544,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,6 +602,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		633190CD2B53DBEA005289E1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk-rx";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		633CB4722B46B82F00448E9B /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -624,6 +638,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 633190CD2B53DBEA005289E1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */;
+			productName = RxKakaoSDKUser;
 		};
 		633CB4732B46B82F00448E9B /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
