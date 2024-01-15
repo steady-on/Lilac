@@ -23,7 +23,7 @@ enum LilacAPI {
         
         enum Vendor {
             case email(email: String, password: String)
-            case kakao
+            case kakao(accessToken: String)
             case apple
         }
         
