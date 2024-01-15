@@ -41,6 +41,7 @@
 		633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D52B550CD3005289E1 /* KakaoLoginService.swift */; };
 		633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* LilacUserService.swift */; };
 		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
+		633190E02B5530B9005289E1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DF2B5530B9005289E1 /* ViewModel.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -84,6 +85,7 @@
 		633190D52B550CD3005289E1 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
 		633190D92B550EAF005289E1 /* LilacUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacUserService.swift; sourceTree = "<group>"; };
 		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
+		633190DF2B5530B9005289E1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,6 +231,14 @@
 			path = UserDefaults;
 			sourceTree = "<group>";
 		};
+		633190DE2B5530AB005289E1 /* Protocel */ = {
+			isa = PBXGroup;
+			children = (
+				633190DF2B5530B9005289E1 /* ViewModel.swift */,
+			);
+			path = Protocel;
+			sourceTree = "<group>";
+		};
 		633CB4522B46B6E900448E9B = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +261,7 @@
 				633CB45E2B46B6E900448E9B /* AppDelegate.swift */,
 				633CB4602B46B6E900448E9B /* SceneDelegate.swift */,
 				633CB4622B46B6E900448E9B /* ViewController.swift */,
+				633190DE2B5530AB005289E1 /* Protocel */,
 				633190B52B506496005289E1 /* Scene */,
 				6317EE6F2B470EAC007662A5 /* Product */,
 				6317EEAB2B4AD540007662A5 /* BaseUI */,
@@ -372,6 +383,7 @@
 				6317EEA02B488A35007662A5 /* User + TargetType.swift in Sources */,
 				6317EE742B470F90007662A5 /* UIFont+.swift in Sources */,
 				6317EE942B487543007662A5 /* LilacAPI.swift in Sources */,
+				633190E02B5530B9005289E1 /* ViewModel.swift in Sources */,
 				6317EE712B470EDA007662A5 /* BasicLabel.swift in Sources */,
 				6317EE9B2B487BE5007662A5 /* LilacAPIError.swift in Sources */,
 				6317EE8A2B480D84007662A5 /* BaseURL.swift in Sources */,
