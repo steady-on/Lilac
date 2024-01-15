@@ -69,20 +69,17 @@ extension LilacAPI.User: TargetType {
                 [
                     "email" : email,
                     "password" : password,
-                    // TODO: keycahin setting 후 가져오기
                     "deviceToken" : "",
                 ]
-            case .kakao:
-                // TODO: keycahin setting 후 가져오기
+            case .kakao(let accessToken):
                 [
-                    "oauthToken" : "",
+                    "oauthToken" : accessToken,
                     "deviceToken" : "",
                 ]
             case .apple:
                 [
                     "idToken" : "",
                     "nickname" : "",
-                    // TODO: keycahin setting 후 가져오기
                     "deviceToken" : ""
                 ]
             }
