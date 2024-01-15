@@ -9,6 +9,10 @@ import UIKit
 
 final class OnboardingViewController: BaseViewController {
     
+    deinit {
+        print("deinit OnboardingViewController")
+    }
+    
     private let messageLabel: BasicLabel = {
         let label = BasicLabel(style: .title1)
         label.text = "새싹톡을 사용하면 어디서나\n팀을 모을 수 있습니다"
@@ -53,9 +57,11 @@ final class OnboardingViewController: BaseViewController {
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
         }
     }
-    
-    @objc func startButtonTapped() {
-        let authViewController = AuthViewController()
+}
+
+extension OnboardingViewController {
+    @objc private func startButtonTapped() {
+        let authViewController = AuthViewController(viewModel: AuthViewModel())
         present(authViewController, animated: true)
     }
 }
