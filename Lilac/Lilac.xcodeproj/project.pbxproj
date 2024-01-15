@@ -38,6 +38,7 @@
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
 		633190BD2B51B818005289E1 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190BC2B51B818005289E1 /* AuthViewController.swift */; };
 		633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */; };
+		633190D12B53DEF0005289E1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D02B53DEF0005289E1 /* AuthViewModel.swift */; };
 		633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D52B550CD3005289E1 /* KakaoLoginService.swift */; };
 		633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* LilacUserService.swift */; };
 		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
@@ -82,6 +83,7 @@
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
 		633190BC2B51B818005289E1 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		633190D02B53DEF0005289E1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		633190D52B550CD3005289E1 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
 		633190D92B550EAF005289E1 /* LilacUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacUserService.swift; sourceTree = "<group>"; };
 		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				633190B72B5064CA005289E1 /* OnboardingViewController.swift */,
 				633190BC2B51B818005289E1 /* AuthViewController.swift */,
+				633190D02B53DEF0005289E1 /* AuthViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */,
 				633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */,
 				6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */,
+				633190D12B53DEF0005289E1 /* AuthViewModel.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastMessage.swift in Sources */,
