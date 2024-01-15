@@ -6,8 +6,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class AuthViewController: BaseViewController {
+    
+    deinit {
+        print("deinit AuthViewController")
+    }
+    
+    private let viewModel: AuthViewModel
+    
+    init(viewModel: AuthViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+    
+    private let disposeBag = DisposeBag()
     
     private let buttonStackView: UIStackView = {
         let stack = UIStackView()
@@ -92,5 +108,36 @@ final class AuthViewController: BaseViewController {
         emailLoginButton.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
+    }
+    
+    override func bind() {
+        let input = AuthViewModel.Input(
+            kakaoLoginButtonTap: kakaoLoginButton.rx.tap
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.isLoggedIn
+            .bind(with: self) { owner, _ in
+                owner.moveToHome()
+            }
+            .disposed(by: disposeBag)
+        
+        output.isShowingToastMessage
+            .bind(with: self) { owner, message in
+                owner.showToast(message: message, style: .caution, bottonInset: 84)
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+extension AuthViewController {
+    private func moveToHome() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        // TODO: 추후 Home Default 화면으로 이동
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
