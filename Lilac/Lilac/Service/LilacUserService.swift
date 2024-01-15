@@ -10,8 +10,8 @@ import RxSwift
 
 final class LilacUserService {
     
-    func kakaoLogin(for accessToken: String) -> Single<Result<Responder.MyProfile, Error>> {
-        return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.MyProfile.self)
+    func kakaoLogin(for accessToken: String) -> Single<Result<Responder.SignInWithVendor, Error>> {
+        return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.SignInWithVendor.self)
     }
     
 }
