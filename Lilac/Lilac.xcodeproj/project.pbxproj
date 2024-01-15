@@ -40,6 +40,7 @@
 		633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */; };
 		633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D52B550CD3005289E1 /* KakaoLoginService.swift */; };
 		633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* LilacUserService.swift */; };
+		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -82,6 +83,7 @@
 		633190BC2B51B818005289E1 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		633190D52B550CD3005289E1 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
 		633190D92B550EAF005289E1 /* LilacUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacUserService.swift; sourceTree = "<group>"; };
+		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,9 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				633190B32B503118005289E1 /* AlertAction.swift */,
-				6317EEBE2B4BE866007662A5 /* Keychain */,
 				6317EE7D2B480063007662A5 /* NetworkMonitor.swift */,
-				6317EEC52B4BEE7E007662A5 /* UserDefault.swift */,
+				6317EEBE2B4BE866007662A5 /* Keychain */,
+				633190DB2B552167005289E1 /* UserDefaults */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -216,6 +218,15 @@
 				633190D92B550EAF005289E1 /* LilacUserService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		633190DB2B552167005289E1 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				6317EEC52B4BEE7E007662A5 /* UserDefault.swift */,
+				633190DC2B552180005289E1 /* UserDefaultItem.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		633CB4522B46B6E900448E9B = {
@@ -368,6 +379,7 @@
 				633190BD2B51B818005289E1 /* AuthViewController.swift in Sources */,
 				6317EE992B487890007662A5 /* Responder.swift in Sources */,
 				6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */,
+				633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */,
 				6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,

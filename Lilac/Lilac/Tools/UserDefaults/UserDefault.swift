@@ -12,8 +12,8 @@ struct UserDefault<T> {
     private let key: String
     private let defaultValue: T
     
-    init(key: String, defaultValue: T) {
-        self.key = key
+    init(key: UserDefaultItem, defaultValue: T) {
+        self.key = key.rawValue
         self.defaultValue = defaultValue
     }
     
