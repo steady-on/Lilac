@@ -10,4 +10,6 @@ import Foundation
 enum UserDefaultItem: String {
     case email
     case nickname
+    case accessToken
+    case refreshToken
 }
