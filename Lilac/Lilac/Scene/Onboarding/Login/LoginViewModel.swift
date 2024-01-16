@@ -21,21 +21,14 @@ extension LoginViewModel: ViewModel {
     }
     
     struct Output {
-        let buttonEnabled: BehaviorRelay<Bool>
+        let buttonEnabled: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
-        let buttonEnabled = BehaviorRelay(value: false)
-
-        Observable.combineLatest(input.emailInputValue, input.passwordInputValue)
+        let buttonEnabled =  Observable.combineLatest(input.emailInputValue, input.passwordInputValue)
             .map { emailValue, passwordValue in
                 emailValue.isEmpty == false && passwordValue.isEmpty == false
             }
-            .bind { bool in
-                buttonEnabled.accept(bool)
-            }
-            .disposed(by: disposeBag)
-        
         
         
         
