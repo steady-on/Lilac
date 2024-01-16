@@ -8,12 +8,11 @@
 import UIKit
 
 final class FilledColorButton: UIButton {
-    init(title: String, action: UIAction, color: UIColor = .accent) {
+    init(title: String, baseColor: UIColor = .accent) {
         super.init(frame: .zero)
         
         setTitle(title, for: .normal)
-        addAction(action, for: .touchUpInside)
-        configureButton(color: color)
+        configureButton(color: baseColor)
     }
     
     @available(*, unavailable)
