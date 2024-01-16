@@ -43,6 +43,7 @@
 		633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* LilacUserService.swift */; };
 		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
 		633190E02B5530B9005289E1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DF2B5530B9005289E1 /* ViewModel.swift */; };
+		633190E32B556E89005289E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E22B556E89005289E1 /* LoginViewController.swift */; };
 		633190E52B565B94005289E1 /* LabeledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E42B565B93005289E1 /* LabeledTextField.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
@@ -89,6 +90,7 @@
 		633190D92B550EAF005289E1 /* LilacUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacUserService.swift; sourceTree = "<group>"; };
 		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
 		633190DF2B5530B9005289E1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		633190E22B556E89005289E1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		633190E42B565B93005289E1 /* LabeledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledTextField.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				633190B72B5064CA005289E1 /* OnboardingViewController.swift */,
 				633190BC2B51B818005289E1 /* AuthViewController.swift */,
 				633190D02B53DEF0005289E1 /* AuthViewModel.swift */,
+				633190E12B556E35005289E1 /* Login */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -243,6 +246,14 @@
 				633190DF2B5530B9005289E1 /* ViewModel.swift */,
 			);
 			path = Protocel;
+			sourceTree = "<group>";
+		};
+		633190E12B556E35005289E1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				633190E22B556E89005289E1 /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		633CB4522B46B6E900448E9B = {
@@ -369,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633190E32B556E89005289E1 /* LoginViewController.swift in Sources */,
 				633190B42B503118005289E1 /* AlertAction.swift in Sources */,
 				633CB4632B46B6E900448E9B /* ViewController.swift in Sources */,
 				633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */,
@@ -400,6 +412,7 @@
 				633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */,
 				6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */,
 				633190D12B53DEF0005289E1 /* AuthViewModel.swift in Sources */,
+				633190E52B565B94005289E1 /* LabeledTextField.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastMessage.swift in Sources */,
