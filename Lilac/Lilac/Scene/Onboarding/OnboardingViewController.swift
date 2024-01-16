@@ -24,7 +24,7 @@ final class OnboardingViewController: BaseViewController {
     
     private let onboardingImageView = UIImageView(image: .onboarding)
     
-    private let startButton = FilledColorButton(title: "시작하기", action: UIAction { _ in  })
+    private let startButton = FilledColorButton(title: "시작하기")
 
     override func viewDidLoad() {
         super.viewDidLoad()
