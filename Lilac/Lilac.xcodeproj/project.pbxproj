@@ -43,6 +43,7 @@
 		633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* LilacUserService.swift */; };
 		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
 		633190E02B5530B9005289E1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DF2B5530B9005289E1 /* ViewModel.swift */; };
+		633190E52B565B94005289E1 /* LabeledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E42B565B93005289E1 /* LabeledTextField.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -88,6 +89,7 @@
 		633190D92B550EAF005289E1 /* LilacUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacUserService.swift; sourceTree = "<group>"; };
 		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
 		633190DF2B5530B9005289E1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		633190E42B565B93005289E1 /* LabeledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledTextField.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				6317EEC92B4BF370007662A5 /* ToastMessage.swift */,
 				6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */,
 				633190B92B5069A8005289E1 /* FilledColorButton.swift */,
+				633190E42B565B93005289E1 /* LabeledTextField.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
