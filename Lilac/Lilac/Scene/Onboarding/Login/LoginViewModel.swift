@@ -28,54 +28,55 @@ extension LoginViewModel: ViewModel {
     
     struct Output {
         let isLoggedIn: PublishRelay<Void>
-        let showToastMessage: PublishRelay<String>
         let buttonEnabled: Observable<Bool>
+        let emailValidation: PublishRelay<Bool>
+        let passwordValidation: PublishRelay<Bool>
+        let showToastMessage: PublishRelay<String>
     }
     
     func transform(input: Input) -> Output {
         let isLoggedIn = PublishRelay<Void>()
+        let emailValidation = PublishRelay<Bool>()
+        let passwordValidation = PublishRelay<Bool>()
         let showToastMessage = PublishRelay<String>()
         
-        let inputValues = Observable.combineLatest(input.emailInputValue, input.passwordInputValue)
+        let inputValues = PublishRelay.combineLatest(input.emailInputValue, input.passwordInputValue)
         
-        let buttonEnabled = inputValues.map { emailValue, passwordValue in
+        let buttonEnabled = inputValues
+            .map { emailValue, passwordValue in
                 emailValue.isEmpty == false && passwordValue.isEmpty == false
             }
         
-        let emailValidation = input.loginButtonTappedEvent
-            .withLatestFrom(input.emailInputValue) { _, inputValue in
-                return inputValue
+        let validations = input.loginButtonTappedEvent
+            .withLatestFrom(inputValues) { _, values in
+                return values
             }
-            .map { inputValue in
-                return inputValue.isValidEmail
-            }.share()
-        
-        emailValidation
-            .filter { bool in bool == false }
-            .subscribe { _ in
-                showToastMessage.accept("이메일 형식이 올바르지 않습니다.")
+            .map { emailInput, passwordInput in
+                let emailValidation = emailInput.isValidEmail
+                let passwordValidation = passwordInput.isValidPassword
+                return (emailValidation, passwordValidation)
             }
-            .disposed(by: disposeBag)
         
-        let passwordValidation = emailValidation
-            .filter { bool in bool }
-            .withLatestFrom(input.passwordInputValue) { bool, inputValue in
-                return inputValue
-            }
-            .map { inputValue in
-                return inputValue.isValidPassword
-            }.share()
-        
-        passwordValidation
-            .filter { bool in bool == false }
-            .subscribe { _ in
-                showToastMessage.accept("비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요.")
+        validations
+            .bind { isValidEmail, isValidPassword in
+                emailValidation.accept(isValidEmail)
+                passwordValidation.accept(isValidPassword)
+                
+                guard isValidEmail else {
+                    showToastMessage.accept("이메일 형식이 올바르지 않습니다.")
+                    return
+                }
+
+                guard isValidPassword else {
+                    showToastMessage.accept("비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요.")
+                    return
+                }
             }
             .disposed(by: disposeBag)
         
-        passwordValidation
-            .filter { bool in bool }
-            .withLatestFrom(inputValues)
+        validations
+            .filter { isValidEmail, isValidPassword in isValidEmail && isValidPassword }
+            .withLatestFrom(inputValues) { _, values in values }
             .flatMap { [weak self] email, password in
                 self!.lilacUserService.emailLogin(email: email, password: password)
             }
@@ -94,8 +95,10 @@ extension LoginViewModel: ViewModel {
         
         return Output(
             isLoggedIn: isLoggedIn,
-            showToastMessage: showToastMessage,
-            buttonEnabled: buttonEnabled
+            buttonEnabled: buttonEnabled,
+            emailValidation: emailValidation,
+            passwordValidation: passwordValidation,
+            showToastMessage: showToastMessage
         )
     }
 }

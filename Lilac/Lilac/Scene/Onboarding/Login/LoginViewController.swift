@@ -89,14 +89,22 @@ final class LoginViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.buttonEnabled
+            .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.emailValidation
+            .bind(to: emailTextField.rx.isValid)
+            .disposed(by: disposeBag)
+        
+        output.passwordValidation
+            .bind(to: passwordTextField.rx.isValid)
+            .disposed(by: disposeBag)
+        
         output.showToastMessage
             .subscribe(with: self) { owner, message in
                 owner.showToast(message: message, style: .caution, bottomInset: 92)
             }
-            .disposed(by: disposeBag)
-        
-        output.buttonEnabled
-            .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
