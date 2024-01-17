@@ -83,6 +83,12 @@ final class LoginViewController: BaseViewController {
         output.buttonEnabled
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
+        
+        output.showToastMessage
+            .subscribe(with: self) { owner, message in
+                owner.showToast(message: message, style: .caution, bottomInset: 92)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureNavigationBar() {
