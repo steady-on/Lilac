@@ -49,10 +49,10 @@ extension AuthViewModel: ViewModel {
                 case .success(let profile):
                     owner.saveUserInfo(profile: profile)
                     isLoggedIn.accept(())
-                case .failure(let error):
+                case .failure(_):
                     isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                 }
-            } onError: { _, error in
+            } onError: { _, _ in
                 isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
             }
             .disposed(by: disposeBag)
