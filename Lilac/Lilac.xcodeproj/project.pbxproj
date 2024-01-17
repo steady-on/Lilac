@@ -47,6 +47,7 @@
 		633190E52B565B94005289E1 /* LabeledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E42B565B93005289E1 /* LabeledTextField.swift */; };
 		633190E72B568789005289E1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E62B568789005289E1 /* LoginViewModel.swift */; };
 		633190E92B56C42A005289E1 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190E82B56C42A005289E1 /* String+.swift */; };
+		633190EC2B57AE29005289E1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190EB2B57AE29005289E1 /* SignUpViewController.swift */; };
 		633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB45E2B46B6E900448E9B /* AppDelegate.swift */; };
 		633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4602B46B6E900448E9B /* SceneDelegate.swift */; };
 		633CB4632B46B6E900448E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CB4622B46B6E900448E9B /* ViewController.swift */; };
@@ -96,6 +97,7 @@
 		633190E42B565B93005289E1 /* LabeledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledTextField.swift; sourceTree = "<group>"; };
 		633190E62B568789005289E1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		633190E82B56C42A005289E1 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		633190EB2B57AE29005289E1 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		633CB45B2B46B6E900448E9B /* Lilac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lilac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		633CB45E2B46B6E900448E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		633CB4602B46B6E900448E9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				633190BC2B51B818005289E1 /* AuthViewController.swift */,
 				633190D02B53DEF0005289E1 /* AuthViewModel.swift */,
 				633190E12B556E35005289E1 /* Login */,
+				633190EA2B57ADC8005289E1 /* SignUp */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -260,6 +263,14 @@
 				633190E62B568789005289E1 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		633190EA2B57ADC8005289E1 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				633190EB2B57AE29005289E1 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		633CB4522B46B6E900448E9B = {
@@ -420,6 +431,7 @@
 				6317EEC62B4BEE7E007662A5 /* UserDefault.swift in Sources */,
 				633190D12B53DEF0005289E1 /* AuthViewModel.swift in Sources */,
 				633190E52B565B94005289E1 /* LabeledTextField.swift in Sources */,
+				633190EC2B57AE29005289E1 /* SignUpViewController.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastMessage.swift in Sources */,
