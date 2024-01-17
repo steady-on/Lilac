@@ -10,6 +10,10 @@ import RxSwift
 import RxCocoa
 
 final class LoginViewModel {
+    deinit {
+        print("deinit LoginViewModel")
+    }
+    
     var disposeBag = DisposeBag()
     
     private lazy var lilacUserService = LilacUserService()
