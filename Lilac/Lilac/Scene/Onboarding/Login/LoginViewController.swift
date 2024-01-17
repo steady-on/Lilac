@@ -49,6 +49,9 @@ final class LoginViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
+        modalPresentationStyle = .formSheet
+        sheetPresentationController?.prefersGrabberVisible = true
+        
         let components = [emailTextField, passwordTextField, loginButton]
         components.forEach { component in
             view.addSubview(component)
