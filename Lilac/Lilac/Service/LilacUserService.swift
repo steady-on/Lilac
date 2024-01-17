@@ -18,4 +18,7 @@ final class LilacUserService {
         return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.SignInWithVendor.self)
     }
     
+    func emailLogin(email: String, password: String) -> Single<Result<Responder.SignIn, Error>> {
+        return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.SignIn.self)
+    }
 }
