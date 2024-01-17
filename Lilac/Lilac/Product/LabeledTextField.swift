@@ -45,9 +45,12 @@ final class LabeledTextField: UITextField {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+         
+        let backgroundViewFrame = CGRect(x: 0, y: labelHeight + spacing, width: bounds.width, height: 44)
         
         titleLabel.frame = CGRect(x: 0, y: 0, width: bounds.width, height: labelHeight)
-        backgroundView.frame = CGRect(x: 0, y: labelHeight + spacing, width: bounds.width, height: 44)
+        backgroundView.layer.shadowPath = UIBezierPath(roundedRect: backgroundViewFrame, cornerRadius: 8).cgPath
+        backgroundView.frame = backgroundViewFrame
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
