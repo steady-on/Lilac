@@ -130,10 +130,10 @@ final class AuthViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         emailLoginButton.rx.tap
-            .bind { _ in
+            .bind(with: self) { owner, _ in
                 let vc = LoginViewController(viewModel: LoginViewModel())
                 let nc = UINavigationController(rootViewController: vc)
-                self.present(nc, animated: true)
+                owner.present(nc, animated: true)
             }
             .disposed(by: disposeBag)
     }
