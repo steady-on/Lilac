@@ -80,14 +80,20 @@ final class LoginViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.buttonEnabled
-            .bind(to: loginButton.rx.isEnabled)
+        output.isLoggedIn
+            .bind(with: self) { owner, _ in
+                owner.moveToHome()
+            }
             .disposed(by: disposeBag)
         
         output.showToastMessage
             .subscribe(with: self) { owner, message in
                 owner.showToast(message: message, style: .caution, bottomInset: 92)
             }
+            .disposed(by: disposeBag)
+        
+        output.buttonEnabled
+            .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
     
@@ -107,5 +113,14 @@ final class LoginViewController: BaseViewController {
 extension LoginViewController {
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    private func moveToHome() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        // TODO: 추후 Home Default 화면으로 이동
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }

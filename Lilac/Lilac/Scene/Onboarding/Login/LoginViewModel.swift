@@ -23,11 +23,13 @@ extension LoginViewModel: ViewModel {
     }
     
     struct Output {
-        let buttonEnabled: Observable<Bool>
+        let isLoggedIn: PublishRelay<Void>
         let showToastMessage: PublishRelay<String>
+        let buttonEnabled: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
+        let isLoggedIn = PublishRelay<Void>()
         let showToastMessage = PublishRelay<String>()
         
         let inputValues = Observable.combineLatest(input.emailInputValue, input.passwordInputValue)
@@ -73,22 +75,31 @@ extension LoginViewModel: ViewModel {
             .flatMap { [weak self] email, password in
                 self!.lilacUserService.emailLogin(email: email, password: password)
             }
-            .subscribe { result in
+            .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let signIn):
-                    print("success :", signIn)
-                case .failure(let error):
+                    owner.saveUserInfo(signIn)
+                    isLoggedIn.accept(())
+                case .failure(_):
                     showToastMessage.accept("이메일 또는 비밀번호가 올바르지 않습니다.")
                 }
-            } onError: { error in
+            } onError: { _, _  in
                 showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
             }
             .disposed(by: disposeBag)
         
         return Output(
-            buttonEnabled: buttonEnabled, 
-            showToastMessage: showToastMessage
+            isLoggedIn: isLoggedIn,
+            showToastMessage: showToastMessage,
+            buttonEnabled: buttonEnabled
         )
     }
 }
 
+extension LoginViewModel {
+    private func saveUserInfo(_ signIn: Responder.SignIn) {
+        @UserDefault(key: .nickname, defaultValue: signIn.nickname) var nickname
+        @UserDefault(key: .accessToken, defaultValue: signIn.accessToken) var accessToken
+        @UserDefault(key: .refreshToken, defaultValue: signIn.refreshToken) var refreshToken
+    }
+}
