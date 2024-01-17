@@ -128,6 +128,14 @@ final class AuthViewController: BaseViewController {
                 owner.showToast(message: message, style: .caution, bottomInset: 84)
             }
             .disposed(by: disposeBag)
+        
+        emailLoginButton.rx.tap
+            .bind { _ in
+                let vc = LoginViewController(viewModel: LoginViewModel())
+                let nc = UINavigationController(rootViewController: vc)
+                self.present(nc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
