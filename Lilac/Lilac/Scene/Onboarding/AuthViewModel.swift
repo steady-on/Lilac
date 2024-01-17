@@ -50,10 +50,10 @@ extension AuthViewModel: ViewModel {
                     owner.saveUserInfo(profile: profile)
                     isLoggedIn.accept(())
                 case .failure(let error):
-                    isShowingToastMessage.accept(String(describing: error))
+                    isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                 }
             } onError: { _, error in
-                isShowingToastMessage.accept(String(describing: error))
+                isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
             }
             .disposed(by: disposeBag)
             
