@@ -40,14 +40,14 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController {
-    func showToast(message: String, style: ToastMessage.ToastStyle, bottonInset: ConstraintInsetTarget) {
+    func showToast(message: String, style: ToastMessage.ToastStyle, bottomInset: ConstraintInsetTarget) {
         let toastMessage = ToastMessage(message: message, style: style)
         
         view.addSubview(toastMessage)
         
         toastMessage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottonInset)
+            make.bottom.equalTo(view.keyboardLayoutGuide).inset(bottomInset)
         }
         
         UIView.animate(withDuration: 0.5, delay: 2, options: .curveLinear) {

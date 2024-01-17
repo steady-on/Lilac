@@ -125,7 +125,7 @@ final class AuthViewController: BaseViewController {
         
         output.isShowingToastMessage
             .bind(with: self) { owner, message in
-                owner.showToast(message: message, style: .caution, bottonInset: 84)
+                owner.showToast(message: message, style: .caution, bottomInset: 84)
             }
             .disposed(by: disposeBag)
     }
