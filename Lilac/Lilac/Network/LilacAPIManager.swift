@@ -37,20 +37,20 @@ struct LilacAPIManager<T: TargetType> {
         }
     }
     
-    func request(_ api: T) -> Completable {
-        return Completable.create { completable in
+    func request(_ api: T) -> Single<Result<Void, Error>> {
+        return Single<Result<Void, Error>>.create { single in
             self.provider.request(api) { result in
                 switch result {
                 case .success(let response):
                     guard response.statusCode == 200 else {
                         let error = parseErrorData(response.data)
-                        completable(.error(error))
+                        single(.success(.failure(error)))
                         return
                     }
                     
-                    completable(.completed)
+                    single(.success(.success(())))
                 case .failure(let moyaError):
-                    completable(.error(moyaError))
+                    single(.failure(moyaError))
                 }
             }
             
