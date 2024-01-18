@@ -10,9 +10,9 @@ import SnapKit
 
 final class ToastMessage: BasicLabel {
     
-    private let style: ToastStyle
+    private let style: Style
     
-    init(message: String, style: ToastStyle) {
+    init(message: String, style: Style) {
         self.style = style
         super.init(style: .body)
         configureLabel(message)
@@ -43,7 +43,7 @@ final class ToastMessage: BasicLabel {
 }
 
 extension ToastMessage {
-    enum ToastStyle {
+    enum Style {
         case success
         case caution
         
