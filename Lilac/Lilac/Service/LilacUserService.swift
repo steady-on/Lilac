@@ -14,11 +14,15 @@ final class LilacUserService {
         print("deinit LilacUserService")
     }
     
+    private lazy var lilacAPIUserManager = LilacAPIManager<LilacAPI.User>()
+    
     func kakaoLogin(for accessToken: String) -> Single<Result<Responder.SignInWithVendor, Error>> {
-        return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.SignInWithVendor.self)
+        return lilacAPIUserManager.request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.SignInWithVendor.self)
     }
     
     func emailLogin(email: String, password: String) -> Single<Result<Responder.SignIn, Error>> {
-        return LilacAPIManager<LilacAPI.User>().request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.SignIn.self)
+        return lilacAPIUserManager.request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.SignIn.self)
+    }
+    
     }
 }
