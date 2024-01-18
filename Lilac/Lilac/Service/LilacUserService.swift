@@ -24,5 +24,7 @@ final class LilacUserService {
         return lilacAPIUserManager.request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.SignIn.self)
     }
     
+    func checkEmailDuplicated(email: String) -> Single<Result<Responder.EmailDuplicateCheckResult, Error>> {
+        return lilacAPIUserManager.request(.validateEmail(email: email), responder: Responder.EmailDuplicateCheckResult.self)
     }
 }
