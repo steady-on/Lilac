@@ -33,7 +33,7 @@ extension SignUpViewModel: ViewModel {
     struct Output {
         let showToastMessage: PublishRelay<Toast>
         let checkDuplicationButtonEnabled: Observable<Bool>
-        let emailValidateion: Observable<Bool>
+        let emailValidation: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -76,7 +76,7 @@ extension SignUpViewModel: ViewModel {
                 switch result {
                 case .success(_):
                     showToastMessage.accept(("사용 가능한 이메일입니다.", .success))
-                case .failure(let error):
+                case .failure(_):
                     showToastMessage.accept(("이미 존재하는 계정입니다.", .caution))
                 }
             } onError: { _, _ in
@@ -88,7 +88,7 @@ extension SignUpViewModel: ViewModel {
         return Output(
             showToastMessage: showToastMessage,
             checkDuplicationButtonEnabled: checkDuplicationButtonEnabled, 
-            emailValidateion: emailValidation
+            emailValidation: emailValidation
         )
     }
 }

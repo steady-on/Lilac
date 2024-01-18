@@ -86,6 +86,7 @@ final class SignUpViewController: BaseViewController {
     
     private let passwordTextField: LabeledTextField = {
         let textField = LabeledTextField(title: "비밀번호")
+        textField.textContentType = .newPassword
         textField.isSecureTextEntry = true
         textField.placeholder = "비밀번호를 입력하세요"
         textField.returnKeyType = .next
@@ -93,7 +94,8 @@ final class SignUpViewController: BaseViewController {
     }()
     
     private let passwordCheckTextField: LabeledTextField = {
-        let textField = LabeledTextField(title: "비밀번호")
+        let textField = LabeledTextField(title: "비밀번호 확인")
+        textField.textContentType = .password
         textField.isSecureTextEntry = true
         textField.placeholder = "비밀번호를 한 번 더 입력하세요"
         textField.returnKeyType = .done
@@ -113,6 +115,7 @@ final class SignUpViewController: BaseViewController {
         sheetPresentationController?.prefersGrabberVisible = true
         
         view.addSubview(scrollView)
+        view.addSubview(signUpButton)
         scrollView.addSubview(contentView)
         contentView.addSubview(formStackView)
         
@@ -135,7 +138,6 @@ final class SignUpViewController: BaseViewController {
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
         contentView.snp.makeConstraints { make in
@@ -149,6 +151,12 @@ final class SignUpViewController: BaseViewController {
         
         checkDuplicationButton.snp.makeConstraints { make in
             make.width.equalTo(100)
+        }
+        
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).inset(-12)
         }
     }
     
@@ -170,7 +178,7 @@ final class SignUpViewController: BaseViewController {
             .bind(to: checkDuplicationButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        output.emailValidateion
+        output.emailValidation
             .bind(to: emailTextField.rx.isValid)
             .disposed(by: disposeBag)
     }
@@ -181,7 +189,7 @@ final class SignUpViewController: BaseViewController {
         let closeButton = UIBarButtonItem(image: .Icon.close, style: .plain, target: self, action: #selector(closeButtonTapped))
         closeButton.tintColor = .black
         navigationItem.leftBarButtonItem = closeButton
-        
+                        
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
