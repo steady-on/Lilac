@@ -19,7 +19,6 @@ final class SignUpViewModel {
     
     var disposeBag = DisposeBag()
     
-    private var duplicatedEmail = [String]()
     private var finalCheckedEmail = ""
     
     private lazy var lilacUserService = LilacUserService()
@@ -47,12 +46,44 @@ extension SignUpViewModel: ViewModel {
             .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
             .map { emailInput in emailInput.isValidEmail }
         
+        // 이메일 형식이 올바르지 않을 때 토스트 메세지
         emailValidation
             .filter { bool in bool == false }
             .bind { _ in
                 showToastMessage.accept(("이메일 형식이 올바르지 않습니다.", .caution))
             }
             .disposed(by: disposeBag)
+        
+        // 직전에 요청한 이메일과 같은 값일 때 직전 결과로 토스트 메세지
+        emailValidation
+            .filter { bool in bool }
+            .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
+            .distinctUntilChanged { $0 != $1 }
+            .withLatestFrom(showToastMessage)
+            .bind(to: showToastMessage)
+            .disposed(by: disposeBag)
+        
+        // 직전 결과와 다를 때 서버로 중복확인 요청
+        emailValidation
+            .filter { bool in bool }
+            .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
+            .distinctUntilChanged()
+            .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+            .flatMap { [unowned self] inputValue in
+                return self.lilacUserService.checkEmailDuplicated(email: inputValue)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    showToastMessage.accept(("사용 가능한 이메일입니다.", .success))
+                case .failure(let error):
+                    showToastMessage.accept(("이미 존재하는 계정입니다.", .caution))
+                }
+            } onError: { _, _ in
+                showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
+            }
+            .disposed(by: disposeBag)
+
         
         return Output(
             showToastMessage: showToastMessage,
