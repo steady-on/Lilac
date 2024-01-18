@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class SignUpViewController: BaseViewController {
+    
+    private let viewModel: SignUpViewModel
+    
+    init(viewModel: SignUpViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
     
     deinit {
         print("deinit SignUpViewController")
     }
+    
+    private let disposeBag = DisposeBag()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -138,6 +150,29 @@ final class SignUpViewController: BaseViewController {
         checkDuplicationButton.snp.makeConstraints { make in
             make.width.equalTo(100)
         }
+    }
+    
+    override func bind() {
+        let input = SignUpViewModel.Input(
+            emailInputValue: emailTextField.rx.text.orEmpty,
+            checkDuplicationButtonTap: checkDuplicationButton.rx.tap
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.showToastMessage
+            .bind(with: self) { owner, toast in
+                owner.showToast(message: toast.message, style: toast.style, bottomInset: 105)
+            }
+            .disposed(by: disposeBag)
+        
+        output.checkDuplicationButtonEnabled
+            .bind(to: checkDuplicationButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.emailValidateion
+            .bind(to: emailTextField.rx.isValid)
+            .disposed(by: disposeBag)
     }
     
     override func configureNavigationBar() {
