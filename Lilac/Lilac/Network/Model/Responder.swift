@@ -12,6 +12,10 @@ enum Responder {
         let accessToken: String
     }
     
+    struct EmailDuplicateCheckResult: Decodable {
+        let email: String
+    }
+    
     struct SignUp: Decodable {
         let token: Token
     }
