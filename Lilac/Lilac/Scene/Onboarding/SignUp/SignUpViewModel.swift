@@ -18,9 +18,7 @@ final class SignUpViewModel {
     }
     
     var disposeBag = DisposeBag()
-    
-    private var finalCheckedEmail = ""
-    
+        
     private lazy var lilacUserService = LilacUserService()
 }
 
@@ -71,7 +69,8 @@ extension SignUpViewModel: ViewModel {
         // 전화번호 길이 확인
         let phoneNumberValidation = input.phoneNumberInputValue
             .map { inputValue in
-                inputValue.starts(with: "01") && 12...13 ~= inputValue.count
+                guard inputValue.isEmpty == false else { return true } // 비어있으면 true
+                return inputValue.starts(with: "01") && 12...13 ~= inputValue.count
             }
         
         // 비밀번호 형식 확인
