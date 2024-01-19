@@ -163,7 +163,7 @@ final class SignUpViewController: BaseViewController {
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+            make.bottom.equalTo(buttonBackgroundView.snp.top)
         }
         
         contentView.snp.makeConstraints { make in
@@ -180,7 +180,6 @@ final class SignUpViewController: BaseViewController {
         }
         
         buttonBackgroundView.snp.makeConstraints { make in
-            make.height.equalTo(68)
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
@@ -192,7 +191,8 @@ final class SignUpViewController: BaseViewController {
         }
         
         signUpButton.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(buttonBackgroundView.layoutMarginsGuide)
+            make.bottom.horizontalEdges.equalTo(buttonBackgroundView.layoutMarginsGuide)
+            make.top.lessThanOrEqualTo(buttonBackgroundView.snp.top).offset(12)
         }
     }
     
