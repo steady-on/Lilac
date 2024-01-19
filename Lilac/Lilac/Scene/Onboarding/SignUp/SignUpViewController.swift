@@ -102,6 +102,20 @@ final class SignUpViewController: BaseViewController {
         return textField
     }()
     
+    private let buttonBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .Background.primary
+        view.directionalLayoutMargins = .init(top: 12, leading: 24, bottom: 12, trailing: 24)
+        return view
+    }()
+    
+    private let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .View.seperator
+        view.isHidden = true
+        return view
+    }()
+    
     private let signUpButton = FilledColorButton(title: "가입하기")
     
     override func viewDidLoad() {
@@ -114,8 +128,16 @@ final class SignUpViewController: BaseViewController {
         modalPresentationStyle = .formSheet
         sheetPresentationController?.prefersGrabberVisible = true
         
-        view.addSubview(scrollView)
-        view.addSubview(signUpButton)
+        let viewComponents = [scrollView, buttonBackgroundView]
+        viewComponents.forEach { component in
+            view.addSubview(component)
+        }
+        
+        let buttonBackgroundViewComponents = [separator, signUpButton]
+        buttonBackgroundViewComponents.forEach { component in
+            buttonBackgroundView.addSubview(component)
+        }
+        
         scrollView.addSubview(contentView)
         contentView.addSubview(formStackView)
         
@@ -138,6 +160,7 @@ final class SignUpViewController: BaseViewController {
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
         contentView.snp.makeConstraints { make in
@@ -153,10 +176,20 @@ final class SignUpViewController: BaseViewController {
             make.width.equalTo(100)
         }
         
+        buttonBackgroundView.snp.makeConstraints { make in
+            make.height.equalTo(68)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        }
+        
+        separator.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(1)
+            make.bottom.equalTo(buttonBackgroundView.snp.top)
+        }
+        
         signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.bottom).offset(12)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).inset(-12)
+            make.top.horizontalEdges.equalTo(buttonBackgroundView.layoutMarginsGuide)
         }
     }
     
@@ -216,5 +249,13 @@ extension SignUpViewController: UITextFieldDelegate {
         default:
             view.endEditing(true)
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        separator.isHidden = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        separator.isHidden = true
     }
 }
