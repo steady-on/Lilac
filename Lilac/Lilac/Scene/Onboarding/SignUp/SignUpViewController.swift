@@ -206,7 +206,12 @@ final class SignUpViewController: BaseViewController {
         
         let input = SignUpViewModel.Input(
             emailInputValue: emailTextField.rx.text.orEmpty,
-            checkDuplicationButtonTap: checkDuplicationButton.rx.tap
+            nicknameInputValue: nicknameTextField.rx.text.orEmpty,
+            phoneNumberInputValue: phoneNumberTextField.rx.text.orEmpty,
+            passwordInputValue: passwordTextField.rx.text.orEmpty,
+            passwordCheckInputValue: passwordCheckTextField.rx.text.orEmpty,
+            checkDuplicationButtonTap: checkDuplicationButton.rx.tap,
+            signUpButtonTap: signUpButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -219,6 +224,10 @@ final class SignUpViewController: BaseViewController {
         
         output.checkDuplicationButtonEnabled
             .bind(to: checkDuplicationButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.signUpButtonEnabled
+            .bind(to: signUpButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         output.emailValidation

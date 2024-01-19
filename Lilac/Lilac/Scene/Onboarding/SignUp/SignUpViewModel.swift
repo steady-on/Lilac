@@ -27,20 +27,35 @@ final class SignUpViewModel {
 extension SignUpViewModel: ViewModel {
     struct Input {
         let emailInputValue: ControlProperty<String>
+        let nicknameInputValue: ControlProperty<String>
+        let phoneNumberInputValue: ControlProperty<String>
+        let passwordInputValue: ControlProperty<String>
+        let passwordCheckInputValue: ControlProperty<String>
         let checkDuplicationButtonTap: ControlEvent<Void>
+        let signUpButtonTap: ControlEvent<Void>
     }
     
     struct Output {
         let showToastMessage: PublishRelay<Toast>
         let checkDuplicationButtonEnabled: Observable<Bool>
+        let signUpButtonEnabled: Observable<Bool>
         let emailValidation: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
+        // 토스트 알림을 방출할 스트림
         let showToastMessage = PublishRelay<Toast>()
         
+        // 중복확인 버튼 활성화
         let checkDuplicationButtonEnabled = input.emailInputValue
             .map { inputValue in inputValue.isEmpty == false }
+        
+        // 회원가입 버튼 활성화
+        let signUpButtonEnabled = PublishRelay.combineLatest(input.emailInputValue, input.nicknameInputValue, input.passwordInputValue, input.passwordCheckInputValue)
+            .map { email, nickname, password, passwordCheck in
+                email.isEmpty == false && nickname.isEmpty == false
+                && password.isEmpty == false && passwordCheck.isEmpty == false
+            }
         
         let emailValidation = input.checkDuplicationButtonTap
             .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
@@ -87,7 +102,8 @@ extension SignUpViewModel: ViewModel {
         
         return Output(
             showToastMessage: showToastMessage,
-            checkDuplicationButtonEnabled: checkDuplicationButtonEnabled, 
+            checkDuplicationButtonEnabled: checkDuplicationButtonEnabled,
+            signUpButtonEnabled: signUpButtonEnabled,
             emailValidation: emailValidation
         )
     }
