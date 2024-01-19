@@ -58,6 +58,7 @@ final class SignUpViewController: BaseViewController {
     
     private let emailTextField: LabeledTextField = {
         let textField = LabeledTextField(title: "이메일")
+        textField.textContentType = .emailAddress
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.placeholder = "이메일을 입력하세요"
@@ -69,6 +70,7 @@ final class SignUpViewController: BaseViewController {
 
     private let nicknameTextField: LabeledTextField = {
         let textField = LabeledTextField(title: "닉네임")
+        textField.textContentType = .nickname
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
         textField.placeholder = "닉네임을 입력하세요"
@@ -78,6 +80,7 @@ final class SignUpViewController: BaseViewController {
     
     private let phoneNumberTextField: LabeledTextField = {
         let textField = LabeledTextField(title: "연락처")
+        textField.textContentType = .telephoneNumber
         textField.keyboardType = .numberPad
         textField.placeholder = "전화번호를 입력하세요"
         textField.returnKeyType = .next
