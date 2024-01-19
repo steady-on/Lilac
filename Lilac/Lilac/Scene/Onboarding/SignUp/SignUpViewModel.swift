@@ -86,7 +86,7 @@ extension SignUpViewModel: ViewModel {
                 passwordInput == checkInput
             }
         
-        // 형식에 맞는 이메일인 경우 이메일 입력값
+        // 유효한 이메일인지에 대한 검사 결과를 view에 반영하고, 형식에 맞다면 그 이메일 주소를 방출
         let validEmailInputValue = input.checkDuplicationButtonTap
             .withLatestFrom(emailValidation) { _, isValidEmail in isValidEmail }
             .filter { isValidEmail in
