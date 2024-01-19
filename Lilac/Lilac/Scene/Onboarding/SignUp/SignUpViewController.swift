@@ -230,7 +230,7 @@ final class SignUpViewController: BaseViewController {
             .bind(to: signUpButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        output.emailValidation
+        output.emailValidationResult
             .bind(to: emailTextField.rx.isValid)
             .disposed(by: disposeBag)
     }

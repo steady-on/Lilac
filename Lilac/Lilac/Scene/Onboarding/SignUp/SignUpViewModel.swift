@@ -38,13 +38,14 @@ extension SignUpViewModel: ViewModel {
     struct Output {
         let showToastMessage: PublishRelay<Toast>
         let checkDuplicationButtonEnabled: Observable<Bool>
+        let emailValidationResult: PublishRelay<Bool>
         let signUpButtonEnabled: Observable<Bool>
-        let emailValidation: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
-        // 토스트 알림을 방출할 스트림
-        let showToastMessage = PublishRelay<Toast>()
+        let showToastMessage = PublishRelay<Toast>() // 토스트 알림을 방출하는 스트림
+        let emailValidationResult = PublishRelay<Bool>() // 이메일이 형식에 맞는지를 판단한 결과
+        let isDuplicatedEmail = PublishRelay<Result<Void, Error>>()
         
         // 중복확인 버튼 활성화
         let checkDuplicationButtonEnabled = input.emailInputValue
@@ -57,36 +58,73 @@ extension SignUpViewModel: ViewModel {
                 && password.isEmpty == false && passwordCheck.isEmpty == false
             }
         
-        let emailValidation = input.checkDuplicationButtonTap
-            .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
+        // 이메일 형식 확인
+        let emailValidation = input.emailInputValue
             .map { emailInput in emailInput.isValidEmail }
         
-        // 이메일 형식이 올바르지 않을 때 토스트 메세지
-        emailValidation
-            .filter { bool in bool == false }
-            .bind { _ in
-                showToastMessage.accept(("이메일 형식이 올바르지 않습니다.", .caution))
+        // 닉네임 길이 확인
+        let nicknameValidation = input.nicknameInputValue
+            .map { inputValue in
+                1...30 ~= inputValue.count
             }
-            .disposed(by: disposeBag)
         
-        // 직전에 요청한 이메일과 같은 값일 때 직전 결과로 토스트 메세지
-        emailValidation
-            .filter { bool in bool }
-            .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
-            .distinctUntilChanged { $0 != $1 }
-            .withLatestFrom(showToastMessage)
-            .bind(to: showToastMessage)
-            .disposed(by: disposeBag)
+        // 전화번호 길이 확인
+        let phoneNumberValidation = input.phoneNumberInputValue
+            .map { inputValue in
+                inputValue.starts(with: "01") && 12...13 ~= inputValue.count
+            }
         
-        // 직전 결과와 다를 때 서버로 중복확인 요청
-        emailValidation
-            .filter { bool in bool }
+        // 비밀번호 형식 확인
+        let passwordValidation = input.passwordInputValue
+            .map { inputValue in
+                inputValue.isValidPassword
+            }
+        
+        // 비밀번호와 비밀번호 확인 일치
+        let passwordCheckValidation = Observable.combineLatest(input.passwordInputValue, input.passwordCheckInputValue)
+            .map { passwordInput, checkInput in
+                passwordInput == checkInput
+            }
+        
+        // 형식에 맞는 이메일인 경우 이메일 입력값
+        let validEmailInputValue = input.checkDuplicationButtonTap
+            .withLatestFrom(emailValidation) { _, isValidEmail in isValidEmail }
+            .filter { isValidEmail in
+                if isValidEmail == false {
+                    showToastMessage.accept(("이메일 형식이 올바르지 않습니다.", .caution))
+                }
+                
+                emailValidationResult.accept(isValidEmail)
+                
+                return isValidEmail
+            }
             .withLatestFrom(input.emailInputValue) { _, inputValue in inputValue }
+        
+        // 직전에 중복검사 요청을 한 메일 주소가 아닌 경우: 서버로 중복 검사 요청
+        validEmailInputValue
             .distinctUntilChanged()
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] inputValue in
-                return self.lilacUserService.checkEmailDuplicated(email: inputValue)
+                self.lilacUserService.checkEmailDuplicated(email: inputValue)
             }
+            .subscribe { result in
+                isDuplicatedEmail.accept(result)
+            } onError: { _ in
+                showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
+            }
+            .disposed(by: disposeBag)
+            
+        
+        // 직전에 중복검사 요청을 한 메일 주소와 같은 경우: 마지막으로 서버에서 받은 결과를 다시 한 번 방출
+        validEmailInputValue
+            .distinctUntilChanged { $0 != $1 }
+            .skip(1) // 맨 처음에는 비교할 값이 없기 때문에 pass
+            .withLatestFrom(isDuplicatedEmail)
+            .bind(to: isDuplicatedEmail)
+            .disposed(by: disposeBag)
+        
+        // 서버에서 받은 결과를 처리하는 로직
+        isDuplicatedEmail
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(_):
@@ -98,13 +136,12 @@ extension SignUpViewModel: ViewModel {
                 showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
             }
             .disposed(by: disposeBag)
-
         
         return Output(
             showToastMessage: showToastMessage,
-            checkDuplicationButtonEnabled: checkDuplicationButtonEnabled,
-            signUpButtonEnabled: signUpButtonEnabled,
-            emailValidation: emailValidation
+            checkDuplicationButtonEnabled: checkDuplicationButtonEnabled, 
+            emailValidationResult: emailValidationResult,
+            signUpButtonEnabled: signUpButtonEnabled
         )
     }
 }
