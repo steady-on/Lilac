@@ -194,6 +194,13 @@ final class SignUpViewController: BaseViewController {
     }
     
     override func bind() {
+        phoneNumberTextField.rx.text.orEmpty
+            .map { input in
+                input.formattedPhoneNumber()
+            }
+            .bind(to: phoneNumberTextField.rx.text)
+            .disposed(by: disposeBag)
+        
         let input = SignUpViewModel.Input(
             emailInputValue: emailTextField.rx.text.orEmpty,
             checkDuplicationButtonTap: checkDuplicationButton.rx.tap
