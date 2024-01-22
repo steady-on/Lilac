@@ -226,12 +226,40 @@ final class SignUpViewController: BaseViewController {
             .bind(to: checkDuplicationButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
+        output.emailValidationResult
+            .bind(to: emailTextField.rx.isValid)
+            .disposed(by: disposeBag)
+        
         output.signUpButtonEnabled
             .bind(to: signUpButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        output.emailValidationResult
-            .bind(to: emailTextField.rx.isValid)
+        output.allValuesValidationResult
+            .bind(with: self) { owner, allValidations in
+                owner.emailTextField.rx.isValid.onNext(allValidations.isCheckedEmail)
+                owner.nicknameTextField.rx.isValid.onNext(allValidations.isValidNickname)
+                owner.phoneNumberTextField.rx.isValid.onNext(allValidations.isValidPhoneNumber)
+                owner.passwordTextField.rx.isValid.onNext(allValidations.isValidPassword)
+                owner.passwordCheckTextField.rx.isValid.onNext(allValidations.isPasswordChecked)
+                
+                if allValidations.isCheckedEmail == false {
+                    owner.emailTextField.becomeFirstResponder()
+                } else if allValidations.isValidNickname == false {
+                    owner.nicknameTextField.becomeFirstResponder()
+                } else if allValidations.isValidPhoneNumber == false {
+                    owner.phoneNumberTextField.becomeFirstResponder()
+                } else if allValidations.isValidPassword == false {
+                    owner.passwordTextField.becomeFirstResponder()
+                } else if allValidations.isPasswordChecked == false {
+                    owner.passwordCheckTextField.becomeFirstResponder()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.isLoggedIn
+            .bind(with: self) { owner, _ in
+                owner.moveToHome()
+            }
             .disposed(by: disposeBag)
     }
     
@@ -276,5 +304,16 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         separator.isHidden = true
+    }
+}
+
+extension SignUpViewController {
+    private func moveToHome() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        // TODO: 추후 Home Default 화면으로 이동
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
