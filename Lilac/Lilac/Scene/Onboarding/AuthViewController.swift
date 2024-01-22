@@ -136,6 +136,18 @@ final class AuthViewController: BaseViewController {
                 owner.present(nc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let presentVC = owner.presentingViewController
+                
+                owner.dismiss(animated: true) {
+                    let vc = SignUpViewController(viewModel: SignUpViewModel())
+                    let nc = UINavigationController(rootViewController: vc)
+                    presentVC?.present(nc, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 
