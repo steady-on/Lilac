@@ -11,7 +11,7 @@ import RxCocoa
 
 final class SignUpViewModel {
     
-    typealias Toast = (message: String, style: ToastMessage.Style)
+    typealias Toast = (message: String, style: ToastAlert.Style)
     
     deinit {
         print("deinit SignUpViewModel")

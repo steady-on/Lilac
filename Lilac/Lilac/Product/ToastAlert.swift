@@ -1,5 +1,5 @@
 //
-//  ToastMessage.swift
+//  ToastAlert.swift
 //  Lilac
 //
 //  Created by Roen White on 1/8/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ToastMessage: BasicLabel {
+final class ToastAlert: BasicLabel {
     
     private let style: Style
     
@@ -42,7 +42,7 @@ final class ToastMessage: BasicLabel {
     }
 }
 
-extension ToastMessage {
+extension ToastAlert {
     enum Style {
         case success
         case caution
