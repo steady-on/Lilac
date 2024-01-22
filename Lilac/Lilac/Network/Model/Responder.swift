@@ -13,7 +13,7 @@ enum Responder {
     }
     
     struct SignUp: Decodable {
-        let nickname: String
+        let email, nickname: String
         let token: Token
     }
     
