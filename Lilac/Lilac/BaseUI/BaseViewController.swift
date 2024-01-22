@@ -47,7 +47,9 @@ extension BaseViewController {
         
         toastMessage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.keyboardLayoutGuide).inset(bottomInset)
+            make.leading.greaterThanOrEqualTo(view.safeAreaLayoutGuide).inset(24)
+            make.trailing.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(-24)
+            make.bottom.equalTo(vc.view.keyboardLayoutGuide).inset(bottomInset)
         }
         
         UIView.animate(withDuration: 0.5, delay: 2, options: .curveLinear) {
