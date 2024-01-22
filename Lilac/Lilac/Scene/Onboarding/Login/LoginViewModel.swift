@@ -77,8 +77,9 @@ extension LoginViewModel: ViewModel {
         validations
             .filter { isValidEmail, isValidPassword in isValidEmail && isValidPassword }
             .withLatestFrom(inputValues) { _, values in values }
-            .flatMap { [weak self] email, password in
-                self!.lilacUserService.emailLogin(email: email, password: password)
+            .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+            .flatMap { [unowned self] email, password in
+                lilacUserService.emailLogin(email: email, password: password)
             }
             .subscribe(with: self) { owner, result in
                 switch result {
