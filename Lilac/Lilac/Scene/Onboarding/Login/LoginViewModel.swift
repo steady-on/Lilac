@@ -31,7 +31,7 @@ extension LoginViewModel: ViewModel {
         let buttonEnabled: Observable<Bool>
         let emailValidation: PublishRelay<Bool>
         let passwordValidation: PublishRelay<Bool>
-        let showToastMessage: PublishRelay<String>
+        let showToastAlert: PublishRelay<String>
     }
     
     func transform(input: Input) -> Output {
@@ -99,7 +99,7 @@ extension LoginViewModel: ViewModel {
             buttonEnabled: buttonEnabled,
             emailValidation: emailValidation,
             passwordValidation: passwordValidation,
-            showToastMessage: showToastMessage
+            showToastAlert: showToastMessage
         )
     }
 }

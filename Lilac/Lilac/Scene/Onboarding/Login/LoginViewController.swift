@@ -101,9 +101,9 @@ final class LoginViewController: BaseViewController {
             .bind(to: passwordTextField.rx.isValid)
             .disposed(by: disposeBag)
         
-        output.showToastMessage
+        output.showToastAlert
             .subscribe(with: self) { owner, message in
-                owner.showToast(.init(message: message, style: .caution), bottomInset: 92)
+                owner.showToast(.init(message: message, style: .caution), target: owner, bottomInset: -84)
             }
             .disposed(by: disposeBag)
     }

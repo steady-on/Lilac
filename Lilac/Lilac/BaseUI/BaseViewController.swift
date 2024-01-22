@@ -40,20 +40,23 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController {
-    func showToast(_ toast: ToastAlert.Toast, bottomInset: ConstraintInsetTarget) {
+    func showToast(_ toast: ToastAlert.Toast, target: BaseViewController, bottomInset: ConstraintInsetTarget) {
         let toastMessage = ToastAlert(toast: toast)
         
-        view.addSubview(toastMessage)
+        target.view.addSubview(toastMessage)
         
         toastMessage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualTo(view.safeAreaLayoutGuide).inset(24)
-            make.trailing.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(-24)
-            make.bottom.equalTo(vc.view.keyboardLayoutGuide).inset(bottomInset)
+            make.centerX.equalTo(target.view)
+            make.leading.greaterThanOrEqualTo(target.view.safeAreaLayoutGuide).inset(24)
+            make.trailing.lessThanOrEqualTo(target.view.safeAreaLayoutGuide).inset(-24)
+            make.bottom.equalTo(target.view.keyboardLayoutGuide.snp.top).inset(bottomInset)
         }
+        
+        target.view.layoutIfNeeded()
         
         UIView.animate(withDuration: 0.5, delay: 2, options: .curveLinear) {
             toastMessage.alpha = 0
+            toastMessage.layoutIfNeeded()
         } completion: { _ in
             toastMessage.removeFromSuperview()
         }

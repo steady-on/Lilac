@@ -216,9 +216,9 @@ final class SignUpViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.showToastMessage
+        output.showToastAlert
             .bind(with: self) { owner, toast in
-                owner.showToast(toast, bottomInset: 105)
+                owner.showToast(toast, target: self, bottomInset: -84)
             }
             .disposed(by: disposeBag)
         

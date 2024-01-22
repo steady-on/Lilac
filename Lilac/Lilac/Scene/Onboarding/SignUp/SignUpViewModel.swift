@@ -31,7 +31,7 @@ extension SignUpViewModel: ViewModel {
     }
     
     struct Output {
-        let showToastMessage: PublishRelay<ToastAlert.Toast>
+        let showToastAlert: PublishRelay<ToastAlert.Toast>
         let checkDuplicationButtonEnabled: Observable<Bool>
         let emailValidationResult: PublishRelay<Bool>
         let signUpButtonEnabled: Observable<Bool>
@@ -191,7 +191,7 @@ extension SignUpViewModel: ViewModel {
             .disposed(by: disposeBag)
 
         return Output(
-            showToastMessage: showToastMessage,
+            showToastAlert: showToastMessage,
             checkDuplicationButtonEnabled: checkDuplicationButtonEnabled, 
             emailValidationResult: emailValidationResult,
             signUpButtonEnabled: signUpButtonEnabled,
