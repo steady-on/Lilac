@@ -203,6 +203,7 @@ extension SignUpViewModel: ViewModel {
 
 extension SignUpViewModel {
     private func saveUserInfo(_ signUp: Responder.SignUp) {
+        @UserDefault(key: .nickname, defaultValue: signUp.nickname) var nickname
         @UserDefault(key: .accessToken, defaultValue: signUp.token.accessToken) var accessToken
         @UserDefault(key: .refreshToken, defaultValue: signUp.token.refreshToken) var refreshToken
     }
