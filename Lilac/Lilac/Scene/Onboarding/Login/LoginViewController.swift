@@ -103,7 +103,7 @@ final class LoginViewController: BaseViewController {
         
         output.showToastMessage
             .subscribe(with: self) { owner, message in
-                owner.showToast(message: message, style: .caution, bottomInset: 92)
+                owner.showToast(.init(message: message, style: .caution), bottomInset: 92)
             }
             .disposed(by: disposeBag)
     }

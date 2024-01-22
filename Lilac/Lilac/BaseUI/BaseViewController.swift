@@ -40,8 +40,8 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController {
-    func showToast(message: String, style: ToastAlert.Style, bottomInset: ConstraintInsetTarget) {
-        let toastMessage = ToastAlert(message: message, style: style)
+    func showToast(_ toast: ToastAlert.Toast, bottomInset: ConstraintInsetTarget) {
+        let toastMessage = ToastAlert(toast: toast)
         
         view.addSubview(toastMessage)
         

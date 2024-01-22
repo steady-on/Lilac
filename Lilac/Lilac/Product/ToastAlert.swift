@@ -12,10 +12,14 @@ final class ToastAlert: BasicLabel {
     
     private let style: Style
     
-    init(message: String, style: Style) {
+    private init(message: String, style: Style) {
         self.style = style
         super.init(style: .body)
         configureLabel(message)
+    }
+    
+    convenience init(toast: Toast) {
+        self.init(message: toast.message, style: toast.style)
     }
     
     private let textInsets = UIEdgeInsets(top: 9, left: 16, bottom: 9, right: 16)
@@ -53,5 +57,10 @@ extension ToastAlert {
             case .caution: return .Brand.error
             }
         }
+    }
+    
+    struct Toast {
+        let message: String
+        let style: Style
     }
 }

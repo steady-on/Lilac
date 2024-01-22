@@ -10,9 +10,6 @@ import RxSwift
 import RxCocoa
 
 final class SignUpViewModel {
-    
-    typealias Toast = (message: String, style: ToastAlert.Style)
-    
     deinit {
         print("deinit SignUpViewModel")
     }
@@ -34,7 +31,7 @@ extension SignUpViewModel: ViewModel {
     }
     
     struct Output {
-        let showToastMessage: PublishRelay<Toast>
+        let showToastMessage: PublishRelay<ToastAlert.Toast>
         let checkDuplicationButtonEnabled: Observable<Bool>
         let emailValidationResult: PublishRelay<Bool>
         let signUpButtonEnabled: Observable<Bool>
@@ -43,7 +40,7 @@ extension SignUpViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let showToastMessage = PublishRelay<Toast>() // 토스트 알림을 방출하는 스트림
+        let showToastMessage = PublishRelay<ToastAlert.Toast>() // 토스트 알림을 방출하는 스트림
         let emailValidationResult = PublishRelay<Bool>() // 이메일이 형식에 맞는지를 판단한 결과
         let allValuesValidationResult = PublishRelay<(isCheckedEmail: Bool, isValidNickname: Bool, isValidPhoneNumber: Bool, isValidPassword: Bool, isPasswordChecked: Bool)>()
         let isLoggedIn = PublishRelay<Void>()
@@ -96,7 +93,7 @@ extension SignUpViewModel: ViewModel {
             .withLatestFrom(emailValidation) { _, isValidEmail in isValidEmail }
             .filter { isValidEmail in
                 if isValidEmail == false {
-                    showToastMessage.accept(("이메일 형식이 올바르지 않습니다.", .caution))
+                    showToastMessage.accept(.init(message: "이메일 형식이 올바르지 않습니다.", style: .caution))
                 }
                 
                 emailValidationResult.accept(isValidEmail)
@@ -118,7 +115,7 @@ extension SignUpViewModel: ViewModel {
             .subscribe { result in
                 isDuplicatedEmail.accept(result)
             } onError: { _ in
-                showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
+                showToastMessage.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
             }
             .disposed(by: disposeBag)
             
@@ -136,12 +133,12 @@ extension SignUpViewModel: ViewModel {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(_):
-                    showToastMessage.accept(("사용 가능한 이메일입니다.", .success))
+                    showToastMessage.accept(.init(message: "사용 가능한 이메일입니다.", style: .success))
                 case .failure(_):
-                    showToastMessage.accept(("이미 존재하는 계정입니다.", .caution))
+                    showToastMessage.accept(.init(message: "이미 존재하는 계정입니다.", style: .caution))
                 }
             } onError: { _, _ in
-                showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
+                showToastMessage.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
             }
             .disposed(by: disposeBag)
         
@@ -160,11 +157,11 @@ extension SignUpViewModel: ViewModel {
             .filter { isCheckedEmail, isValidNickname, isValidPhoneNumber, isValidPassword, isPasswordChecked in
                 allValuesValidationResult.accept((isCheckedEmail, isValidNickname, isValidPhoneNumber, isValidPassword, isPasswordChecked))
                 
-                let toast: Toast? = if isCheckedEmail == false { ("이메일 중복 확인을 진행해주세요.", .caution)
-                } else if isValidNickname == false { ("닉네임은 1글자 이상 30글자 이내로 부탁드려요.", .caution)
-                } else if isValidPhoneNumber == false { ("잘못된 전화번호 형식입니다.", .caution)
-                } else if isValidPassword == false { ("비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요.", .caution)
-                } else  if isPasswordChecked == false { ("작성하신 비밀번호가 일치하지 않습니다. ", .caution)
+                let toast: ToastAlert.Toast? = if isCheckedEmail == false { .init(message: "이메일 중복 확인을 진행해주세요.", style: .caution)
+                } else if isValidNickname == false { .init(message: "닉네임은 1글자 이상 30글자 이내로 부탁드려요.", style: .caution)
+                } else if isValidPhoneNumber == false { .init(message: "잘못된 전화번호 형식입니다.", style: .caution)
+                } else if isValidPassword == false { .init(message: "비밀번호는 최소 8자 이상, 하나 이상의 대소문자/숫자/특수 문자를 설정해주세요.", style: .caution)
+                } else  if isPasswordChecked == false { .init(message: "작성하신 비밀번호가 일치하지 않습니다. ", style: .caution)
                 } else { nil }
                 
                 if let toast {
@@ -186,10 +183,10 @@ extension SignUpViewModel: ViewModel {
                     owner.saveUserInfo(signUp)
                     isLoggedIn.accept(())
                 case .failure(let error):
-                    showToastMessage.accept(("이미 가입된 회원입니다. 로그인을 진행해주세요.", .caution))
+                    showToastMessage.accept(.init(message: "이미 가입된 회원입니다. 로그인을 진행해주세요.", style: .caution))
                 }
             } onError: { owner, error in
-                showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
+                showToastMessage.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
             }
             .disposed(by: disposeBag)
 
