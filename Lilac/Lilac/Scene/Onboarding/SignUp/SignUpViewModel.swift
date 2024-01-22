@@ -185,10 +185,10 @@ extension SignUpViewModel: ViewModel {
                 case .success(let signUp):
                     owner.saveUserInfo(signUp)
                     isLoggedIn.accept(())
-                case .failure(let error):
+                case .failure(_):
                     showToastMessage.accept(("이미 가입된 회원입니다. 로그인을 진행해주세요.", .caution))
                 }
-            } onError: { owner, error in
+            } onError: { owner, _ in
                 showToastMessage.accept(("에러가 발생했어요. 잠시 후 다시 시도해주세요.", .caution))
             }
             .disposed(by: disposeBag)
