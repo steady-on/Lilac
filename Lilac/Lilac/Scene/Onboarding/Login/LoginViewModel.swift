@@ -109,7 +109,7 @@ extension LoginViewModel: ViewModel {
 }
 
 extension LoginViewModel {
-    private func saveUserInfo(_ signIn: Responder.SignIn) -> Bool {
+    private func saveUserInfo(_ signIn: Responder.SimpleProfileWithToken) -> Bool {
         @UserDefault(key: .nickname, defaultValue: signIn.nickname) var nickname
         @UserDefault(key: .accessToken, defaultValue: signIn.accessToken) var accessToken
         @UserDefault(key: .refreshToken, defaultValue: signIn.refreshToken) var refreshToken

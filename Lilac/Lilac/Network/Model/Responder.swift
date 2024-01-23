@@ -8,20 +8,20 @@
 import Foundation
 
 enum Responder {
+    // auth/refresh
     struct Auth: Decodable {
         let accessToken: String
     }
     
-    struct SignUp: Decodable {
-        let email, nickname: String
-        let token: Token
-    }
-    
-    struct SignIn: Decodable {
+    // v1/users/login
+    struct SimpleProfileWithToken: Decodable {
+        let userId: Int
         let nickname, accessToken, refreshToken: String
     }
     
-    struct SignInWithVendor: Decodable {
+    // users/login/kakao, apple, users/signUp
+    struct ProfileWithToken: Decodable {
+        let userId: Int
         let email, nickname: String
         let profileImage, phone: String?
         let vendor: Vendor
@@ -29,15 +29,19 @@ enum Responder {
         let token: Token
     }
     
+    // users/my
     struct MyProfile: Decodable {
+        let userId: Int
         let email, nickname: String
         let profileImage, phone: String?
         let vendor: Vendor
-        let sesacCoin: Int
+        let sesacCoin: Int?
         let createdAt: Date
     }
     
-    struct OtherUserProfile: Decodable {
+    // users/{id}
+    struct UserProfile: Decodable {
+        let userId: Int
         let email, nickname: String
         let profileImage: String?
         let createdAt: Date

@@ -20,7 +20,7 @@ final class AuthViewModel {
     private lazy var kakaoLoginService = KakaoLoginService()
     private lazy var lilacUserService = LilacUserService()
     
-    private func kakaoLogin() -> Observable<Result<Responder.SignInWithVendor, Error>> {
+    private func kakaoLogin() -> Observable<Result<Responder.ProfileWithToken, Error>> {
         return kakaoLoginService.kakaoLogin()
             .flatMap { [weak self] accessToken in
                 self!.lilacUserService.kakaoLogin(for: accessToken)
@@ -69,7 +69,7 @@ extension AuthViewModel: ViewModel {
 }
 
 extension AuthViewModel {
-    private func saveUserInfo(profile: Responder.SignInWithVendor) -> Bool {
+    private func saveUserInfo(profile: Responder.ProfileWithToken) -> Bool {
         @UserDefault(key: .email, defaultValue: profile.email) var email
         @UserDefault(key: .nickname, defaultValue: profile.nickname) var nickname
         
