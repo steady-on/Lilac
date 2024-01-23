@@ -13,4 +13,5 @@ enum KeychainError: Error {
     case failToSearchItemError(itemType: String)
     case unexpectedItemData(status: OSStatus)
     case unhandledError(status: OSStatus)
+    case failToEncodingData
 }

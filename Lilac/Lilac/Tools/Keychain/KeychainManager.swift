@@ -15,11 +15,15 @@ final class KeychainManager {
     private let server = BaseURL.server
     
     func save(_ item: SecItem) throws {
+        guard let data = item.value.data(using: String.Encoding.utf8) else {
+            throw KeychainError.failToEncodingData
+        }
+        
         let query: NSDictionary = [
-            kSecClass as String: kSecClassInternetPassword,
-            kSecAttrServer as String: server,
-            kSecAttrLabel as String: item.type.rawValue,
-            kSecValueData as String: item.value
+            kSecClass : kSecClassInternetPassword,
+            kSecAttrServer : server,
+            kSecAttrLabel : item.type.rawValue,
+            kSecValueData : data
         ]
         
         SecItemDelete(query)
@@ -32,11 +36,11 @@ final class KeychainManager {
     
     func search(_ itemType: ItemType) throws -> String {
         let query: NSDictionary = [
-            kSecClass as String: kSecClassInternetPassword,
-            kSecAttrServer as String: server,
-            kSecAttrLabel as String: itemType.rawValue,
-            kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecReturnData as String: true
+            kSecClass : kSecClassInternetPassword,
+            kSecAttrServer : server,
+            kSecAttrLabel : itemType.rawValue,
+            kSecMatchLimit : kSecMatchLimitOne,
+            kSecReturnData : true
         ]
         
         var item: CFTypeRef?
