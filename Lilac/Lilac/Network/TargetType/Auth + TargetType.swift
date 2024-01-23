@@ -10,7 +10,7 @@ import Moya
 
 extension LilacAPI.Auth: TargetType {
     var baseURL: URL {
-        return URL(string: BaseURL.server + "auth")!
+        return URL(string: BaseURL.v1.server + "auth")!
     }
     
     var path: String {

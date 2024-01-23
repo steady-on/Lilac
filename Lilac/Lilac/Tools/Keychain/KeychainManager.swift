@@ -12,7 +12,7 @@ final class KeychainManager {
     static let shared = KeychainManager()
     private init() {}
     
-    private let server = BaseURL.server
+    private let server = BaseURL.serverURL
     
     func save(_ item: SecItem) throws {
         guard let data = item.value.data(using: String.Encoding.utf8) else {
