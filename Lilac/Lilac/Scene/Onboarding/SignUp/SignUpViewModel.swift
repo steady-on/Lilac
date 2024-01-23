@@ -180,7 +180,11 @@ extension SignUpViewModel: ViewModel {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let signUp):
-                    owner.saveUserInfo(signUp)
+                    guard owner.saveUserInfo(signUp) else {
+                        showToastMessage.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
+                        return
+                    }
+                    
                     isLoggedIn.accept(())
                 case .failure(_):
                     showToastMessage.accept(.init(message: "이미 가입된 회원입니다. 로그인을 진행해주세요.", style: .caution))
@@ -202,10 +206,16 @@ extension SignUpViewModel: ViewModel {
 }
 
 extension SignUpViewModel {
-    private func saveUserInfo(_ profile: Responder.SignUp) {
+    private func saveUserInfo(_ profile: Responder.SignUp) -> Bool {
         @UserDefault(key: .email, defaultValue: profile.email) var email
         @UserDefault(key: .nickname, defaultValue: profile.nickname) var nickname
-        @UserDefault(key: .accessToken, defaultValue: profile.token.accessToken) var accessToken
-        @UserDefault(key: .refreshToken, defaultValue: profile.token.refreshToken) var refreshToken
+        
+        do {
+            try KeychainManager.shared.save(.init(type: .accessToken, value: profile.token.accessToken))
+            try KeychainManager.shared.save(.init(type: .refreshToken, value: profile.token.refreshToken))
+            return true
+        } catch {
+            return false
+        }
     }
 }
