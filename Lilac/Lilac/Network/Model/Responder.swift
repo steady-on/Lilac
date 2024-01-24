@@ -51,14 +51,47 @@ enum Responder {
         }
     }
     
-    
+    enum WorkSpace {
+        struct WorkSpace: Decodable {
+            let workspaceId: Int
+            let name: String
+            let description: String?
+            let thumbnail: String
+            let ownerId: Int
+            let createdAt: Date
+            let channels: [Channel]?
+            let workspaceMembers: [Member]?
+        }
+        
+        struct Channel: Decodable {
+            let workSpaceId: Int
+            let channelId: Int
+            let name: String
+            let description: String?
+            let ownerId: Int
+            let isPrivate: Bool
+            let createdAt: Date
+            
+            enum CodingKeys: String, CodingKey {
+                case workSpaceId, channelId, name, description, ownerId, createdAt
+                case isPrivate = "private"
+            }
+        }
+        
+        struct Member: Decodable {
+            let userId: Int
+            let email: String
+            let nickname: String
+            let profileImage: String?
+        }
+    }
 
     struct Error: Decodable {
         let errorCode: String
     }
 }
 
-extension Responder {
+extension Responder.User {
     struct Token: Decodable {
         let accessToken, refreshToken: String
     }
@@ -68,4 +101,8 @@ extension Responder {
         case kakao
         case apple
     }
+}
+
+extension Responder.WorkSpace {
+    
 }
