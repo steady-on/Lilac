@@ -83,8 +83,6 @@ extension LilacAPI.User: TargetType {
                     "deviceToken" : ""
                 ]
             }
-        case .signOut:
-            [:]
         case .saveDeviceToken:
             // TODO: keycahin setting 후 가져오기
             ["deviceToken" : ""]
@@ -100,7 +98,7 @@ extension LilacAPI.User: TargetType {
             case .updateImage(let image):
                 ["image" : image]
             }
-        case .askForOtherUserProfile:
+        default:
             [:]
         }
         return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
