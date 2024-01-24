@@ -15,5 +15,4 @@ struct SecItem {
 enum ItemType: String {
     case accessToken
     case refreshToken
-    case password
 }
