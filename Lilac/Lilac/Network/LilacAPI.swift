@@ -18,7 +18,7 @@ enum LilacAPI {
         case signIn(vendor: Vendor)
         case signOut
         case saveDeviceToken
-        case myProfile(type: WorkType)
+        case myProfile(type: MyProfile)
         case askForOtherUserProfile(id: Int)
         
         enum Vendor {
@@ -27,10 +27,29 @@ enum LilacAPI {
             case apple
         }
         
-        enum WorkType {
+        enum MyProfile {
             case load
             case updateInfo(nickname: String?, phone: String?)
             case updateImage(image: Data)
+        }
+    }
+    
+    enum WorkSpace {
+        case workSpace(type: WorkSpace)
+        case member(id: Int, type: Member)
+        
+        enum WorkSpace {
+            case create(name: String, description: String?, image: String)
+            case load(id: Int?)
+            case update(id: Int, name: String?, description: String?, image: String?)
+            case delete(id: Int)
+        }
+        
+        enum Member {
+            case invite(email: String)
+            case load(userId: Int?)
+            case search(keyword: String)
+            case leave
         }
     }
 }
