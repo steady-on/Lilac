@@ -28,9 +28,9 @@ enum LilacAPI {
         }
         
         enum WorkType {
-            case askForMyInfo
-            case editInfo(nickname: String?, phone: String?)
-            case editImage(image: Data)
+            case load
+            case updateInfo(nickname: String?, phone: String?)
+            case updateImage(image: Data)
         }
     }
 }

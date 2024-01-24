@@ -31,8 +31,8 @@ extension LilacAPI.User: TargetType {
             return "deviceToken"
         case .myProfile(let type):
             return switch type {
-            case .askForMyInfo, .editInfo: "my"
-            case .editImage: "my/image"
+            case .load, .updateInfo: "my"
+            case .updateImage: "my/image"
             }
         case .askForOtherUserProfile(let id):
             return "\(id)"
@@ -43,9 +43,9 @@ extension LilacAPI.User: TargetType {
         switch self {
         case .signUp, .validateEmail, .signIn, .saveDeviceToken:
             return .post
-        case .signOut, .myProfile(type: .askForMyInfo), .askForOtherUserProfile:
+        case .signOut, .myProfile(type: .load), .askForOtherUserProfile:
             return .get
-        case .myProfile(type: .editInfo), .myProfile(type: .editImage):
+        case .myProfile(type: .updateInfo), .myProfile(type: .updateImage):
             return .post
         }
     }
@@ -90,14 +90,14 @@ extension LilacAPI.User: TargetType {
             ["deviceToken" : ""]
         case .myProfile(let type):
             switch type {
-            case .askForMyInfo:
+            case .load:
                 [:]
-            case .editInfo(let nickname, let phone):
+            case .updateInfo(let nickname, let phone):
                 [
                     "nickname" : nickname ?? "",
                     "phone" : phone ?? ""
                 ]
-            case .editImage(let image):
+            case .updateImage(let image):
                 ["image" : image]
             }
         case .askForOtherUserProfile:
@@ -110,7 +110,7 @@ extension LilacAPI.User: TargetType {
         let commons = ["SesacKey" : APIKey.secretKey]
         
         let specified: [String : String] = switch self {
-        case .myProfile(type: .editImage):
+        case .myProfile(type: .updateImage):
             // TODO: keycahin setting 후 가져오기
             [
                 "Authorization" : "",
