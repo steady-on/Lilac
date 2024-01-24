@@ -112,12 +112,16 @@ extension LoginViewModel {
     private func saveUserInfo(_ signIn: Responder.User.SimpleProfileWithToken) -> Bool {
         @UserDefault(key: .nickname, defaultValue: signIn.nickname) var nickname
         
-        do {
-            try KeychainManager.shared.save(.init(type: .accessToken, value: signIn.accessToken))
-            try KeychainManager.shared.save(.init(type: .refreshToken, value: signIn.refreshToken))
-            return true
-        } catch {
+        @KeychainStorage(itemType: .accessToken) var accessToken
+        @KeychainStorage(itemType: .refreshToken) var refreshToken
+        
+        accessToken = signIn.accessToken
+        refreshToken = signIn.refreshToken
+        
+        guard let accessToken, let refreshToken else {
             return false
         }
+        
+        return true
     }
 }

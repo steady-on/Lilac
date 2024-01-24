@@ -73,12 +73,16 @@ extension AuthViewModel {
         @UserDefault(key: .email, defaultValue: profile.email) var email
         @UserDefault(key: .nickname, defaultValue: profile.nickname) var nickname
         
-        do {
-            try KeychainManager.shared.save(.init(type: .accessToken, value: profile.token.accessToken))
-            try KeychainManager.shared.save(.init(type: .refreshToken, value: profile.token.refreshToken))
-            return true
-        } catch {
+        @KeychainStorage(itemType: .accessToken) var accessToken
+        @KeychainStorage(itemType: .refreshToken) var refreshToken
+        
+        accessToken = profile.token.accessToken
+        refreshToken = profile.token.refreshToken
+        
+        guard let accessToken, let refreshToken else {
             return false
         }
+        
+        return true
     }
 }
