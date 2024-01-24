@@ -206,7 +206,7 @@ extension SignUpViewModel: ViewModel {
 }
 
 extension SignUpViewModel {
-    private func saveUserInfo(_ profile: Responder.ProfileWithToken) -> Bool {
+    private func saveUserInfo(_ profile: Responder.User.ProfileWithToken) -> Bool {
         @UserDefault(key: .email, defaultValue: profile.email) var email
         @UserDefault(key: .nickname, defaultValue: profile.nickname) var nickname
         
