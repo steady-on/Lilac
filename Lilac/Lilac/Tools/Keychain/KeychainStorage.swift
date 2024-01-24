@@ -23,7 +23,10 @@ struct KeychainStorage {
             return value
         }
         set {
-            guard let newValue else { return }
+            guard let newValue else {
+                try? KeychainManager.shared.delete(itemType)
+                return
+            }
             try? KeychainManager.shared.save(.init(type: itemType, value: newValue))
         }
     }
