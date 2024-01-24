@@ -58,6 +58,7 @@
 		633CB4792B46B83F00448E9B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4782B46B83F00448E9B /* SnapKit */; };
 		638CBF492B60D7DC00778283 /* WorkSpace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */; };
 		638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF4C2B60EAA700778283 /* KeychainStorage.swift */; };
+		638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF522B610D8E00778283 /* LilacAuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		633CB46C2B46B6EA00448E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkSpace + TargetType.swift"; sourceTree = "<group>"; };
 		638CBF4C2B60EAA700778283 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		638CBF522B610D8E00778283 /* LilacAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacAuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				633190D52B550CD3005289E1 /* KakaoLoginService.swift */,
+				638CBF522B610D8E00778283 /* LilacAuthService.swift */,
 				633190D92B550EAF005289E1 /* LilacUserService.swift */,
 			);
 			path = Service;
@@ -444,6 +447,7 @@
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
+				638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */,
 				633CB4612B46B6E900448E9B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
