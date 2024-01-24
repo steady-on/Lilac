@@ -50,6 +50,7 @@ enum LilacAPI {
             case load(userId: Int?)
             case search(keyword: String)
             case leave
+            case admin(userId: Int)
         }
     }
 }
