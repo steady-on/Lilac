@@ -15,19 +15,21 @@ struct KeychainStorage {
         self.itemType = itemType
     }
     
+    private let keychainManager = KeychainManager.shared
+    
     var wrappedValue: String? {
         get {
-            guard let value = try? KeychainManager.shared.search(itemType) else {
+            guard let value = try? keychainManager.search(itemType) else {
                 return nil
             }
             return value
         }
         set {
             guard let newValue else {
-                try? KeychainManager.shared.delete(itemType)
+                try? keychainManager.delete(itemType)
                 return
             }
-            try? KeychainManager.shared.save(.init(type: itemType, value: newValue))
+            try? keychainManager.save(.init(type: itemType, value: newValue))
         }
     }
 }
