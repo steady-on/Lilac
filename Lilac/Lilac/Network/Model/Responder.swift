@@ -52,6 +52,7 @@ enum Responder {
     }
     
     enum WorkSpace {
+        // workspace create, load, update, search, leave, admin
         struct WorkSpace: Decodable {
             let workspaceId: Int
             let name: String
@@ -78,6 +79,7 @@ enum Responder {
             }
         }
         
+        // workspace member invite, load
         struct Member: Decodable {
             let userId: Int
             let email: String
