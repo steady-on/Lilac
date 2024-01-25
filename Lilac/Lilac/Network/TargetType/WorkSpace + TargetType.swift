@@ -73,4 +73,8 @@ extension LilacAPI.WorkSpace: TargetType {
             [:]
         }
     }
+    
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

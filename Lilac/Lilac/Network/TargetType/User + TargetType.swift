@@ -112,5 +112,8 @@ extension LilacAPI.User: TargetType {
             [:]
         }
     }
+    
+    var validationType: ValidationType {
+        return .successCodes
     }
 }
