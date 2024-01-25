@@ -11,7 +11,7 @@ import Moya
 
 struct LilacAPIManager<T: TargetType> {
     
-    private let provider = MoyaProvider<T>()
+    private let provider = MoyaProvider<T>(session: Session(interceptor: AuthInterceptor.shared))
     
     func request<U: Decodable>(_ api: T, responder: U.Type) -> Single<Result<U, Error>> {
         let decoder = JSONDecoder()
