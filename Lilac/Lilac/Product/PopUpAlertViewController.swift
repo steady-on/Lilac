@@ -132,23 +132,13 @@ final class PopUpAlertViewController: BaseViewController {
         case .destructive: .Brand.error
         }
         
-        let button = UIButton()
-        
-        var config = UIButton.Configuration.filled()
-        config.background.cornerRadius = 8
-        button.configuration = config
-        
-        button.setTitle(action.title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .brandedFont(.title2)
-        button.tintColor = buttonColor
+        let button = FilledColorButton(title: action.title, baseColor: buttonColor)
         
         if action.style == .cancel {
             buttonStackView.insertArrangedSubview(button, at: 0)
         } else {
             buttonStackView.addArrangedSubview(button)
         }
-        
         
         guard let handler = action.handler else {
             button.addAction(UIAction { [weak self] _ in self?.dismiss(animated: false) }, for: .touchUpInside)

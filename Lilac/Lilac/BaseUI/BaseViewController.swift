@@ -69,7 +69,7 @@ extension BaseViewController {
         if let secondAction {
             alert.addAction(secondAction)            
         }
-        
+
         present(alert, animated: false)
     }
 }
