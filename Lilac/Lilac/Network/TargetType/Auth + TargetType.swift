@@ -26,12 +26,6 @@ extension LilacAPI.Auth: TargetType {
     }
     
     var headers: [String : String]? {
-        let headers = [
-            "SesacKey": APIKey.secretKey,
-            // TODO: keychain에 저장된 Token 값 가져오기
-            "RefreshToken": ""
-        ]
-        
-        return headers
+        [:]
     }
 }

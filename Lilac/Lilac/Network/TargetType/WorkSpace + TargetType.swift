@@ -66,19 +66,11 @@ extension LilacAPI.WorkSpace: TargetType {
     }
     
     var headers: [String : String]? {
-        let commons = [
-            "SesacKey" : APIKey.secretKey,
-            // TODO: keycahin setting 후 가져오기
-            "Authorization" : ""
-        ]
-        
-        let specified: [String : String] = switch self {
+        return switch self {
         case .create, .update:
             ["Content-Type" : "multipart/form-data"]
         default:
             [:]
         }
-        
-        return commons.merging(specified) { current, _ in current }
     }
 }

@@ -105,22 +105,12 @@ extension LilacAPI.User: TargetType {
     }
     
     var headers: [String : String]? {
-        let commons = ["SesacKey" : APIKey.secretKey]
-        
-        let specified: [String : String] = switch self {
+        return switch self {
         case .myProfile(type: .updateImage):
-            // TODO: keycahin setting 후 가져오기
-            [
-                "Authorization" : "",
-                "Content-Type" : "multipart/form-data"
-            ]
-        case .signOut, .saveDeviceToken, .myProfile, .askForOtherUserProfile:
-            // TODO: keycahin setting 후 가져오기
-            ["Authorization" : ""]
+            [ "Content-Type" : "multipart/form-data" ]
         default:
             [:]
         }
-        
-        return commons.merging(specified) { current, _ in current }
+    }
     }
 }
