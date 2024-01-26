@@ -22,14 +22,19 @@ struct LilacAPIManager<T: TargetType> {
                 switch result {
                 case .success(let response):
                     guard let decodedData = try? decoder.decode(U.self, from: response.data) else {
-                        let error = parseErrorData(response.data)
-                        single(.success(.failure(error)))
+                        single(.success(.failure(NetworkingError.jsonParsingError)))
                         return
                     }
                     
                     single(.success(.success(decodedData)))
                 case .failure(let moyaError):
-                    single(.failure(moyaError))
+                    guard let data = moyaError.response?.data,
+                          let lilacError = parseErrorData(data) else {
+                        single(.failure(moyaError))
+                        return
+                    }
+                    
+                    single(.success(.failure(lilacError)))
                 }
             }
             
@@ -41,16 +46,16 @@ struct LilacAPIManager<T: TargetType> {
         return Single<Result<Void, Error>>.create { single in
             self.provider.request(api) { result in
                 switch result {
-                case .success(let response):
-                    guard response.statusCode == 200 else {
-                        let error = parseErrorData(response.data)
-                        single(.success(.failure(error)))
+                case .success(_):
+                    single(.success(.success(())))
+                case .failure(let moyaError):
+                    guard let data = moyaError.response?.data,
+                          let lilacError = parseErrorData(data) else {
+                        single(.failure(moyaError))
                         return
                     }
                     
-                    single(.success(.success(())))
-                case .failure(let moyaError):
-                    single(.failure(moyaError))
+                    single(.success(.failure(lilacError)))
                 }
             }
             
@@ -60,12 +65,12 @@ struct LilacAPIManager<T: TargetType> {
 }
 
 extension LilacAPIManager {
-    private func parseErrorData(_ data: Data) -> Error {
+    private func parseErrorData(_ data: Data) -> Error? {
         let decoder = JSONDecoder()
         
         guard let decodedData = try? decoder.decode(Responder.Error.self, from: data),
               let lilacError = LilacAPIError(rawValue: decodedData.errorCode) else {
-            return NetworkingError.jsonParsingError
+            return nil
         }
         
         return lilacError

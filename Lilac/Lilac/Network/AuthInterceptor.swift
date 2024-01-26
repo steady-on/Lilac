@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RxSwift
 import Alamofire
 
 final class AuthInterceptor: RequestInterceptor {
