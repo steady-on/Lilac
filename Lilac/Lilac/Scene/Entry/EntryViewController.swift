@@ -7,23 +7,55 @@
 
 import UIKit
 
-class EntryViewController: BaseViewController {
+final class EntryViewController: BaseViewController {
+    
+    deinit {
+        print("deinit EntryViewController")
+    }
+    
+    private let viewModel: EntryViewModel
+    
+    init(viewModel: EntryViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+    
+    private let disposeBag = DisposeBag()
+    
+    private let appIconImageView = UIImageView(image: .splash)
+    private let appNameLabel = BasicLabel(style: .title1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        // Do any additional setup after loading the view.
+    override func configureHiararchy() {
+        super.configureHiararchy()
+        
+        let components = [appIconImageView, appNameLabel]
+        components.forEach { component in
+            view.addSubview(component)
+        }
+        
+        appIconImageView.contentMode = .scaleAspectFit
+        appNameLabel.text = "Lilac"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func setConstraints() {
+        appIconImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.6)
+            make.height.equalTo(appIconImageView.snp.width)
+        }
+        
+        appNameLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+        }
     }
-    */
+    
+    }
+}
 
 }
