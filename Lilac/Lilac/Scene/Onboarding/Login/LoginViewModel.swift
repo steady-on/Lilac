@@ -16,7 +16,7 @@ final class LoginViewModel {
     
     var disposeBag = DisposeBag()
     
-    private lazy var lilacUserService = LilacUserService()
+    private let lilacUserService = LilacUserService()
 }
 
 extension LoginViewModel: ViewModel {
@@ -118,7 +118,7 @@ extension LoginViewModel {
         accessToken = signIn.accessToken
         refreshToken = signIn.refreshToken
         
-        guard let accessToken, let refreshToken else {
+        guard accessToken != nil, refreshToken != nil else {
             return false
         }
         

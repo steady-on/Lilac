@@ -8,12 +8,7 @@
 import Foundation
 import RxSwift
 
-final class LilacUserService {
-    
-    deinit {
-        print("deinit LilacUserService")
-    }
-    
+struct LilacUserService {    
     private let lilacAPIUserManager = LilacAPIManager<LilacAPI.User>()
     
     func kakaoLogin(for accessToken: String) -> Single<Result<Responder.User.ProfileWithToken, Error>> {

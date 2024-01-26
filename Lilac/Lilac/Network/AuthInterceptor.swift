@@ -8,14 +8,16 @@
 import Foundation
 import Alamofire
 
-final class AuthInterceptor: RequestInterceptor {
+final class AuthInterceptor {
     static let shared = AuthInterceptor()
     
     private init() {}
     
     @KeychainStorage(itemType: .accessToken) private var accessToken
     @KeychainStorage(itemType: .refreshToken) private var refreshToken
-    
+}
+
+extension AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
 
         var urlRequest = urlRequest
