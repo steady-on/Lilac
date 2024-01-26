@@ -62,6 +62,7 @@
 		638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF522B610D8E00778283 /* LilacAuthService.swift */; };
 		638CBF562B6232E000778283 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF552B6232E000778283 /* EntryViewController.swift */; };
 		638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF572B623CAD00778283 /* EntryViewModel.swift */; };
+		638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		638CBF522B610D8E00778283 /* LilacAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacAuthService.swift; sourceTree = "<group>"; };
 		638CBF552B6232E000778283 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		638CBF572B623CAD00778283 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
+		638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacWorkSpaceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 				633190D52B550CD3005289E1 /* KakaoLoginService.swift */,
 				638CBF522B610D8E00778283 /* LilacAuthService.swift */,
 				633190D92B550EAF005289E1 /* LilacUserService.swift */,
+				638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
+				638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
 				638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */,

@@ -35,10 +35,10 @@ enum LilacAPI {
     }
     
     enum WorkSpace {
-        case create(name: String, description: String?, image: String)
+        case create(name: String, description: String?, image: Data)
         case loadAll
         case load(id: Int)
-        case update(id: Int, name: String?, description: String?, image: String?)
+        case update(id: Int, name: String?, description: String?, image: Data?)
         case delete(id: Int)
         case search(id: Int, keyword: String)
         case leave(id: Int)
