@@ -14,6 +14,6 @@ final class LilacAuthService {
     private init() {}
     
     func refreshAccessToken() -> Single<Result<Responder.Auth.TokenRefresh, Error>> {
-        return LilacAPIManager<LilacAPI.Auth>().request(.refresh, responder: Responder.Auth.TokenRefresh.self)
+        return LilacRepository<LilacAPI.Auth>().request(.refresh, responder: Responder.Auth.TokenRefresh.self)
     }
 }

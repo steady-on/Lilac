@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import Moya
 
-struct LilacAPIManager<T: TargetType> {
+struct LilacRepository<T: TargetType> {
     
     private let provider = MoyaProvider<T>(session: Session(interceptor: AuthInterceptor.shared))
     
@@ -64,7 +64,7 @@ struct LilacAPIManager<T: TargetType> {
     }
 }
 
-extension LilacAPIManager {
+extension LilacRepository {
     private func parseErrorData(_ data: Data) -> Error? {
         let decoder = JSONDecoder()
         
