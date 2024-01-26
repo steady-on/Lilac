@@ -14,7 +14,7 @@ final class LilacUserService {
         print("deinit LilacUserService")
     }
     
-    private lazy var lilacAPIUserManager = LilacAPIManager<LilacAPI.User>()
+    private let lilacAPIUserManager = LilacAPIManager<LilacAPI.User>()
     
     func kakaoLogin(for accessToken: String) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
         return lilacAPIUserManager.request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.User.ProfileWithToken.self)
