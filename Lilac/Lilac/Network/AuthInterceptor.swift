@@ -22,7 +22,7 @@ final class AuthInterceptor: RequestInterceptor {
         var urlRequest = urlRequest
         urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
         
-        guard urlRequest.url?.lastPathComponent != "refresh" else {
+        guard urlRequest.url?.lastPathComponent != LilacAPI.Auth.refresh.rawValue else {
             let urlRequestWithRefreshToken = addRefreshToken(to: urlRequest)
             completion(.success(urlRequestWithRefreshToken))
             return
