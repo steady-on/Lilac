@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class EntryViewController: BaseViewController {
     
@@ -55,7 +56,37 @@ final class EntryViewController: BaseViewController {
         }
     }
     
+    override func bind() {
+        let output = viewModel.transform(input: .init())
+        
+        output.goToOnboardingView
+            .bind(with: self) { owner, goToOnboarding in
+                guard goToOnboarding else {
+                    owner.moveToHomeView()
+                    return
+                }
+                
+                owner.moveToOnboardingView()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
+extension EntryViewController {
+    private func moveToOnboardingView() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let rootViewController = OnboardingViewController()
+        sceneDelegate?.window?.rootViewController = rootViewController
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
+    // TODO: HomeView 만들고 수정
+    private func moveToHomeView() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let rootViewController = ViewController()
+        sceneDelegate?.window?.rootViewController = rootViewController
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
 }
