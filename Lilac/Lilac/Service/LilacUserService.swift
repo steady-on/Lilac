@@ -40,4 +40,16 @@ final class LilacUserService {
         accessToken = nil
         return lilacAPIUserRepository.request(.signOut)
     }
+    
+    func loadMyProfile() -> Single<Result<Responder.User.MyProfile, Error>> {
+        return lilacAPIUserRepository.request(.myProfile(type: .load), responder: Responder.User.MyProfile.self)
+    }
+    
+    func updateProfileInfo(nickname: String?, phone: String?) -> Single<Result<Responder.User.MyProfile, Error>> {
+        return lilacAPIUserRepository.request(.myProfile(type: .updateInfo(nickname: nickname, phone: phone)), responder: Responder.User.MyProfile.self)
+    }
+    
+    func loadOtherUserProfile(id: Int) -> Single<Result<Responder.User.UserProfile, Error>> {
+        return lilacAPIUserRepository.request(.otherUserProfile(id: id), responder: Responder.User.UserProfile.self)
+    }
 }

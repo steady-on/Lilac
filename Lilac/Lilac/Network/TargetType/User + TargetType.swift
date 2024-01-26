@@ -34,7 +34,7 @@ extension LilacAPI.User: TargetType {
             case .load, .updateInfo: "my"
             case .updateImage: "my/image"
             }
-        case .askForOtherUserProfile(let id):
+        case .otherUserProfile(let id):
             return "\(id)"
         }
     }
@@ -43,7 +43,7 @@ extension LilacAPI.User: TargetType {
         switch self {
         case .signUp, .validateEmail, .signIn, .saveDeviceToken:
             return .post
-        case .signOut, .myProfile(type: .load), .askForOtherUserProfile:
+        case .signOut, .myProfile(type: .load), .otherUserProfile:
             return .get
         case .myProfile(type: .updateInfo), .myProfile(type: .updateImage):
             return .post

@@ -19,7 +19,7 @@ enum LilacAPI {
         case signOut
         case saveDeviceToken
         case myProfile(type: MyProfile)
-        case askForOtherUserProfile(id: Int)
+        case otherUserProfile(id: Int)
         
         enum Vendor {
             case email(email: String, password: String)
