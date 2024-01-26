@@ -61,6 +61,7 @@
 		638CBF512B610B2C00778283 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF502B610B2C00778283 /* AuthInterceptor.swift */; };
 		638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF522B610D8E00778283 /* LilacAuthService.swift */; };
 		638CBF562B6232E000778283 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF552B6232E000778283 /* EntryViewController.swift */; };
+		638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF572B623CAD00778283 /* EntryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -331,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				638CBF552B6232E000778283 /* EntryViewController.swift */,
+				638CBF572B623CAD00778283 /* EntryViewModel.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -461,6 +463,7 @@
 				638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
+				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
