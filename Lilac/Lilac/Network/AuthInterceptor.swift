@@ -54,7 +54,7 @@ extension AuthInterceptor: RequestInterceptor {
                 case .success(let newToken):
                     owner.accessToken = newToken.accessToken
                     completion(.retry)
-                case .failure(let error):
+                case .failure(_):
                     completion(.doNotRetry)
                 }
             } onFailure: { owner, error in
