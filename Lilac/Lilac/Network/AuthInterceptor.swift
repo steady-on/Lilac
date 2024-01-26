@@ -41,7 +41,7 @@ final class AuthInterceptor: RequestInterceptor {
         }
 
         guard case LilacAPIError.expiredAccessToken = serverError else {
-            completion(.doNotRetryWithError(serverError))
+            completion(.doNotRetry)
             return
         }
         
@@ -54,10 +54,10 @@ final class AuthInterceptor: RequestInterceptor {
                     owner.accessToken = newToken.accessToken
                     completion(.retry)
                 case .failure(let error):
-                    completion(.doNotRetryWithError(error))
+                    completion(.doNotRetry)
                 }
             } onFailure: { owner, error in
-                completion(.doNotRetryWithError(error))
+                completion(.doNotRetry)
             }
             .dispose()
     }
