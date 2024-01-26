@@ -20,7 +20,7 @@ final class AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
 
         var urlRequest = urlRequest
-        urlRequest.setValue("SesacKey", forHTTPHeaderField: APIKey.secretKey)
+        urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
         
         guard urlRequest.url?.lastPathComponent != "refresh" else {
             let urlRequestWithRefreshToken = addRefreshToken(to: urlRequest)
