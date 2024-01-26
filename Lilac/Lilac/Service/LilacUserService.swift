@@ -8,24 +8,36 @@
 import Foundation
 import RxSwift
 
-struct LilacUserService {    
-    private let lilacAPIUserManager = LilacRepository<LilacAPI.User>()
+final class LilacUserService {
+    
+    deinit {
+        print("deinit LilacUserService")
+    }
+    
+    private let lilacAPIUserRepository = LilacRepository<LilacAPI.User>()
+    
+    @KeychainStorage(itemType: .refreshToken) var refreshToken
+    @KeychainStorage(itemType: .accessToken) var accessToken
     
     func signUp(for newUser: Requester.NewUser) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
-        return lilacAPIUserManager.request(.signUp(userInfo: newUser), responder: Responder.User.ProfileWithToken.self)
+        return lilacAPIUserRepository.request(.signUp(userInfo: newUser), responder: Responder.User.ProfileWithToken.self)
     }
     
     func checkEmailDuplicated(email: String) -> Single<Result<Void, Error>> {
-        return lilacAPIUserManager.request(.validateEmail(email: email))
+        return lilacAPIUserRepository.request(.validateEmail(email: email))
     }
     
     func kakaoLogin(for accessToken: String) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
-        return lilacAPIUserManager.request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.User.ProfileWithToken.self)
+        return lilacAPIUserRepository.request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.User.ProfileWithToken.self)
     }
     
     func emailLogin(email: String, password: String) -> Single<Result<Responder.User.SimpleProfileWithToken, Error>> {
-        return lilacAPIUserManager.request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.User.SimpleProfileWithToken.self)
+        return lilacAPIUserRepository.request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.User.SimpleProfileWithToken.self)
     }
     
-    
+    func signOut() -> Single<Result<Void, Error>> {
+        refreshToken = nil
+        accessToken = nil
+        return lilacAPIUserRepository.request(.signOut)
+    }
 }
