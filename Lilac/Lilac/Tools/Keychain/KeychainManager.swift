@@ -19,9 +19,10 @@ final class KeychainManager {
             throw KeychainError.failToEncodingData
         }
         
+        let secClass = item.type == .accessToken ? kSecClassInternetPassword : kSecClassGenericPassword
+        
         let query: NSDictionary = [
-            kSecClass : kSecClassInternetPassword,
-            kSecAttrServer : server,
+            kSecClass : secClass,
             kSecAttrLabel : item.type.rawValue,
             kSecValueData : data
         ]
@@ -29,15 +30,17 @@ final class KeychainManager {
         SecItemDelete(query)
         
         let status = SecItemAdd(query, nil)
+        
         guard status == errSecSuccess else {
             throw KeychainError.failToAddItemError(itemType: item.type.rawValue)
         }
     }
     
     func search(_ itemType: ItemType) throws -> String {
+        let secClass = itemType == .accessToken ? kSecClassInternetPassword : kSecClassGenericPassword
+        
         let query: NSDictionary = [
-            kSecClass : kSecClassInternetPassword,
-            kSecAttrServer : server,
+            kSecClass : secClass,
             kSecAttrLabel : itemType.rawValue,
             kSecMatchLimit : kSecMatchLimitOne,
             kSecReturnData : true
