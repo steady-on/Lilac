@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class User {
-    static let `default` = User()
+    static let shared = User()
     private init() {}
     
     private let profile = PublishRelay<Responder.User.MyProfile>()
