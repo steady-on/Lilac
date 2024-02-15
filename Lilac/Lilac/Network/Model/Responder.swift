@@ -40,6 +40,32 @@ enum Responder {
             let vendor: Vendor
             let sesacCoin: Int?
             let createdAt: Date
+            
+            enum CodingKeys: CodingKey {
+                case userId
+                case email
+                case nickname
+                case profileImage
+                case phone
+                case vendor
+                case sesacCoin
+                case createdAt
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container: KeyedDecodingContainer<Responder.User.MyProfile.CodingKeys> = try decoder.container(keyedBy: Responder.User.MyProfile.CodingKeys.self)
+                
+                self.userId = try container.decode(Int.self, forKey: .userId)
+                self.email = try container.decode(String.self, forKey: .email)
+                self.nickname = try container.decode(String.self, forKey: .nickname)
+                self.profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage)
+                self.phone = try container.decodeIfPresent(String.self, forKey: .phone)
+                self.vendor = try container.decodeIfPresent(Responder.User.Vendor.self, forKey: .vendor) ?? .email
+                self.sesacCoin = try container.decodeIfPresent(Int.self, forKey: .sesacCoin)
+                let createdAt = try container.decode(String.self, forKey: .createdAt)
+                print("createdAt", createdAt)
+                self.createdAt = createdAt.convertedDate
+            }
         }
         
         // users/{id}
