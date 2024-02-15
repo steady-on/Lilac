@@ -21,16 +21,15 @@ extension AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
 
         var urlRequest = urlRequest
-        urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
+        let urlRequestWithRequiredHeader = addRequiredHeader(to: urlRequest)
         
         guard urlRequest.url?.lastPathComponent != LilacAPI.Auth.refresh.rawValue else {
-            let urlRequestWithRefreshToken = addRefreshToken(to: urlRequest)
+            let urlRequestWithRefreshToken = addRefreshToken(to: urlRequestWithRequiredHeader)
             completion(.success(urlRequestWithRefreshToken))
             return
         }
         
-        let urlRequestWithAccessToken = addAccessToken(to: urlRequest)
-        completion(.success(urlRequestWithAccessToken))
+        completion(.success(urlRequestWithRequiredHeader))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
@@ -87,12 +86,13 @@ extension AuthInterceptor {
         return urlRequest
     }
     
-    private func addAccessToken(to urlRequest: URLRequest) -> URLRequest {
+    private func addRequiredHeader(to urlRequest: URLRequest) -> URLRequest {
         guard let accessToken else {
             return urlRequest
         }
         
         var urlRequest = urlRequest
+        urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
         urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         return urlRequest
