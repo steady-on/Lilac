@@ -28,4 +28,8 @@ extension LilacAPI.Auth: TargetType {
     var headers: [String : String]? {
         [:]
     }
+    
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }
