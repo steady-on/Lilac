@@ -19,13 +19,13 @@ extension String {
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return passwordPredicate.evaluate(with: self)
     }
-    
-    private var decimalFilteredString: String {
-        return String(unicodeScalars.filter(CharacterSet.decimalDigits.contains))
-    }
 }
 
 extension String {
+    private var decimalFilteredString: String {
+        return String(unicodeScalars.filter(CharacterSet.decimalDigits.contains))
+    }
+    
     func formattedPhoneNumber() -> String {
         let digit: Character = "#"
  
@@ -55,4 +55,13 @@ extension String {
         return String(formatted)
     }
 
+}
+
+extension String {
+    var convertedDate: Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        
+        return formatter.date(from: self) ?? Date()
+    }
 }
