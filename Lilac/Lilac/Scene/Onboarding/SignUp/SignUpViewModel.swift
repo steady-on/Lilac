@@ -152,6 +152,7 @@ extension SignUpViewModel: ViewModel {
         // 회원가입 요청에 필요한 값 모음
         let allInputValues = Observable.combineLatest(input.emailInputValue, input.nicknameInputValue, input.passwordInputValue, input.phoneNumberInputValue)
         
+        // 회원가입 버튼을 탭했을 때 모든 정보가 유효한지 순차적으로 확인하는 로직
         let validInputValues = input.signUpButtonTap
             .withLatestFrom(allValuesValidation) { _, validation in validation }
             .filter { isCheckedEmail, isValidNickname, isValidPhoneNumber, isValidPassword, isPasswordChecked in
@@ -172,6 +173,7 @@ extension SignUpViewModel: ViewModel {
             }
             .withLatestFrom(allInputValues) { _, allValues in allValues }
         
+        // 모든 값이 유효한 경우 회원가입 요청
         validInputValues
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] email, nickname, password, phoneNumber in
@@ -179,12 +181,12 @@ extension SignUpViewModel: ViewModel {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let signUp):
-                    guard owner.saveUserInfo(signUp) else {
+                case .success(let profile):
+                    guard owner.saveUserInfo(profile) else {
                         showToastMessage.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
                         return
                     }
-                    
+                    User.shared.update(for: profile)
                     isLoggedIn.accept(())
                 case .failure(_):
                     showToastMessage.accept(.init(message: "이미 가입된 회원입니다. 로그인을 진행해주세요.", style: .caution))
