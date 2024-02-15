@@ -13,9 +13,15 @@ final class User {
     static let shared = User()
     private init() {}
     
-    private let profile = PublishRelay<Responder.User.MyProfile>()
+    private let profile = PublishRelay<MyProfile>()
     
     func update(for profile: Responder.User.MyProfile) {
-        self.profile.accept(profile)
+        let myProfile = MyProfile(from: profile)
+        self.profile.accept(myProfile)
+    }
+    
+    func update(for profile: Responder.User.ProfileWithToken) {
+        let myProfile = MyProfile(from: profile)
+        self.profile.accept(myProfile)
     }
 }

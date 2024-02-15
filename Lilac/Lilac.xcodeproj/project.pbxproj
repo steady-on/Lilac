@@ -33,6 +33,7 @@
 		6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EEC92B4BF370007662A5 /* ToastAlert.swift */; };
 		6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */; };
 		631D75022B7B74E3002F4279 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75012B7B74E3002F4279 /* User.swift */; };
+		631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75072B7E65EE002F4279 /* MyProfile.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
@@ -92,6 +93,7 @@
 		6317EEC92B4BF370007662A5 /* ToastAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastAlert.swift; sourceTree = "<group>"; };
 		6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertViewController.swift; sourceTree = "<group>"; };
 		631D75012B7B74E3002F4279 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		631D75072B7E65EE002F4279 /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
@@ -233,8 +235,17 @@
 			isa = PBXGroup;
 			children = (
 				631D75012B7B74E3002F4279 /* User.swift */,
+				631D75062B7E65E0002F4279 /* Model */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		631D75062B7E65E0002F4279 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				631D75072B7E65EE002F4279 /* MyProfile.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		633190B52B506496005289E1 /* Scene */ = {
@@ -477,6 +488,7 @@
 				638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
+				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
