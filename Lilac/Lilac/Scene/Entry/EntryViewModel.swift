@@ -20,7 +20,8 @@ final class EntryViewModel {
     
     @UserDefault(key: .isFirst, defaultValue: true) private var isFirst
     
-    private lazy var lilacAuthSevice = LilacAuthService.shared
+    private lazy var lilacAuthService = LilacAuthService.shared
+    private lazy var lilacUserService = LilacUserService()
     
     var disposeBag = DisposeBag()
 }
@@ -34,6 +35,8 @@ extension EntryViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         let goToOnboardingView = BehaviorRelay<Bool>(value: true)
+        let isTokenRefresh = PublishRelay<Void>()
+        let isLoadedProfile = PublishRelay<Void>()
         
         guard isFirst == false else {
             refreshToken = nil
@@ -46,22 +49,39 @@ extension EntryViewModel: ViewModel {
             return Output(goToOnboardingView: goToOnboardingView)
         }
         
-        let tokenRefreshResponse = lilacAuthSevice.refreshAccessToken()
-        
+        let tokenRefreshResponse = lilacAuthService.refreshAccessToken()
+
         tokenRefreshResponse
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let newToken):
                     owner.accessToken = newToken.accessToken
-                    goToOnboardingView.accept(false)
+                    isTokenRefresh.accept(())
                 case .failure(let error):
                     if case LilacAPIError.validToken = error {
-                        goToOnboardingView.accept(false)
+                        isTokenRefresh.accept(())
                     } else {
                         goToOnboardingView.accept(true)
                     }
                 }
             } onFailure: { owner, error in
+                goToOnboardingView.accept(true)
+            }
+            .disposed(by: disposeBag)
+        
+        isTokenRefresh
+            .flatMap { [unowned self] _ in
+                lilacUserService.loadMyProfile()
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let myProfile):
+                    User.shared.update(for: myProfile)
+                    isLoadedProfile.accept(())
+                case .failure(let error):
+                    goToOnboardingView.accept(true)
+                }
+            } onError: { _ in
                 goToOnboardingView.accept(true)
             }
             .disposed(by: disposeBag)
