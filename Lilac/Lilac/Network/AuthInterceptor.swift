@@ -20,7 +20,6 @@ final class AuthInterceptor {
 extension AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
 
-        var urlRequest = urlRequest
         let urlRequestWithRequiredHeader = addRequiredHeader(to: urlRequest)
         
         guard urlRequest.url?.lastPathComponent != LilacAPI.Auth.refresh.rawValue else {

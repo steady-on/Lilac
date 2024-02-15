@@ -110,7 +110,7 @@ extension LoginViewModel: ViewModel {
                 case .success(let myProfile):
                     User.shared.update(for: myProfile)
                     isLoadedProfile.accept(())
-                case .failure(let error):
+                case .failure(_):
                     goToHome.accept(())
                 }
             } onError: { _ in

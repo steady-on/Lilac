@@ -78,7 +78,7 @@ extension EntryViewModel: ViewModel {
                 case .success(let myProfile):
                     User.shared.update(for: myProfile)
                     isLoadedProfile.accept(())
-                case .failure(let error):
+                case .failure(_):
                     goToOnboardingView.accept(true)
                 }
             } onError: { _ in
