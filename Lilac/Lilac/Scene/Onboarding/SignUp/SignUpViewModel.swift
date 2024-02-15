@@ -216,7 +216,7 @@ extension SignUpViewModel {
         accessToken = profile.token.accessToken
         refreshToken = profile.token.refreshToken
         
-        guard let accessToken, let refreshToken else {
+        guard accessToken != nil, refreshToken != nil else {
             return false
         }
         
