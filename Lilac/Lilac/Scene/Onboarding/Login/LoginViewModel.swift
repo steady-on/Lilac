@@ -27,7 +27,7 @@ extension LoginViewModel: ViewModel {
     }
     
     struct Output {
-        let isLoggedIn: PublishRelay<Void>
+        let goToHome: PublishRelay<Void>
         let buttonEnabled: Observable<Bool>
         let emailValidation: PublishRelay<Bool>
         let passwordValidation: PublishRelay<Bool>
@@ -35,10 +35,13 @@ extension LoginViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let isLoggedIn = PublishRelay<Void>()
+        let goToHome = PublishRelay<Void>()
         let emailValidation = PublishRelay<Bool>()
         let passwordValidation = PublishRelay<Bool>()
         let showToastMessage = PublishRelay<String>()
+        
+        let isLoggedIn = PublishRelay<Void>()
+        let isLoadedProfile = PublishRelay<Void>()
         
         let inputValues = PublishRelay.combineLatest(input.emailInputValue, input.passwordInputValue)
         
@@ -98,8 +101,25 @@ extension LoginViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        isLoggedIn
+            .flatMap { [unowned self] _ in
+                lilacUserService.loadMyProfile()
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let myProfile):
+                    User.shared.update(for: myProfile)
+                    isLoadedProfile.accept(())
+                case .failure(let error):
+                    goToHome.accept(())
+                }
+            } onError: { _ in
+                goToHome.accept(())
+            }
+            .disposed(by: disposeBag)
+        
         return Output(
-            isLoggedIn: isLoggedIn,
+            goToHome: goToHome,
             buttonEnabled: buttonEnabled,
             emailValidation: emailValidation,
             passwordValidation: passwordValidation,

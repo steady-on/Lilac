@@ -83,7 +83,7 @@ final class LoginViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.isLoggedIn
+        output.goToHome
             .bind(with: self) { owner, _ in
                 owner.moveToHome()
             }
