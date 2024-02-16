@@ -50,7 +50,7 @@ extension AuthViewModel: ViewModel {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let profile):
-                    guard owner.saveUserInfo(profile: profile) else {
+                    guard owner.saveToken(token: profile.token) else {
                         isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                         return
                     }
@@ -90,15 +90,12 @@ extension AuthViewModel: ViewModel {
 }
 
 extension AuthViewModel {
-    private func saveUserInfo(profile: Responder.User.ProfileWithToken) -> Bool {
-        @UserDefault(key: .email, defaultValue: profile.email) var email
-        @UserDefault(key: .nickname, defaultValue: profile.nickname) var nickname
-        
+    private func saveToken(token: Responder.User.Token) -> Bool {
         @KeychainStorage(itemType: .accessToken) var accessToken
         @KeychainStorage(itemType: .refreshToken) var refreshToken
         
-        accessToken = profile.token.accessToken
-        refreshToken = profile.token.refreshToken
+        accessToken = token.accessToken
+        refreshToken = token.refreshToken
         
         guard accessToken != nil, refreshToken != nil else {
             return false
