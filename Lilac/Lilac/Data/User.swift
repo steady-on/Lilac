@@ -13,7 +13,16 @@ final class User {
     static let shared = User()
     private init() {}
     
-    private let profile = PublishRelay<MyProfile>()
+    
+    private var _workSpaces: [WorkSpace]? = nil {
+        didSet {
+            guard let _workSpaces else { return }
+            workSpaces.accept(_workSpaces)
+        }
+    }
+    
+    let profile = PublishRelay<MyProfile>()
+    let workSpaces = PublishRelay<[WorkSpace]>()
     
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
@@ -24,4 +33,11 @@ final class User {
         let myProfile = MyProfile(from: profile)
         self.profile.accept(myProfile)
     }
+    
+    func fetch(for workSpacesData: [Responder.WorkSpace.WorkSpace]) {
+        let workSpaces = workSpacesData.map { WorkSpace(from: $0) }
+        self._workSpaces = workSpaces
+        
+    }
+    
 }
