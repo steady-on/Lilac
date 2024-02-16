@@ -47,4 +47,9 @@ final class User {
         _workSpaces?[index] = workSpace
     }
     
+    func visitWorkSpace(id: Int) {
+        lastVisitedWorkSpaceId = id
+    }
+}
+
 }
