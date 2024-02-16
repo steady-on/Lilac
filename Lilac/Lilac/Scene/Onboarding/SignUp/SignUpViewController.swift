@@ -311,7 +311,7 @@ extension SignUpViewController {
     private func moveToWelcomeView() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        let navigationController = UINavigationController(rootViewController: WelcomeViewController())
+        let navigationController = UINavigationController(rootViewController: WelcomeViewController(viewModel: WelcomeViewModel()))
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
     }

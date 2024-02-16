@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class WelcomeViewController: BaseViewController {
+    
+    private let viewModel: WelcomeViewModel
+    
+    init(viewModel: WelcomeViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
     
     deinit {
         print("deinit WelcomeViewController")
     }
+    
+    private let disposeBag = DisposeBag()
     
     @UserDefault(key: .nickname, defaultValue: "") var nickname
     
@@ -36,6 +48,13 @@ final class WelcomeViewController: BaseViewController {
     }()
 
     private let createWorkSpaceButton = FilledColorButton(title: "워크스페이스 생성")
+    
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.Icon.close, for: .normal)
+        button.tintColor = .black
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,18 +96,33 @@ final class WelcomeViewController: BaseViewController {
     override func configureNavigationBar() {
         title = "시작하기"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: .Icon.close, style: .plain, target: self, action: #selector(closeButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: closeButton)
         
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
     }
-}
-
-extension WelcomeViewController {
-    @objc private func closeButtonTapped() {
-        print("Tap Close")
+    
+    override func bind() {
+        let input = WelcomeViewModel.Input(closeButtonTapped: closeButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.goToHome
+            .subscribe(with: self) { owner, _ in
+                owner.moveToHome()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
+extension WelcomeViewController {
+    private func moveToHome() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        // TODO: 추후 Home Default 화면으로 이동
+        let navigationController = UINavigationController(rootViewController: ViewController())
+        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
+}
