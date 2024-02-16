@@ -40,4 +40,11 @@ final class User {
         
     }
     
+    func updateWorkSpaceDetail(for workSpaceData: Responder.WorkSpace.WorkSpace) {
+        let workSpace = WorkSpace(from: workSpaceData)
+        
+        guard let index = _workSpaces?.firstIndex(where: { $0.workspaceId == workSpace.workspaceId }) else { return }
+        _workSpaces?[index] = workSpace
+    }
+    
 }
