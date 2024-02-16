@@ -19,6 +19,7 @@ final class AuthViewModel {
     
     private lazy var kakaoLoginService = KakaoLoginService()
     private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
     
     private func kakaoLogin() -> Observable<Result<Responder.User.ProfileWithToken, Error>> {
         return kakaoLoginService.kakaoLogin()
@@ -34,13 +35,15 @@ extension AuthViewModel: ViewModel {
     }
     
     struct Output {
-        let isLoggedIn: PublishRelay<Void>
+        let goToHome: PublishRelay<Void>
         let isShowingToastMessage: PublishRelay<String>
     }
     
     func transform(input: Input) -> Output {
-        let isLoggedIn = PublishRelay<Void>()
+        let goToHome = PublishRelay<Void>()
         let isShowingToastMessage = PublishRelay<String>()
+        
+        let isLoadedProfile = PublishRelay<Void>()
         
         input.kakaoLoginButtonTap
             .flatMap { [weak self] _ in self!.kakaoLogin() }
@@ -53,7 +56,7 @@ extension AuthViewModel: ViewModel {
                     }
                     
                     User.shared.update(for: profile)
-                    isLoggedIn.accept(())
+                    isLoadedProfile.accept(())
                 case .failure(_):
                     isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                 }
@@ -61,9 +64,26 @@ extension AuthViewModel: ViewModel {
                 isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
             }
             .disposed(by: disposeBag)
+        
+        isLoadedProfile
+            .flatMap { [unowned self] _ in
+                return lilacWorkSpaceService.loadAll()
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let workspaces):
+                    User.shared.fetch(for: workspaces)
+                    goToHome.accept(())
+                case .failure(_):
+                    isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
+                }
+            } onError: { _ in
+                isShowingToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
+            }
+            .disposed(by: disposeBag)
             
         return Output(
-            isLoggedIn: isLoggedIn,
+            goToHome: goToHome,
             isShowingToastMessage: isShowingToastMessage
         )
     }
