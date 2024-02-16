@@ -59,14 +59,17 @@ final class EntryViewController: BaseViewController {
     override func bind() {
         let output = viewModel.transform(input: .init())
         
-        output.goToOnboardingView
+        output.goToOnboarding
             .bind(with: self) { owner, goToOnboarding in
-                guard goToOnboarding else {
-                    owner.moveToHomeView()
-                    return
-                }
+                guard goToOnboarding else { return }
                 
                 owner.moveToOnboardingView()
+            }
+            .disposed(by: disposeBag)
+        
+        output.goToHome
+            .bind(with: self) { owner, _ in
+                owner.moveToHomeView()
             }
             .disposed(by: disposeBag)
     }

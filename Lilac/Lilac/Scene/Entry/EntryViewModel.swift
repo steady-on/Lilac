@@ -31,32 +31,41 @@ extension EntryViewModel: ViewModel {
     struct Input {}
     
     struct Output {
-        let goToOnboardingView: PublishRelay<Bool>
+        let goToOnboarding: BehaviorRelay<Bool>
+        let goToHome: PublishRelay<Void>
     }
     
     func transform(input: Input) -> Output {
-        let goToOnboardingView = PublishRelay<Bool>()
-        let isTokenRefresh = PublishRelay<Void>()
+        let goToOnboarding = BehaviorRelay(value: true)
+        let goToHome = PublishRelay<Void>()
         
+        let isTokenRefresh = PublishRelay<Void>()
         let isLoadedProfile = PublishRelay<Void>()
         
         guard isFirst == false else {
             refreshToken = nil
             accessToken = nil
             isFirst = false
-            goToOnboardingView.accept(true)
-            return Output(goToOnboardingView: goToOnboardingView)
+            
+            return Output(
+                goToOnboarding: goToOnboarding,
+                goToHome: goToHome
+            )
         }
         
         guard refreshToken != nil else {
-            return Output(goToOnboardingView: goToOnboardingView)
+            return Output(
+                goToOnboarding: goToOnboarding,
+                goToHome: goToHome
+            )
         }
+        
+        goToOnboarding.accept(false)
         
         let tokenRefreshResponse = lilacAuthService.refreshAccessToken()
         
         tokenRefreshResponse
             .subscribe(with: self) { owner, result in
-                print("토큰 새로 받아옴")
                 switch result {
                 case .success(let newToken):
                     owner.accessToken = newToken.accessToken
@@ -65,11 +74,11 @@ extension EntryViewModel: ViewModel {
                     if case LilacAPIError.validToken = error {
                         isTokenRefresh.accept(())
                     } else {
-                        goToOnboardingView.accept(true)
+                        goToOnboarding.accept(true)
                     }
                 }
             } onFailure: { owner, error in
-                goToOnboardingView.accept(true)
+                goToOnboarding.accept(true)
             }
             .disposed(by: disposeBag)
         
@@ -80,14 +89,13 @@ extension EntryViewModel: ViewModel {
             .subscribe { result in
                 switch result {
                 case .success(let myProfile):
-                    print("프로필 가져왔당")
                     User.shared.update(for: myProfile)
                     isLoadedProfile.accept(())
                 case .failure(_):
-                    goToOnboardingView.accept(true)
+                    goToOnboarding.accept(true)
                 }
             } onError: { _ in
-                goToOnboardingView.accept(true)
+                goToOnboarding.accept(true)
             }
             .disposed(by: disposeBag)
         
@@ -99,15 +107,18 @@ extension EntryViewModel: ViewModel {
                 switch result {
                 case .success(let workspaces):
                     User.shared.fetch(for: workspaces)
-                    goToOnboardingView.accept(false)
+                    goToHome.accept(())
                 case .failure(_):
-                    goToOnboardingView.accept(true)
+                    goToOnboarding.accept(true)
                 }
             } onError: { _ in
-                goToOnboardingView.accept(true)
+                goToOnboarding.accept(true)
             }
             .disposed(by: disposeBag)
         
-        return Output(goToOnboardingView: goToOnboardingView)
+        return Output(
+            goToOnboarding: goToOnboarding,
+            goToHome: goToHome
+        )
     }
 }
