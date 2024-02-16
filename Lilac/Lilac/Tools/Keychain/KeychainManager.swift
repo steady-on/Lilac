@@ -66,10 +66,11 @@ final class KeychainManager {
     }
     
     func delete(_ itemType: ItemType) throws {
+        let secClass = itemType == .accessToken ? kSecClassInternetPassword : kSecClassGenericPassword
+        
         let query: NSDictionary = [
-            kSecClass as String: kSecClassInternetPassword,
-            kSecAttrServer as String: server,
-            kSecAttrLabel as String: itemType.rawValue
+            kSecClass: secClass,
+            kSecAttrLabel: itemType.rawValue
         ]
         
         let status = SecItemDelete(query)
