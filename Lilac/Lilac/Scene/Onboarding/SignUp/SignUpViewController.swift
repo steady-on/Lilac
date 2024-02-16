@@ -256,9 +256,9 @@ final class SignUpViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.isLoggedIn
+        output.isCompletedSignUp
             .bind(with: self) { owner, _ in
-                owner.moveToHome()
+                owner.moveToWelcomeView()
             }
             .disposed(by: disposeBag)
     }
@@ -308,11 +308,10 @@ extension SignUpViewController: UITextFieldDelegate {
 }
 
 extension SignUpViewController {
-    private func moveToHome() {
+    private func moveToWelcomeView() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        // TODO: 추후 Home Default 화면으로 이동
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let navigationController = UINavigationController(rootViewController: WelcomeViewController())
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
     }

@@ -9,6 +9,10 @@ import UIKit
 
 final class WelcomeViewController: BaseViewController {
     
+    deinit {
+        print("deinit WelcomeViewController")
+    }
+    
     @UserDefault(key: .nickname, defaultValue: "") var nickname
     
     private let titleLabel: BasicLabel = {

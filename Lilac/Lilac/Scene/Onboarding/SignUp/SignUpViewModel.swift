@@ -36,14 +36,14 @@ extension SignUpViewModel: ViewModel {
         let emailValidationResult: PublishRelay<Bool>
         let signUpButtonEnabled: Observable<Bool>
         let allValuesValidationResult: PublishRelay<(isCheckedEmail: Bool, isValidNickname: Bool, isValidPhoneNumber: Bool, isValidPassword: Bool, isPasswordChecked: Bool)>
-        let isLoggedIn: PublishRelay<Void>
+        let isCompletedSignUp: PublishRelay<Void>
     }
     
     func transform(input: Input) -> Output {
         let showToastMessage = PublishRelay<ToastAlert.Toast>() // 토스트 알림을 방출하는 스트림
         let emailValidationResult = PublishRelay<Bool>() // 이메일이 형식에 맞는지를 판단한 결과
         let allValuesValidationResult = PublishRelay<(isCheckedEmail: Bool, isValidNickname: Bool, isValidPhoneNumber: Bool, isValidPassword: Bool, isPasswordChecked: Bool)>()
-        let isLoggedIn = PublishRelay<Void>()
+        let isCompletedSignUp = PublishRelay<Void>()
         
         let isDuplicatedEmail = PublishRelay<Result<Void, Error>>()
         let validEmailInputValue = BehaviorRelay(value: "")
@@ -187,7 +187,7 @@ extension SignUpViewModel: ViewModel {
                         return
                     }
                     User.shared.update(for: profile)
-                    isLoggedIn.accept(())
+                    isCompletedSignUp.accept(())
                 case .failure(_):
                     showToastMessage.accept(.init(message: "이미 가입된 회원입니다. 로그인을 진행해주세요.", style: .caution))
                 }
@@ -202,7 +202,7 @@ extension SignUpViewModel: ViewModel {
             emailValidationResult: emailValidationResult,
             signUpButtonEnabled: signUpButtonEnabled,
             allValuesValidationResult: allValuesValidationResult,
-            isLoggedIn: isLoggedIn
+            isCompletedSignUp: isCompletedSignUp
         )
     }
 }
