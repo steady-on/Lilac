@@ -100,6 +100,25 @@ enum Responder {
             let email, nickname: String
             let profileImage: String?
             let createdAt: Date
+            
+            enum CodingKeys: CodingKey {
+                case userId
+                case email
+                case nickname
+                case profileImage
+                case createdAt
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container: KeyedDecodingContainer<Responder.User.UserProfile.CodingKeys> = try decoder.container(keyedBy: Responder.User.UserProfile.CodingKeys.self)
+                self.userId = try container.decode(Int.self, forKey: Responder.User.UserProfile.CodingKeys.userId)
+                self.email = try container.decode(String.self, forKey: Responder.User.UserProfile.CodingKeys.email)
+                self.nickname = try container.decode(String.self, forKey: Responder.User.UserProfile.CodingKeys.nickname)
+                self.profileImage = try container.decodeIfPresent(String.self, forKey: Responder.User.UserProfile.CodingKeys.profileImage)
+                
+                let createdAt = try container.decode(String.self, forKey: .createdAt)
+                self.createdAt = createdAt.convertedDate
+            }
         }
     }
     
@@ -114,6 +133,32 @@ enum Responder {
             let createdAt: Date
             let channels: [Channel]?
             let workspaceMembers: [Member]?
+            
+            enum CodingKeys: CodingKey {
+                case workspaceId
+                case name
+                case description
+                case thumbnail
+                case ownerId
+                case createdAt
+                case channels
+                case workspaceMembers
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container: KeyedDecodingContainer<Responder.WorkSpace.WorkSpace.CodingKeys> = try decoder.container(keyedBy: Responder.WorkSpace.WorkSpace.CodingKeys.self)
+                self.workspaceId = try container.decode(Int.self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.workspaceId)
+                self.name = try container.decode(String.self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.name)
+                self.description = try container.decodeIfPresent(String.self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.description)
+                self.thumbnail = try container.decode(String.self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.thumbnail)
+                self.ownerId = try container.decode(Int.self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.ownerId)
+                
+                let createdAt = try container.decode(String.self, forKey: .createdAt)
+                self.createdAt = createdAt.convertedDate
+                
+                self.channels = try container.decodeIfPresent([Responder.WorkSpace.Channel].self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.channels)
+                self.workspaceMembers = try container.decodeIfPresent([Responder.WorkSpace.Member].self, forKey: Responder.WorkSpace.WorkSpace.CodingKeys.workspaceMembers)
+            }
         }
         
         struct Channel: Decodable {
@@ -128,6 +173,20 @@ enum Responder {
             enum CodingKeys: String, CodingKey {
                 case workSpaceId, channelId, name, description, ownerId, createdAt
                 case isPrivate = "private"
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container: KeyedDecodingContainer<Responder.WorkSpace.Channel.CodingKeys> = try decoder.container(keyedBy: Responder.WorkSpace.Channel.CodingKeys.self)
+                self.workSpaceId = try container.decode(Int.self, forKey: Responder.WorkSpace.Channel.CodingKeys.workSpaceId)
+                self.channelId = try container.decode(Int.self, forKey: Responder.WorkSpace.Channel.CodingKeys.channelId)
+                self.name = try container.decode(String.self, forKey: Responder.WorkSpace.Channel.CodingKeys.name)
+                self.description = try container.decodeIfPresent(String.self, forKey: Responder.WorkSpace.Channel.CodingKeys.description)
+                self.ownerId = try container.decode(Int.self, forKey: Responder.WorkSpace.Channel.CodingKeys.ownerId)
+                
+                let createdAt = try container.decode(String.self, forKey: .createdAt)
+                self.createdAt = createdAt.convertedDate
+                
+                self.isPrivate = try container.decode(Bool.self, forKey: Responder.WorkSpace.Channel.CodingKeys.isPrivate)
             }
         }
         
