@@ -22,6 +22,7 @@ final class EntryViewModel {
     
     private lazy var lilacAuthService = LilacAuthService.shared
     private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
     
     var disposeBag = DisposeBag()
 }
@@ -30,18 +31,20 @@ extension EntryViewModel: ViewModel {
     struct Input {}
     
     struct Output {
-        let goToOnboardingView: BehaviorRelay<Bool>
+        let goToOnboardingView: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
-        let goToOnboardingView = BehaviorRelay<Bool>(value: true)
+        let goToOnboardingView = PublishRelay<Bool>()
         let isTokenRefresh = PublishRelay<Void>()
+        
         let isLoadedProfile = PublishRelay<Void>()
         
         guard isFirst == false else {
             refreshToken = nil
             accessToken = nil
             isFirst = false
+            goToOnboardingView.accept(true)
             return Output(goToOnboardingView: goToOnboardingView)
         }
         
@@ -50,9 +53,10 @@ extension EntryViewModel: ViewModel {
         }
         
         let tokenRefreshResponse = lilacAuthService.refreshAccessToken()
-
+        
         tokenRefreshResponse
             .subscribe(with: self) { owner, result in
+                print("토큰 새로 받아옴")
                 switch result {
                 case .success(let newToken):
                     owner.accessToken = newToken.accessToken
@@ -76,8 +80,26 @@ extension EntryViewModel: ViewModel {
             .subscribe { result in
                 switch result {
                 case .success(let myProfile):
+                    print("프로필 가져왔당")
                     User.shared.update(for: myProfile)
                     isLoadedProfile.accept(())
+                case .failure(_):
+                    goToOnboardingView.accept(true)
+                }
+            } onError: { _ in
+                goToOnboardingView.accept(true)
+            }
+            .disposed(by: disposeBag)
+        
+        isLoadedProfile
+            .flatMap { [unowned self] _ in
+                return lilacWorkSpaceService.loadAll()
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let workspaces):
+                    User.shared.fetch(for: workspaces)
+                    goToOnboardingView.accept(false)
                 case .failure(_):
                     goToOnboardingView.accept(true)
                 }
