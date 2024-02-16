@@ -35,6 +35,7 @@
 		631D75022B7B74E3002F4279 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75012B7B74E3002F4279 /* User.swift */; };
 		631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75072B7E65EE002F4279 /* MyProfile.swift */; };
 		631D750A2B7F56D2002F4279 /* WorkSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75092B7F56D2002F4279 /* WorkSpace.swift */; };
+		631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
@@ -96,6 +97,7 @@
 		631D75012B7B74E3002F4279 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		631D75072B7E65EE002F4279 /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		631D75092B7F56D2002F4279 /* WorkSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpace.swift; sourceTree = "<group>"; };
+		631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			children = (
 				633190EB2B57AE29005289E1 /* SignUpViewController.swift */,
 				633190ED2B57E208005289E1 /* SignUpViewModel.swift */,
+				631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				631D750A2B7F56D2002F4279 /* WorkSpace.swift in Sources */,
+				631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
 				638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
