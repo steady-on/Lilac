@@ -13,6 +13,7 @@ final class User {
     static let shared = User()
     private init() {}
     
+    @UserDefault(key: .lastVisitedWorkSpaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkSpaceId
     
     private var _workSpaces: [WorkSpace]? = nil {
         didSet {
@@ -38,6 +39,7 @@ final class User {
         let workSpaces = workSpacesData.map { WorkSpace(from: $0) }
         self._workSpaces = workSpaces
         
+        manageLastVisitedWorkSpace()
     }
     
     func updateWorkSpaceDetail(for workSpaceData: Responder.WorkSpace.WorkSpace) {
@@ -52,4 +54,15 @@ final class User {
     }
 }
 
+extension User {
+    private func manageLastVisitedWorkSpace() {
+        guard _workSpaces?.firstIndex(where: { $0.workspaceId == lastVisitedWorkSpaceId }) == nil else {
+            return
+        }
+        
+        guard let sortedWorkSpaces = _workSpaces?.sorted(by: { $0.createdAt > $1.createdAt }),
+              let latestCreatedWorkSpace = sortedWorkSpaces.first else { return }
+        
+        lastVisitedWorkSpaceId = latestCreatedWorkSpace.workspaceId
+    }
 }
