@@ -13,6 +13,8 @@ final class User {
     static let shared = User()
     private init() {}
     
+    @UserDefault(key: .nickname, defaultValue: "") var nickname
+    @UserDefault(key: .email, defaultValue: "") var email
     @UserDefault(key: .lastVisitedWorkSpaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkSpaceId
     
     private var _workSpaces: [WorkSpace]? = nil {
@@ -27,11 +29,15 @@ final class User {
     
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
+        nickname = myProfile.nickname
+        email = myProfile.email
         self.profile.accept(myProfile)
     }
     
     func update(for profile: Responder.User.ProfileWithToken) {
         let myProfile = MyProfile(from: profile)
+        nickname = myProfile.nickname
+        email = myProfile.email
         self.profile.accept(myProfile)
     }
     
