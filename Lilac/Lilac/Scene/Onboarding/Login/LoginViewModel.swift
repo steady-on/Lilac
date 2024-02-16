@@ -147,12 +147,12 @@ extension LoginViewModel: ViewModel {
 }
 
 extension LoginViewModel {
-    private func saveToken(_ token: Responder.User.SimpleProfileWithToken) -> Bool {
+    private func saveToken(_ profile: Responder.User.SimpleProfileWithToken) -> Bool {
         @KeychainStorage(itemType: .accessToken) var accessToken
         @KeychainStorage(itemType: .refreshToken) var refreshToken
         
-        accessToken = token.accessToken
-        refreshToken = token.refreshToken
+        accessToken = profile.accessToken
+        refreshToken = profile.refreshToken
         
         guard accessToken != nil, refreshToken != nil else {
             return false
