@@ -49,7 +49,7 @@ enum Responder {
                 self.nickname = try container.decode(String.self, forKey: Responder.User.ProfileWithToken.CodingKeys.nickname)
                 self.profileImage = try container.decodeIfPresent(String.self, forKey: Responder.User.ProfileWithToken.CodingKeys.profileImage)
                 self.phone = try container.decodeIfPresent(String.self, forKey: Responder.User.ProfileWithToken.CodingKeys.phone)
-                self.vendor = try container.decode(Responder.User.Vendor.self, forKey: Responder.User.ProfileWithToken.CodingKeys.vendor)
+                self.vendor = .email
                 
                 let createdAt = try container.decode(String.self, forKey: .createdAt)
                 self.createdAt = createdAt.convertedDate
