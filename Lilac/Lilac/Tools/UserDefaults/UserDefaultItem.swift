@@ -11,4 +11,5 @@ enum UserDefaultItem: String {
     case isFirst
     case email
     case nickname
+    case lastVisitedWorkSpaceId
 }
