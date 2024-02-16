@@ -17,6 +17,7 @@ final class LoginViewModel {
     var disposeBag = DisposeBag()
     
     private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
 }
 
 extension LoginViewModel: ViewModel {
@@ -111,10 +112,27 @@ extension LoginViewModel: ViewModel {
                     User.shared.update(for: myProfile)
                     isLoadedProfile.accept(())
                 case .failure(_):
-                    goToHome.accept(())
+                    showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                 }
             } onError: { _ in
-                goToHome.accept(())
+                showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
+            }
+            .disposed(by: disposeBag)
+        
+        isLoadedProfile
+            .flatMap { [unowned self] _ in
+                return lilacWorkSpaceService.loadAll()
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let workspaces):
+                    User.shared.fetch(for: workspaces)
+                    goToHome.accept(())
+                case .failure(_):
+                    showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
+                }
+            } onError: { _ in
+                showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
             }
             .disposed(by: disposeBag)
         
