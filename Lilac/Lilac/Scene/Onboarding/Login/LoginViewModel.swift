@@ -88,7 +88,7 @@ extension LoginViewModel: ViewModel {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let signIn):
-                    guard owner.saveUserInfo(signIn) else {
+                    guard owner.saveToken(signIn) else {
                         showToastMessage.accept("에러가 발생했어요. 잠시 후 다시 시도해주세요.")
                         return
                     }
@@ -147,14 +147,12 @@ extension LoginViewModel: ViewModel {
 }
 
 extension LoginViewModel {
-    private func saveUserInfo(_ signIn: Responder.User.SimpleProfileWithToken) -> Bool {
-        @UserDefault(key: .nickname, defaultValue: signIn.nickname) var nickname
-        
+    private func saveToken(_ token: Responder.User.SimpleProfileWithToken) -> Bool {
         @KeychainStorage(itemType: .accessToken) var accessToken
         @KeychainStorage(itemType: .refreshToken) var refreshToken
         
-        accessToken = signIn.accessToken
-        refreshToken = signIn.refreshToken
+        accessToken = token.accessToken
+        refreshToken = token.refreshToken
         
         guard accessToken != nil, refreshToken != nil else {
             return false
