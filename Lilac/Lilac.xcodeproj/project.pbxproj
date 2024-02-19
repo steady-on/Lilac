@@ -42,6 +42,7 @@
 		631D751E2B82EFE9002F4279 /* DirectMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */; };
 		631D75202B82F00B002F4279 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751F2B82F00B002F4279 /* SearchViewController.swift */; };
 		631D75232B82F028002F4279 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75222B82F028002F4279 /* SettingsViewController.swift */; };
+		631D752B2B82FA12002F4279 /* SelectImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D752A2B82FA12002F4279 /* SelectImageButton.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
@@ -111,6 +112,7 @@
 		631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageViewController.swift; sourceTree = "<group>"; };
 		631D751F2B82F00B002F4279 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		631D75222B82F028002F4279 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		631D752A2B82FA12002F4279 /* SelectImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageButton.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */,
 				633190B92B5069A8005289E1 /* FilledColorButton.swift */,
 				633190E42B565B93005289E1 /* LabeledTextField.swift */,
+				631D752A2B82FA12002F4279 /* SelectImageButton.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */,
 				631D751C2B82EFAC002F4279 /* HomeViewController.swift in Sources */,
 				631D75202B82F00B002F4279 /* SearchViewController.swift in Sources */,
+				631D752B2B82FA12002F4279 /* SelectImageButton.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
