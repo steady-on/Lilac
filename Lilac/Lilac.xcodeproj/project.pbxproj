@@ -37,6 +37,11 @@
 		631D750A2B7F56D2002F4279 /* WorkSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75092B7F56D2002F4279 /* WorkSpace.swift */; };
 		631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */; };
 		631D75152B7FBF0F002F4279 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */; };
+		631D75192B82EF59002F4279 /* WorkSpaceTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */; };
+		631D751C2B82EFAC002F4279 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751B2B82EFAC002F4279 /* HomeViewController.swift */; };
+		631D751E2B82EFE9002F4279 /* DirectMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */; };
+		631D75202B82F00B002F4279 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751F2B82F00B002F4279 /* SearchViewController.swift */; };
+		631D75232B82F028002F4279 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75222B82F028002F4279 /* SettingsViewController.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
 		633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B92B5069A8005289E1 /* FilledColorButton.swift */; };
@@ -100,6 +105,11 @@
 		631D75092B7F56D2002F4279 /* WorkSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpace.swift; sourceTree = "<group>"; };
 		631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceTabBarController.swift; sourceTree = "<group>"; };
+		631D751B2B82EFAC002F4279 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageViewController.swift; sourceTree = "<group>"; };
+		631D751F2B82F00B002F4279 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		631D75222B82F028002F4279 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
@@ -258,8 +268,13 @@
 		633190B52B506496005289E1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */,
 				638CBF542B6232C800778283 /* Entry */,
 				633190B62B5064AE005289E1 /* Onboarding */,
+				631D751B2B82EFAC002F4279 /* HomeViewController.swift */,
+				631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */,
+				631D751F2B82F00B002F4279 /* SearchViewController.swift */,
+				631D75222B82F028002F4279 /* SettingsViewController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -479,8 +494,10 @@
 				631D75152B7FBF0F002F4279 /* WelcomeViewModel.swift in Sources */,
 				6317EEC02B4BE878007662A5 /* SecItem.swift in Sources */,
 				6317EEA02B488A35007662A5 /* User + TargetType.swift in Sources */,
+				631D75232B82F028002F4279 /* SettingsViewController.swift in Sources */,
 				6317EE742B470F90007662A5 /* UIFont+.swift in Sources */,
 				6317EE942B487543007662A5 /* LilacAPI.swift in Sources */,
+				631D751E2B82EFE9002F4279 /* DirectMessageViewController.swift in Sources */,
 				633190E02B5530B9005289E1 /* ViewModel.swift in Sources */,
 				6317EE712B470EDA007662A5 /* BasicLabel.swift in Sources */,
 				6317EE9B2B487BE5007662A5 /* LilacAPIError.swift in Sources */,
@@ -496,6 +513,8 @@
 				633190EC2B57AE29005289E1 /* SignUpViewController.swift in Sources */,
 				6317EEAF2B4AD7E6007662A5 /* BaseView.swift in Sources */,
 				638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */,
+				631D751C2B82EFAC002F4279 /* HomeViewController.swift in Sources */,
+				631D75202B82F00B002F4279 /* SearchViewController.swift in Sources */,
 				6317EE972B487812007662A5 /* Requester.swift in Sources */,
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
@@ -505,6 +524,7 @@
 				631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
 				638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */,
+				631D75192B82EF59002F4279 /* WorkSpaceTabBarController.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
 				638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */,
