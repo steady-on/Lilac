@@ -66,6 +66,7 @@
 		633CB4742B46B82F00448E9B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4732B46B82F00448E9B /* RxCocoa */; };
 		633CB4762B46B82F00448E9B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4752B46B82F00448E9B /* RxSwift */; };
 		633CB4792B46B83F00448E9B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4782B46B83F00448E9B /* SnapKit */; };
+		634C08972B834FED0098255C /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C08962B834FED0098255C /* UIImage+.swift */; };
 		638CBF492B60D7DC00778283 /* WorkSpace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */; };
 		638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF4C2B60EAA700778283 /* KeychainStorage.swift */; };
 		638CBF512B610B2C00778283 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF502B610B2C00778283 /* AuthInterceptor.swift */; };
@@ -132,6 +133,7 @@
 		633CB4672B46B6EA00448E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		633CB46A2B46B6EA00448E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		633CB46C2B46B6EA00448E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		634C08962B834FED0098255C /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkSpace + TargetType.swift"; sourceTree = "<group>"; };
 		638CBF4C2B60EAA700778283 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		638CBF502B610B2C00778283 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				6317EE732B470F90007662A5 /* UIFont+.swift */,
 				633190E82B56C42A005289E1 /* String+.swift */,
+				634C08962B834FED0098255C /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				6317EEAA2B4ABF34007662A5 /* NetworkingError.swift in Sources */,
 				6317EEB12B4AD89C007662A5 /* BaseTableViewCell.swift in Sources */,
 				638CBF512B610B2C00778283 /* AuthInterceptor.swift in Sources */,
+				634C08972B834FED0098255C /* UIImage+.swift in Sources */,
 				6317EE9E2B487DD8007662A5 /* Auth + TargetType.swift in Sources */,
 				6317EEB32B4AD8C6007662A5 /* BaseCollectionViewCell.swift in Sources */,
 				633190E92B56C42A005289E1 /* String+.swift in Sources */,
