@@ -31,9 +31,15 @@ final class SelectImageButton: UIButton {
         overlayBadge()
     }
     
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let newArea = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: badgeImage.frame.maxX, height: badgeImage.frame.maxY)
+        
+        return newArea.contains(point)
+    }
+    
     private func configureButton() {
         addSubview(badgeImage)
-        bringSubviewToFront(badgeImage)
+        badgeImage.isUserInteractionEnabled = false
         
         let image = baseImage ?? .WorkSpace.default
         
