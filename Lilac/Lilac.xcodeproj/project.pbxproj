@@ -265,6 +265,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		631D75242B82F6B2002F4279 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */,
+				631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
 		633190B52B506496005289E1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +296,7 @@
 				633190D02B53DEF0005289E1 /* AuthViewModel.swift */,
 				633190E12B556E35005289E1 /* Login */,
 				633190EA2B57ADC8005289E1 /* SignUp */,
+				631D75242B82F6B2002F4279 /* Welcome */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -333,8 +343,6 @@
 			children = (
 				633190EB2B57AE29005289E1 /* SignUpViewController.swift */,
 				633190ED2B57E208005289E1 /* SignUpViewModel.swift */,
-				631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */,
-				631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
