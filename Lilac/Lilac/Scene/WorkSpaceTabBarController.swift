@@ -37,14 +37,18 @@ extension WorkSpaceTabBarController {
     private func setTabImage() {
         home.tabBarItem.image = .TabItem.home
         home.tabBarItem.selectedImage = .TabItem.homeActive
+        home.tabBarItem.title = "홈"
         
         directMessage.tabBarItem.image = .TabItem.message
         directMessage.tabBarItem.selectedImage = .TabItem.messageActive
+        directMessage.tabBarItem.title = "DM"
         
         search.tabBarItem.image = .TabItem.profile
         search.tabBarItem.selectedImage = .TabItem.profileActive
+        search.tabBarItem.title = "검색"
         
         settings.tabBarItem.image = .TabItem.setting
         settings.tabBarItem.selectedImage = .TabItem.settingActive
+        settings.tabBarItem.title = "설정"
     }
 }
