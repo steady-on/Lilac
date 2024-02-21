@@ -104,6 +104,15 @@ final class WelcomeViewController: BaseViewController {
     }
     
     override func bind() {
+        createWorkSpaceButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                let addWorkSpaceView = AddWorkSpaceViewController(viewModel: AddWorkSpaceViewModel())
+                let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkSpaceView)
+                owner.present(wrappedNavigationContoller, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         let input = WelcomeViewModel.Input(closeButtonTapped: closeButton.rx.tap)
         
         let output = viewModel.transform(input: input)
