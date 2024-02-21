@@ -12,7 +12,7 @@ final class LilacWorkSpaceService {
     
     private let lilacWorkSpaceRepository = LilacRepository<LilacAPI.WorkSpace>()
     
-    func create(name: String, description: String?, image: Data) -> Single<Result<Responder.WorkSpace.WorkSpace, Error>> {
+    func create(name: Data, description: Data, image: Data) -> Single<Result<Responder.WorkSpace.WorkSpace, Error>> {
         return lilacWorkSpaceRepository.request(.create(name: name, description: description, image: image), responder: Responder.WorkSpace.WorkSpace.self)
     }
     
