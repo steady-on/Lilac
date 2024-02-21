@@ -24,7 +24,7 @@ final class LilacWorkSpaceService {
         return lilacWorkSpaceRepository.request(.load(id: id), responder: Responder.WorkSpace.WorkSpace.self)
     }
     
-    func updateInfo(id: Int, name: String?, description: String?, image: Data?) -> Single<Result<Responder.WorkSpace.WorkSpace, Error>> {
+    func updateInfo(id: Int, name: Data?, description: Data?, image: Data?) -> Single<Result<Responder.WorkSpace.WorkSpace, Error>> {
         return lilacWorkSpaceRepository.request(.update(id: id, name: name, description: description, image: image), responder: Responder.WorkSpace.WorkSpace.self)
     }
     
