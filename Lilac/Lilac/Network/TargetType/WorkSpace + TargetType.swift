@@ -63,7 +63,7 @@ extension LilacAPI.WorkSpace: TargetType {
             }
             
             return .uploadMultipart(multiparts)
-        case .search(let id, let keyword):
+        case .search(_, let keyword):
             let parameters = [ "keyword" : keyword ]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         default:
