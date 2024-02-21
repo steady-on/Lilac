@@ -40,7 +40,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController {
-    func showToast(_ toast: ToastAlert.Toast, target: BaseViewController, bottomInset: ConstraintInsetTarget) {
+    func showToast(_ toast: ToastAlert.Toast, target: BaseViewController) {
         let toastMessage = ToastAlert(toast: toast)
         
         target.view.addSubview(toastMessage)
@@ -49,7 +49,7 @@ extension BaseViewController {
             make.centerX.equalTo(target.view)
             make.leading.greaterThanOrEqualTo(target.view.safeAreaLayoutGuide).inset(24)
             make.trailing.lessThanOrEqualTo(target.view.safeAreaLayoutGuide).inset(-24)
-            make.bottom.equalTo(target.view.keyboardLayoutGuide.snp.top).inset(bottomInset)
+            make.bottom.equalTo(target.view.keyboardLayoutGuide.snp.top).inset(-84)
         }
         
         target.view.layoutIfNeeded()
