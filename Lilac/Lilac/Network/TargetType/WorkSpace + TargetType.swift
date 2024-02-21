@@ -38,31 +38,37 @@ extension LilacAPI.WorkSpace: TargetType {
     }
     
     var task: Moya.Task {
-        let parameters: [String : Any] = switch self {
+        switch self {
         case .create(let name, let description, let image):
-            [
-                "name" : name,
-                "description" : description ?? "",
-                "image" : image
-            ]
+            let nameData = MultipartFormData(provider: .data(name), name: "name")
+            let descriptionData = MultipartFormData(provider: .data(description), name: "description")
+            let imageData = MultipartFormData(provider: .data(image), name: "image", fileName: "\(Date.now).jpeg" , mimeType: "image/jpeg")
+            return .uploadMultipart([nameData, descriptionData, imageData])
         case .update(_, let name, let description, let image):
-            [
-                "name" : name ?? "",
-                "description" : description ?? "",
-                "image" : image ?? ""
-            ]
-        case .search(_, let keyword):
-            [ "keyword" : keyword ]
+            var multiparts = [MultipartFormData]()
+            
+            if let name {
+                let transition = MultipartFormData(provider: .data(name), name: "name")
+                multiparts.append(transition)
+            }
+            
+            if let description {
+                let transition = MultipartFormData(provider: .data(description), name: "description")
+                multiparts.append(transition)
+            }
+            
+            if let image {
+                let transition = MultipartFormData(provider: .data(image), name: "image", fileName: "\(Date.now).jpeg" , mimeType: "image/jpeg")
+                multiparts.append(transition)
+            }
+            
+            return .uploadMultipart(multiparts)
+        case .search(let id, let keyword):
+            let parameters = [ "keyword" : keyword ]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         default:
-            [:]
+            return .requestPlain
         }
-        
-//        return switch self {
-//        case .search: .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-//        default: 
-//        }
-        
-        return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
     }
     
     var headers: [String : String]? {
