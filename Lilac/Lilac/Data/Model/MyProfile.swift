@@ -33,6 +33,10 @@ struct MyProfile {
     init(from profile: Responder.User.ProfileWithToken) {
         self.init(userId: profile.userId, email: profile.email, nickname: profile.nickname, profileImage: profile.profileImage, phone: profile.phone, vendor: .init(from: profile.vendor), sesacCoin: nil, createdAt: profile.createdAt)
     }
+    
+    init() {
+        self.init(userId: 0, email: "", nickname: "", profileImage: nil, phone: nil, vendor: .apple, sesacCoin: nil, createdAt: Date.now)
+    }
 }
 
 extension MyProfile {

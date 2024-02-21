@@ -17,15 +17,14 @@ final class User {
     @UserDefault(key: .email, defaultValue: "") var email
     @UserDefault(key: .lastVisitedWorkSpaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkSpaceId
     
-    private var _workSpaces: [WorkSpace]? = nil {
+    private var _workSpaces = [WorkSpace]() {
         didSet {
-            guard let _workSpaces else { return }
             workSpaces.accept(_workSpaces)
         }
     }
     
-    let profile = PublishRelay<MyProfile>()
-    let workSpaces = PublishRelay<[WorkSpace]>()
+    let profile = BehaviorRelay(value: MyProfile())
+    let workSpaces = BehaviorRelay(value: [WorkSpace]())
     
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
@@ -41,6 +40,11 @@ final class User {
         self.profile.accept(myProfile)
     }
     
+    func add(for newWorkSpace: Responder.WorkSpace.WorkSpace) {
+        let workSpace = WorkSpace(from: newWorkSpace)
+        self._workSpaces.append(workSpace)
+    }
+    
     func fetch(for workSpacesData: [Responder.WorkSpace.WorkSpace]) {
         let workSpaces = workSpacesData.map { WorkSpace(from: $0) }
         self._workSpaces = workSpaces
@@ -51,8 +55,8 @@ final class User {
     func updateWorkSpaceDetail(for workSpaceData: Responder.WorkSpace.WorkSpace) {
         let workSpace = WorkSpace(from: workSpaceData)
         
-        guard let index = _workSpaces?.firstIndex(where: { $0.workspaceId == workSpace.workspaceId }) else { return }
-        _workSpaces?[index] = workSpace
+        guard let index = _workSpaces.firstIndex(where: { $0.workspaceId == workSpace.workspaceId }) else { return }
+        _workSpaces[index] = workSpace
     }
     
     func visitWorkSpace(id: Int) {
@@ -62,12 +66,12 @@ final class User {
 
 extension User {
     private func manageLastVisitedWorkSpace() {
-        guard _workSpaces?.firstIndex(where: { $0.workspaceId == lastVisitedWorkSpaceId }) == nil else {
+        guard _workSpaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkSpaceId }) == nil else {
             return
         }
         
-        guard let sortedWorkSpaces = _workSpaces?.sorted(by: { $0.createdAt > $1.createdAt }),
-              let latestCreatedWorkSpace = sortedWorkSpaces.first else { return }
+        let sortedWorkSpaces = _workSpaces.sorted(by: { $0.createdAt > $1.createdAt })
+        guard let latestCreatedWorkSpace = sortedWorkSpaces.first else { return }
         
         lastVisitedWorkSpaceId = latestCreatedWorkSpace.workspaceId
     }
