@@ -177,7 +177,7 @@ extension SignUpViewModel: ViewModel {
         validInputValues
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] email, nickname, password, phoneNumber in
-                self.lilacUserService.signUp(for: .init(email: email, password: password, nickname: nickname, phone: phoneNumber))
+                lilacUserService.signUp(for: .init(email: email, password: password, nickname: nickname, phone: phoneNumber))
             }
             .subscribe(with: self) { owner, result in
                 switch result {
