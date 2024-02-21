@@ -6,12 +6,35 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import PhotosUI
 
 final class AddWorkSpaceViewController: BaseViewController {
+    
+    private let viewModel: AddWorkSpaceViewModel
+    
+    init(viewModel: AddWorkSpaceViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
     
     deinit {
         print("deinit AddWorkSpaceViewController")
     }
+    
+    private let disposeBag = DisposeBag()
+    
+    private let selectedImage = BehaviorRelay<UIImage?>(value: nil)
+    
+    private let phPickerViewContoller: PHPickerViewController = {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .any(of: [.livePhotos, .images])
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        return picker
+    }()
     
     private let selectImageButton = SelectImageButton(baseImage: nil)
     
@@ -36,6 +59,7 @@ final class AddWorkSpaceViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
+        phPickerViewContoller.delegate = self
         modalPresentationStyle = .formSheet
         
         let components = [selectImageButton, nameTextField, descriptionTextField, doneButton]
@@ -78,10 +102,60 @@ final class AddWorkSpaceViewController: BaseViewController {
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
     }
+    
+    override func bind() {
+        selectImageButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                owner.present(self.phPickerViewContoller, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        selectedImage.asDriver()
+            .drive(with: self) { owner, image in
+                owner.selectImageButton.changeImage(for: image)
+            }
+            .disposed(by: disposeBag)
+        
+        let input = AddWorkSpaceViewModel.Input(
+            selectedImage: selectedImage,
+            nameInputValue: nameTextField.rx.text.orEmpty,
+            descriptionValue: descriptionTextField.rx.text,
+            doneButtonTapped: doneButton.rx.tap
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.doneButtonEnabled
+            .bind(to: doneButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.showToastAlert
+            .bind(with: self) { owner, toast in
+                owner.showToast(toast, target: self)
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 extension AddWorkSpaceViewController {
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
+    }
+}
+
+extension AddWorkSpaceViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        guard let itemProvider = results.first?.itemProvider,
+        itemProvider.canLoadObject(ofClass: UIImage.self) else {
+            return
+        }
+        
+        itemProvider.loadObject(ofClass: UIImage.self) { [unowned self] imageData, error in
+            guard error == nil, let image = imageData as? UIImage else { return }
+            
+            selectedImage.accept(image)
+        }
     }
 }
