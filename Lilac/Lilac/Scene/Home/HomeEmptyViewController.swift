@@ -12,6 +12,10 @@ import Kingfisher
 
 final class HomeEmptyViewController: BaseViewController {
     
+    deinit {
+        print("deinit HomeEmptyViewController")
+    }
+    
     private let disposeBag = DisposeBag()
         
     private let workspaceTitleButton = WorkspaceTitleButton()
