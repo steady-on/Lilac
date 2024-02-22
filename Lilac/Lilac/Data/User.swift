@@ -17,14 +17,14 @@ final class User {
     @UserDefault(key: .email, defaultValue: "") var email
     @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkspaceId
     
-    private var _workSpaces = [Workspace]() {
+    private var _workspaces = [Workspace]() {
         didSet {
-            workSpaces.accept(_workSpaces)
+            workspaces.accept(_workspaces)
         }
     }
     
     let profile = BehaviorRelay(value: MyProfile())
-    let workSpaces = BehaviorRelay(value: [Workspace]())
+    let workspaces = BehaviorRelay(value: [Workspace]())
     
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
@@ -41,22 +41,22 @@ final class User {
     }
     
     func add(for newWorkspace: Responder.Workspace.Workspace) {
-        let workSpace = Workspace(from: newWorkspace)
-        self._workSpaces.append(workSpace)
+        let workspace = Workspace(from: newWorkspace)
+        self._workspaces.append(workspace)
     }
     
-    func fetch(for workSpacesData: [Responder.Workspace.Workspace]) {
-        let workSpaces = workSpacesData.map { Workspace(from: $0) }
-        self._workSpaces = workSpaces
+    func fetch(for workspacesData: [Responder.Workspace.Workspace]) {
+        let workspaces = workspacesData.map { Workspace(from: $0) }
+        self._workspaces = workspaces
         
         manageLastVisitedWorkspace()
     }
     
-    func updateWorkspaceDetail(for workSpaceData: Responder.Workspace.Workspace) {
-        let workSpace = Workspace(from: workSpaceData)
+    func updateWorkspaceDetail(for workspaceData: Responder.Workspace.Workspace) {
+        let workspace = Workspace(from: workspaceData)
         
-        guard let index = _workSpaces.firstIndex(where: { $0.workspaceId == workSpace.workspaceId }) else { return }
-        _workSpaces[index] = workSpace
+        guard let index = _workspaces.firstIndex(where: { $0.workspaceId == workspace.workspaceId }) else { return }
+        _workspaces[index] = workspace
     }
     
     func visitWorkspace(id: Int) {
@@ -66,11 +66,11 @@ final class User {
 
 extension User {
     private func manageLastVisitedWorkspace() {
-        guard _workSpaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkspaceId }) == nil else {
+        guard _workspaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkspaceId }) == nil else {
             return
         }
         
-        let sortedWorkspaces = _workSpaces.sorted(by: { $0.createdAt > $1.createdAt })
+        let sortedWorkspaces = _workspaces.sorted(by: { $0.createdAt > $1.createdAt })
         guard let latestCreatedWorkspace = sortedWorkspaces.first else { return }
         
         lastVisitedWorkspaceId = latestCreatedWorkspace.workspaceId

@@ -162,7 +162,7 @@ enum Responder {
         }
         
         struct Channel: Decodable {
-            let workSpaceId: Int
+            let workspaceId: Int
             let channelId: Int
             let name: String
             let description: String?
@@ -171,13 +171,13 @@ enum Responder {
             let createdAt: Date
             
             enum CodingKeys: String, CodingKey {
-                case workSpaceId, channelId, name, description, ownerId, createdAt
+                case workspaceId, channelId, name, description, ownerId, createdAt
                 case isPrivate = "private"
             }
             
             init(from decoder: Decoder) throws {
                 let container: KeyedDecodingContainer<Responder.Workspace.Channel.CodingKeys> = try decoder.container(keyedBy: Responder.Workspace.Channel.CodingKeys.self)
-                self.workSpaceId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.workSpaceId)
+                self.workspaceId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.workspaceId)
                 self.channelId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.channelId)
                 self.name = try container.decode(String.self, forKey: Responder.Workspace.Channel.CodingKeys.name)
                 self.description = try container.decodeIfPresent(String.self, forKey: Responder.Workspace.Channel.CodingKeys.description)

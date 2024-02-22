@@ -37,7 +37,7 @@ struct Workspace {
 }
 
 struct Channel {
-    let workSpaceId: Int
+    let workspaceId: Int
     let channelId: Int
     let name: String
     let description: String?
@@ -45,8 +45,8 @@ struct Channel {
     let isPrivate: Bool
     let createdAt: Date
     
-    init(workSpaceId: Int, channelId: Int, name: String, description: String?, ownerId: Int, isPrivate: Bool, createdAt: Date) {
-        self.workSpaceId = workSpaceId
+    init(workspaceId: Int, channelId: Int, name: String, description: String?, ownerId: Int, isPrivate: Bool, createdAt: Date) {
+        self.workspaceId = workspaceId
         self.channelId = channelId
         self.name = name
         self.description = description
@@ -56,7 +56,7 @@ struct Channel {
     }
     
     init(from channel: Responder.Workspace.Channel) {
-        self.init(workSpaceId: channel.workSpaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
+        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
     }
 }
 
