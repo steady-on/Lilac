@@ -8,8 +8,11 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class HomeEmptyViewController: BaseViewController {
+    
+    private let disposeBag = DisposeBag()
         
     private let workspaceTitleButton = WorkspaceTitleButton()
     private let profileButton = ProfileButton()
@@ -83,6 +86,31 @@ final class HomeEmptyViewController: BaseViewController {
     }
     
     override func bind() {
+        User.shared.profile
+            .asDriver()
+            .drive(with: self) { owner, profile in
+                owner.setProfileImage(for: profile.profileImage)
+            }
+            .disposed(by: disposeBag)
+    }
+}
 
+extension HomeEmptyViewController {
+    private func setProfileImage(for endPoint: String?) {
+        let defaultImages: [UIImage] = [.Profile.noPhotoA, .Profile.noPhotoB, .Profile.noPhotoC]
+        
+        guard let endPoint, let imageURL = URL(string: BaseURL.v1.server + endPoint) else {
+            profileButton.setProfile(for: defaultImages.randomElement()!)
+            return
+        }
+        
+        KingfisherManager.shared.retrieveImage(with: imageURL) { [unowned self] result in
+            switch result {
+            case .success(let imageData):
+                profileButton.setProfile(for: imageData.image)
+            case .failure(_):
+                profileButton.setProfile(for: defaultImages.randomElement()!)
+            }
+        }
     }
 }
