@@ -92,6 +92,11 @@ final class HomeEmptyViewController: BaseViewController {
                 owner.setProfileImage(for: profile.profileImage)
             }
             .disposed(by: disposeBag)
+        createWorkspaceButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                owner.presentAddWorksapceView()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -112,5 +117,11 @@ extension HomeEmptyViewController {
                 profileButton.setProfile(for: defaultImages.randomElement()!)
             }
         }
+    }
+    
+    private func presentAddWorksapceView() {
+        let addWorkspaceView = AddWorkspaceViewController(viewModel: AddWorkspaceViewModel())
+        let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkspaceView)
+        present(wrappedNavigationContoller, animated: true)
     }
 }
