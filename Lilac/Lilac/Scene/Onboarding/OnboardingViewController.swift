@@ -15,7 +15,7 @@ final class OnboardingViewController: BaseViewController {
     
     private let messageLabel: BasicLabel = {
         let label = BasicLabel(style: .title1)
-        label.text = "새싹톡을 사용하면 어디서나\n팀을 모을 수 있습니다"
+        label.text = "라일락을 사용하면 어디서나\n팀을 모을 수 있습니다"
         label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .center
