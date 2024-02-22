@@ -72,6 +72,7 @@
 		6353148C2B87131F0014AC3C /* WorkspaceTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */; };
 		635314912B872DB10014AC3C /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635314902B872DB10014AC3C /* ProfileButton.swift */; };
 		635314932B87375C0014AC3C /* HomeEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635314922B87375C0014AC3C /* HomeEmptyViewController.swift */; };
+		635314962B874C1C0014AC3C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 635314952B874C1C0014AC3C /* Kingfisher */; };
 		637A93582B83595000756CA3 /* AddWorkspaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */; };
 		638CBF492B60D7DC00778283 /* Workspace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */; };
 		638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF4C2B60EAA700778283 /* KeychainStorage.swift */; };
@@ -162,6 +163,7 @@
 			files = (
 				633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */,
 				633CB4792B46B83F00448E9B /* SnapKit in Frameworks */,
+				635314962B874C1C0014AC3C /* Kingfisher in Frameworks */,
 				6317EE842B480C83007662A5 /* Alamofire in Frameworks */,
 				633CB4762B46B82F00448E9B /* RxSwift in Frameworks */,
 				6317EE922B487414007662A5 /* Moya in Frameworks */,
@@ -462,6 +464,7 @@
 				6317EE832B480C83007662A5 /* Alamofire */,
 				6317EE912B487414007662A5 /* Moya */,
 				633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */,
+				635314952B874C1C0014AC3C /* Kingfisher */,
 			);
 			productName = Lilac;
 			productReference = 633CB45B2B46B6E900448E9B /* Lilac.app */;
@@ -497,6 +500,7 @@
 				6317EE822B480C83007662A5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6317EE902B487414007662A5 /* XCRemoteSwiftPackageReference "Moya" */,
 				633190CD2B53DBEA005289E1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
+				635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 633CB45C2B46B6E900448E9B /* Products */;
 			projectDirPath = "";
@@ -860,6 +864,14 @@
 				minimumVersion = 5.7.0;
 			};
 		};
+		635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -892,6 +904,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 633CB4772B46B83F00448E9B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		635314952B874C1C0014AC3C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
