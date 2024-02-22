@@ -21,10 +21,11 @@ final class ProfileButton: UIButton {
         
         imageView?.backgroundColor = .accent
         imageView?.contentMode = .scaleAspectFill
-        imageView?.clipsToBounds = true
-        imageView?.layer.cornerRadius = bounds.width / 2
-        imageView?.layer.borderWidth = 2
-        imageView?.layer.borderColor = UIColor.View.selected.cgColor
+        
+        layer.borderColor = UIColor.View.selected.cgColor
+        layer.borderWidth = 2
+        layer.cornerRadius = frame.width / 2
+        clipsToBounds = true
     }
     
     func setProfile(for image: UIImage) {
