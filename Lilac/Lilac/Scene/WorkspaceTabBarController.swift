@@ -1,5 +1,5 @@
 //
-//  WorkSpaceTabBarController.swift
+//  WorkspaceTabBarController.swift
 //  Lilac
 //
 //  Created by Roen White on 2/19/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WorkSpaceTabBarController: UITabBarController {
+final class WorkspaceTabBarController: UITabBarController {
     
     private let home = HomeViewController()
     private let directMessage = DirectMessageViewController()
@@ -33,7 +33,7 @@ final class WorkSpaceTabBarController: UITabBarController {
     }
 }
 
-extension WorkSpaceTabBarController {
+extension WorkspaceTabBarController {
     private func setTabImage() {
         home.tabBarItem.image = .TabItem.home
         home.tabBarItem.selectedImage = .TabItem.homeActive

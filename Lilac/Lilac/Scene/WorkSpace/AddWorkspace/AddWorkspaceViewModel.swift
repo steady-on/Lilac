@@ -1,5 +1,5 @@
 //
-//  AddWorkSpaceViewModel.swift
+//  AddWorkspaceViewModel.swift
 //  Lilac
 //
 //  Created by Roen White on 2/19/24.
@@ -10,18 +10,18 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-final class AddWorkSpaceViewModel {
+final class AddWorkspaceViewModel {
     
     deinit {
-        print("deinit AddWorkSpaceViewModel")
+        print("deinit AddWorkspaceViewModel")
     }
     
     var disposeBag = DisposeBag()
     
-    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
+    private lazy var lilacWorkspaceService = LilacWorkspaceService()
 }
 
-extension AddWorkSpaceViewModel: ViewModel {
+extension AddWorkspaceViewModel: ViewModel {
     struct Input {
         let selectedImage: BehaviorRelay<UIImage?>
         let nameInputValue: ControlProperty<String>
@@ -97,7 +97,7 @@ extension AddWorkSpaceViewModel: ViewModel {
         validInputValues
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .flatMap { [unowned self] name, description, imageData in
-                lilacWorkSpaceService.create(name: name, description: description, image: imageData)
+                lilacWorkspaceService.create(name: name, description: description, image: imageData)
             }
             .subscribe { result in
                 switch result {

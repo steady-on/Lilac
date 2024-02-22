@@ -12,7 +12,7 @@ import RxCocoa
 final class WelcomeViewModel {
     var disposeBag = DisposeBag()
     
-    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
+    private lazy var lilacWorkspaceService = LilacWorkspaceService()
 }
 
 extension WelcomeViewModel: ViewModel {
@@ -29,7 +29,7 @@ extension WelcomeViewModel: ViewModel {
         
         input.closeButtonTapped
             .flatMap { [unowned self] _ in
-                lilacWorkSpaceService.loadAll()
+                lilacWorkspaceService.loadAll()
             }
             .subscribe { result in
                 switch result {

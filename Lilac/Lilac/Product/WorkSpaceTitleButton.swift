@@ -1,5 +1,5 @@
 //
-//  WorkSpaceTitleButton.swift
+//  WorkspaceTitleButton.swift
 //  Lilac
 //
 //  Created by Roen White on 2/22/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WorkSpaceTitleButton: UIButton {
+final class WorkspaceTitleButton: UIButton {
     init() {
         super.init(frame: .zero)
         
@@ -34,13 +34,13 @@ final class WorkSpaceTitleButton: UIButton {
         imageView?.backgroundColor = .accent
     }
     
-    func setWorkSpace(for name: String, thumbnail: UIImage?) {
+    func setWorkspace(for name: String, thumbnail: UIImage?) {
         configuration?.image = thumbnail?.resize(targetSize: .init(width: 32, height: 32))
         configuration?.attributedTitle = AttributedString(name)
     }
     
     func setEmpty() {
-        configuration?.image = UIImage.WorkSpace.default.resize(targetSize: .init(width: 32, height: 32))
+        configuration?.image = UIImage.Workspace.default.resize(targetSize: .init(width: 32, height: 32))
         configuration?.attributedTitle = AttributedString("No Workspace")
     }
     

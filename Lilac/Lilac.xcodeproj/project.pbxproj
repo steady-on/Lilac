@@ -34,15 +34,15 @@
 		6317EECC2B4C6201007662A5 /* PopUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */; };
 		631D75022B7B74E3002F4279 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75012B7B74E3002F4279 /* User.swift */; };
 		631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75072B7E65EE002F4279 /* MyProfile.swift */; };
-		631D750A2B7F56D2002F4279 /* WorkSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75092B7F56D2002F4279 /* WorkSpace.swift */; };
+		631D750A2B7F56D2002F4279 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75092B7F56D2002F4279 /* Workspace.swift */; };
 		631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */; };
 		631D75152B7FBF0F002F4279 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */; };
-		631D75192B82EF59002F4279 /* WorkSpaceTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */; };
+		631D75192B82EF59002F4279 /* WorkspaceTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75182B82EF59002F4279 /* WorkspaceTabBarController.swift */; };
 		631D751C2B82EFAC002F4279 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751B2B82EFAC002F4279 /* HomeViewController.swift */; };
 		631D751E2B82EFE9002F4279 /* DirectMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */; };
 		631D75202B82F00B002F4279 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D751F2B82F00B002F4279 /* SearchViewController.swift */; };
 		631D75232B82F028002F4279 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75222B82F028002F4279 /* SettingsViewController.swift */; };
-		631D75292B82F72B002F4279 /* AddWorkSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75282B82F72B002F4279 /* AddWorkSpaceViewController.swift */; };
+		631D75292B82F72B002F4279 /* AddWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D75282B82F72B002F4279 /* AddWorkspaceViewController.swift */; };
 		631D752B2B82FA12002F4279 /* SelectImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631D752A2B82FA12002F4279 /* SelectImageButton.swift */; };
 		633190B42B503118005289E1 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B32B503118005289E1 /* AlertAction.swift */; };
 		633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190B72B5064CA005289E1 /* OnboardingViewController.swift */; };
@@ -70,14 +70,14 @@
 		633CB4792B46B83F00448E9B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4782B46B83F00448E9B /* SnapKit */; };
 		634C08972B834FED0098255C /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C08962B834FED0098255C /* UIImage+.swift */; };
 		6353148C2B87131F0014AC3C /* WorkSpaceTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353148B2B87131F0014AC3C /* WorkSpaceTitleButton.swift */; };
-		637A93582B83595000756CA3 /* AddWorkSpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A93572B83595000756CA3 /* AddWorkSpaceViewModel.swift */; };
-		638CBF492B60D7DC00778283 /* WorkSpace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */; };
+		637A93582B83595000756CA3 /* AddWorkspaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */; };
+		638CBF492B60D7DC00778283 /* Workspace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */; };
 		638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF4C2B60EAA700778283 /* KeychainStorage.swift */; };
 		638CBF512B610B2C00778283 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF502B610B2C00778283 /* AuthInterceptor.swift */; };
 		638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF522B610D8E00778283 /* LilacAuthService.swift */; };
 		638CBF562B6232E000778283 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF552B6232E000778283 /* EntryViewController.swift */; };
 		638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF572B623CAD00778283 /* EntryViewModel.swift */; };
-		638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */; };
+		638CBF5A2B63DF3E00778283 /* LilacWorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* LilacWorkspaceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,15 +107,15 @@
 		6317EECB2B4C6201007662A5 /* PopUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertViewController.swift; sourceTree = "<group>"; };
 		631D75012B7B74E3002F4279 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		631D75072B7E65EE002F4279 /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
-		631D75092B7F56D2002F4279 /* WorkSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpace.swift; sourceTree = "<group>"; };
+		631D75092B7F56D2002F4279 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		631D75122B7FBB3E002F4279 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		631D75142B7FBF0F002F4279 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
-		631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceTabBarController.swift; sourceTree = "<group>"; };
+		631D75182B82EF59002F4279 /* WorkspaceTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTabBarController.swift; sourceTree = "<group>"; };
 		631D751B2B82EFAC002F4279 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessageViewController.swift; sourceTree = "<group>"; };
 		631D751F2B82F00B002F4279 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		631D75222B82F028002F4279 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		631D75282B82F72B002F4279 /* AddWorkSpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkSpaceViewController.swift; sourceTree = "<group>"; };
+		631D75282B82F72B002F4279 /* AddWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceViewController.swift; sourceTree = "<group>"; };
 		631D752A2B82FA12002F4279 /* SelectImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageButton.swift; sourceTree = "<group>"; };
 		633190B32B503118005289E1 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		633190B72B5064CA005289E1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -141,14 +141,14 @@
 		633CB46C2B46B6EA00448E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		634C08962B834FED0098255C /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		6353148B2B87131F0014AC3C /* WorkSpaceTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceTitleButton.swift; sourceTree = "<group>"; };
-		637A93572B83595000756CA3 /* AddWorkSpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkSpaceViewModel.swift; sourceTree = "<group>"; };
-		638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkSpace + TargetType.swift"; sourceTree = "<group>"; };
+		637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceViewModel.swift; sourceTree = "<group>"; };
+		638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workspace + TargetType.swift"; sourceTree = "<group>"; };
 		638CBF4C2B60EAA700778283 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		638CBF502B610B2C00778283 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		638CBF522B610D8E00778283 /* LilacAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacAuthService.swift; sourceTree = "<group>"; };
 		638CBF552B6232E000778283 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		638CBF572B623CAD00778283 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
-		638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacWorkSpaceService.swift; sourceTree = "<group>"; };
+		638CBF592B63DF3E00778283 /* LilacWorkspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacWorkspaceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +232,7 @@
 			children = (
 				6317EE9D2B487DD8007662A5 /* Auth + TargetType.swift */,
 				6317EE9F2B488A35007662A5 /* User + TargetType.swift */,
-				638CBF482B60D7DC00778283 /* WorkSpace + TargetType.swift */,
+				638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */,
 			);
 			path = TargetType;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				631D75072B7E65EE002F4279 /* MyProfile.swift */,
-				631D75092B7F56D2002F4279 /* WorkSpace.swift */,
+				631D75092B7F56D2002F4279 /* Workspace.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -290,24 +290,24 @@
 		631D75252B82F6F9002F4279 /* WorkSpace */ = {
 			isa = PBXGroup;
 			children = (
-				631D75262B82F711002F4279 /* AddWorkSpace */,
+				631D75262B82F711002F4279 /* AddWorkspace */,
 			);
 			path = WorkSpace;
 			sourceTree = "<group>";
 		};
-		631D75262B82F711002F4279 /* AddWorkSpace */ = {
+		631D75262B82F711002F4279 /* AddWorkspace */ = {
 			isa = PBXGroup;
 			children = (
-				631D75282B82F72B002F4279 /* AddWorkSpaceViewController.swift */,
-				637A93572B83595000756CA3 /* AddWorkSpaceViewModel.swift */,
+				631D75282B82F72B002F4279 /* AddWorkspaceViewController.swift */,
+				637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */,
 			);
-			path = AddWorkSpace;
+			path = AddWorkspace;
 			sourceTree = "<group>";
 		};
 		633190B52B506496005289E1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				631D75182B82EF59002F4279 /* WorkSpaceTabBarController.swift */,
+				631D75182B82EF59002F4279 /* WorkspaceTabBarController.swift */,
 				638CBF542B6232C800778283 /* Entry */,
 				633190B62B5064AE005289E1 /* Onboarding */,
 				631D75252B82F6F9002F4279 /* WorkSpace */,
@@ -338,7 +338,7 @@
 				633190D52B550CD3005289E1 /* KakaoLoginService.swift */,
 				638CBF522B610D8E00778283 /* LilacAuthService.swift */,
 				633190D92B550EAF005289E1 /* LilacUserService.swift */,
-				638CBF592B63DF3E00778283 /* LilacWorkSpaceService.swift */,
+				638CBF592B63DF3E00778283 /* LilacWorkspaceService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -523,7 +523,7 @@
 				6353148C2B87131F0014AC3C /* WorkSpaceTitleButton.swift in Sources */,
 				633CB4632B46B6E900448E9B /* ViewController.swift in Sources */,
 				633190DA2B550EAF005289E1 /* LilacUserService.swift in Sources */,
-				638CBF492B60D7DC00778283 /* WorkSpace + TargetType.swift in Sources */,
+				638CBF492B60D7DC00778283 /* Workspace + TargetType.swift in Sources */,
 				6317EE882B480D20007662A5 /* APIKey.swift in Sources */,
 				633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */,
 				6317EEAA2B4ABF34007662A5 /* NetworkingError.swift in Sources */,
@@ -536,10 +536,10 @@
 				6317EE7E2B480063007662A5 /* NetworkMonitor.swift in Sources */,
 				6317EEA42B4A93FE007662A5 /* LilacRepository.swift in Sources */,
 				6317EEC42B4BE8AF007662A5 /* KeychainError.swift in Sources */,
-				631D75292B82F72B002F4279 /* AddWorkSpaceViewController.swift in Sources */,
+				631D75292B82F72B002F4279 /* AddWorkspaceViewController.swift in Sources */,
 				633CB45F2B46B6E900448E9B /* AppDelegate.swift in Sources */,
 				633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */,
-				637A93582B83595000756CA3 /* AddWorkSpaceViewModel.swift in Sources */,
+				637A93582B83595000756CA3 /* AddWorkspaceViewModel.swift in Sources */,
 				6317EEAD2B4AD557007662A5 /* BaseViewController.swift in Sources */,
 				633190BA2B5069A8005289E1 /* FilledColorButton.swift in Sources */,
 				631D75152B7FBF0F002F4279 /* WelcomeViewModel.swift in Sources */,
@@ -572,11 +572,11 @@
 				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
-				631D750A2B7F56D2002F4279 /* WorkSpace.swift in Sources */,
+				631D750A2B7F56D2002F4279 /* Workspace.swift in Sources */,
 				631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
-				638CBF5A2B63DF3E00778283 /* LilacWorkSpaceService.swift in Sources */,
-				631D75192B82EF59002F4279 /* WorkSpaceTabBarController.swift in Sources */,
+				638CBF5A2B63DF3E00778283 /* LilacWorkspaceService.swift in Sources */,
+				631D75192B82EF59002F4279 /* WorkspaceTabBarController.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
 				638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */,

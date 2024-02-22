@@ -47,7 +47,7 @@ final class WelcomeViewController: BaseViewController {
         return imageView
     }()
 
-    private let createWorkSpaceButton = FilledColorButton(title: "워크스페이스 생성")
+    private let createWorkspaceButton = FilledColorButton(title: "워크스페이스 생성")
     
     private let closeButton: UIButton = {
         let button = UIButton()
@@ -65,7 +65,7 @@ final class WelcomeViewController: BaseViewController {
         
         messageLabel.text = "\(nickname)님의 조직을 위해 새로운 라일락 워크스페이스를 시작할 준비가 완료되었어요!"
         
-        let components = [titleLabel, messageLabel, launchingImageView, createWorkSpaceButton]
+        let components = [titleLabel, messageLabel, launchingImageView, createWorkspaceButton]
         components.forEach { component in
             view.addSubview(component)
         }
@@ -87,7 +87,7 @@ final class WelcomeViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
         }
         
-        createWorkSpaceButton.snp.makeConstraints { make in
+        createWorkspaceButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
         }
@@ -104,11 +104,11 @@ final class WelcomeViewController: BaseViewController {
     }
     
     override func bind() {
-        createWorkSpaceButton.rx.tap
+        createWorkspaceButton.rx.tap
             .asDriver()
             .drive(with: self) { owner, _ in
-                let addWorkSpaceView = AddWorkSpaceViewController(viewModel: AddWorkSpaceViewModel())
-                let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkSpaceView)
+                let addWorkspaceView = AddWorkspaceViewController(viewModel: AddWorkspaceViewModel())
+                let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkspaceView)
                 owner.present(wrappedNavigationContoller, animated: true)
             }
             .disposed(by: disposeBag)

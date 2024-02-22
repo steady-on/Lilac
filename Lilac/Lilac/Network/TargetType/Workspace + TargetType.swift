@@ -1,5 +1,5 @@
 //
-//  WorkSpace + TargetType.swift
+//  Workspace + TargetType.swift
 //  Lilac
 //
 //  Created by Roen White on 1/24/24.
@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-extension LilacAPI.WorkSpace: TargetType {
+extension LilacAPI.Workspace: TargetType {
     var baseURL: URL {
         return URL(string: BaseURL.v1.server + "workspaces")!
     }

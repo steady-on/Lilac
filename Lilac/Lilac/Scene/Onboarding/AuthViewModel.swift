@@ -19,7 +19,7 @@ final class AuthViewModel {
     
     private lazy var kakaoLoginService = KakaoLoginService()
     private lazy var lilacUserService = LilacUserService()
-    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
+    private lazy var lilacWorkspaceService = LilacWorkspaceService()
     
     private func kakaoLogin() -> Observable<Result<Responder.User.ProfileWithToken, Error>> {
         return kakaoLoginService.kakaoLogin()
@@ -67,7 +67,7 @@ extension AuthViewModel: ViewModel {
         
         isLoadedProfile
             .flatMap { [unowned self] _ in
-                return lilacWorkSpaceService.loadAll()
+                return lilacWorkspaceService.loadAll()
             }
             .subscribe { result in
                 switch result {

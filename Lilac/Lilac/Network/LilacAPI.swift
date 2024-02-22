@@ -34,7 +34,7 @@ enum LilacAPI {
         }
     }
     
-    enum WorkSpace {
+    enum Workspace {
         case create(name: Data, description: Data, image: Data)
         case loadAll
         case load(id: Int)

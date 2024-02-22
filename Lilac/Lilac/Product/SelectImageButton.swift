@@ -41,7 +41,7 @@ final class SelectImageButton: UIButton {
         addSubview(badgeImage)
         badgeImage.isUserInteractionEnabled = false
         
-        let image = baseImage ?? .WorkSpace.default
+        let image = baseImage ?? .Workspace.default
         
         var config = UIButton.Configuration.filled()
         config.background.cornerRadius = 8

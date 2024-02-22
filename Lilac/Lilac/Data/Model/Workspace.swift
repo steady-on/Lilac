@@ -1,5 +1,5 @@
 //
-//  WorkSpace.swift
+//  Workspace.swift
 //  Lilac
 //
 //  Created by Roen White on 2/16/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WorkSpace {
+struct Workspace {
     let workspaceId: Int
     let name: String
     let description: String?
@@ -28,7 +28,7 @@ struct WorkSpace {
         self.workspaceMembers = workspaceMembers
     }
     
-    init(from workspace: Responder.WorkSpace.WorkSpace) {
+    init(from workspace: Responder.Workspace.Workspace) {
         let channels = workspace.channels?.compactMap { Channel(from: $0) }
         let workspaceMembers = workspace.workspaceMembers?.compactMap { Member(from: $0) }
         
@@ -55,7 +55,7 @@ struct Channel {
         self.createdAt = createdAt
     }
     
-    init(from channel: Responder.WorkSpace.Channel) {
+    init(from channel: Responder.Workspace.Channel) {
         self.init(workSpaceId: channel.workSpaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
     }
 }
@@ -73,7 +73,7 @@ struct Member {
         self.profileImage = profileImage
     }
     
-    init(from member: Responder.WorkSpace.Member) {
+    init(from member: Responder.Workspace.Member) {
         self.init(userId: member.userId, email: member.email, nickname: member.nickname, profileImage: member.profileImage)
     }
 }

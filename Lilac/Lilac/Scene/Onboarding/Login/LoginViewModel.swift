@@ -17,7 +17,7 @@ final class LoginViewModel {
     var disposeBag = DisposeBag()
     
     private lazy var lilacUserService = LilacUserService()
-    private lazy var lilacWorkSpaceService = LilacWorkSpaceService()
+    private lazy var lilacWorkspaceService = LilacWorkspaceService()
 }
 
 extension LoginViewModel: ViewModel {
@@ -121,7 +121,7 @@ extension LoginViewModel: ViewModel {
         
         isLoadedProfile
             .flatMap { [unowned self] _ in
-                return lilacWorkSpaceService.loadAll()
+                return lilacWorkspaceService.loadAll()
             }
             .subscribe { result in
                 switch result {

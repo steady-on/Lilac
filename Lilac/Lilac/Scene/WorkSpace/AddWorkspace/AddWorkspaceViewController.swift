@@ -1,5 +1,5 @@
 //
-//  AddWorkSpaceViewController.swift
+//  AddWorkspaceViewController.swift
 //  Lilac
 //
 //  Created by Roen White on 2/19/24.
@@ -10,18 +10,18 @@ import RxSwift
 import RxCocoa
 import PhotosUI
 
-final class AddWorkSpaceViewController: BaseViewController {
+final class AddWorkspaceViewController: BaseViewController {
     
-    private let viewModel: AddWorkSpaceViewModel
+    private let viewModel: AddWorkspaceViewModel
     
-    init(viewModel: AddWorkSpaceViewModel) {
+    init(viewModel: AddWorkspaceViewModel) {
         self.viewModel = viewModel
         
         super.init()
     }
     
     deinit {
-        print("deinit AddWorkSpaceViewController")
+        print("deinit AddWorkspaceViewController")
     }
     
     private let disposeBag = DisposeBag()
@@ -116,7 +116,7 @@ final class AddWorkSpaceViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        let input = AddWorkSpaceViewModel.Input(
+        let input = AddWorkspaceViewModel.Input(
             selectedImage: selectedImage,
             nameInputValue: nameTextField.rx.text.orEmpty,
             descriptionValue: descriptionTextField.rx.text,
@@ -137,13 +137,13 @@ final class AddWorkSpaceViewController: BaseViewController {
     }
 }
 
-extension AddWorkSpaceViewController {
+extension AddWorkspaceViewController {
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
     }
 }
 
-extension AddWorkSpaceViewController: PHPickerViewControllerDelegate {
+extension AddWorkspaceViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
