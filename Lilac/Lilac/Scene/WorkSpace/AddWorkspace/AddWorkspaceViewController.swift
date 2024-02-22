@@ -134,6 +134,12 @@ final class AddWorkspaceViewController: BaseViewController {
                 owner.showToast(toast, target: self)
             }
             .disposed(by: disposeBag)
+        
+        output.isDismiss
+            .bind(with: self) { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

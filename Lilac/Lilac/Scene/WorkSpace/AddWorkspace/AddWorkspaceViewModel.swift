@@ -5,10 +5,9 @@
 //  Created by Roen White on 2/19/24.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
-import UIKit
 
 final class AddWorkspaceViewModel {
     
@@ -32,10 +31,12 @@ extension AddWorkspaceViewModel: ViewModel {
     struct Output {
         let doneButtonEnabled: Observable<Bool>
         let showToastAlert: PublishRelay<ToastAlert.Toast>
+        let isDismiss: PublishRelay<Void>
     }
     
     func transform(input: Input) -> Output {
         let showToastAlert = PublishRelay<ToastAlert.Toast>()
+        let isDismiss = PublishRelay<Void>()
         
         // 완료 버튼 활성화
         let doneButtonEnabled = input.nameInputValue.map { $0.isEmpty == false }
@@ -103,9 +104,10 @@ extension AddWorkspaceViewModel: ViewModel {
                 switch result {
                 case .success(let workspace):
                     User.shared.add(for: workspace)
+                    isDismiss.accept(())
                 case .failure(_):
                     showToastAlert.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
-                }
+                }                
             } onError: { _ in
                 showToastAlert.accept(.init(message: "에러가 발생했어요. 잠시 후 다시 시도해주세요.", style: .caution))
             }
@@ -114,7 +116,8 @@ extension AddWorkspaceViewModel: ViewModel {
         
         return Output(
             doneButtonEnabled: doneButtonEnabled,
-            showToastAlert: showToastAlert
+            showToastAlert: showToastAlert,
+            isDismiss: isDismiss
         )
     }
 }
