@@ -10,7 +10,7 @@ import Moya
 
 extension LilacAPI.Workspace: TargetType {
     var baseURL: URL {
-        return URL(string: BaseURL.v1.server + "workspaces")!
+        return URL(string: BaseURL.v1.server + "/workspaces")!
     }
     
     var path: String {
