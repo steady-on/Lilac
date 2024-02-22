@@ -11,8 +11,7 @@ final class FilledColorButton: UIButton {
     init(title: String, baseColor: UIColor = .accent) {
         super.init(frame: .zero)
         
-        setTitle(title, for: .normal)
-        configureButton(color: baseColor)
+        configureButton(title: title, color: baseColor)
     }
     
     @available(*, unavailable)
@@ -26,9 +25,18 @@ final class FilledColorButton: UIButton {
         return size
     }
     
-    private func configureButton(color: UIColor) {
+    private func configureButton(title: String, color: UIColor) {
         var config = UIButton.Configuration.filled()
         config.background.cornerRadius = 8
+        config.attributedTitle = AttributedString(title)
+        
+        config.titleTextAttributesTransformer = .init { _ in
+            return .init([
+                .font : UIFont.brandedFont(.title2),
+                .foregroundColor : UIColor.white
+            ])
+        }
+        
         configuration = config
         
         let updateHandler: UIButton.ConfigurationUpdateHandler = { button in
@@ -41,10 +49,5 @@ final class FilledColorButton: UIButton {
         }
         
         configurationUpdateHandler = updateHandler
-        
-        setTitleColor(.white, for: .normal)
-        setTitleColor(.white, for: .disabled)
-        
-        titleLabel?.font = .brandedFont(.title2)
     }
 }
