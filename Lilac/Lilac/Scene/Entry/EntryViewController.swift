@@ -84,11 +84,10 @@ extension EntryViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
-    // TODO: HomeView 만들고 수정
     private func moveToHomeView() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        let rootViewController = ViewController()
+        let rootViewController = WorkspaceTabBarController()
         sceneDelegate?.window?.rootViewController = rootViewController
         sceneDelegate?.window?.makeKeyAndVisible()
     }

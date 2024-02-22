@@ -155,8 +155,7 @@ extension AuthViewController {
     private func moveToHome() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        // TODO: 추후 Home Default 화면으로 이동
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let rootViewController = WorkspaceTabBarController()
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
     }
