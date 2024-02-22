@@ -104,6 +104,19 @@ final class WelcomeViewController: BaseViewController {
     }
     
     override func bind() {
+        User.shared.workspaces
+            .subscribe(with: self) { owner, workspaces in
+                guard workspaces.isEmpty == false else { return }
+                owner.moveToHome()
+            }
+            .disposed(by: disposeBag)
+        
+        closeButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                owner.moveToHome()
+            }
+            .disposed(by: disposeBag)
+        
         createWorkspaceButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 owner.presentAddWorksapceView()
