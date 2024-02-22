@@ -70,6 +70,7 @@
 		633CB4792B46B83F00448E9B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 633CB4782B46B83F00448E9B /* SnapKit */; };
 		634C08972B834FED0098255C /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C08962B834FED0098255C /* UIImage+.swift */; };
 		6353148C2B87131F0014AC3C /* WorkspaceTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */; };
+		635314912B872DB10014AC3C /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635314902B872DB10014AC3C /* ProfileButton.swift */; };
 		637A93582B83595000756CA3 /* AddWorkspaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */; };
 		638CBF492B60D7DC00778283 /* Workspace + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */; };
 		638CBF4D2B60EAA700778283 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF4C2B60EAA700778283 /* KeychainStorage.swift */; };
@@ -141,6 +142,7 @@
 		633CB46C2B46B6EA00448E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		634C08962B834FED0098255C /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTitleButton.swift; sourceTree = "<group>"; };
+		635314902B872DB10014AC3C /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		637A93572B83595000756CA3 /* AddWorkspaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkspaceViewModel.swift; sourceTree = "<group>"; };
 		638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workspace + TargetType.swift"; sourceTree = "<group>"; };
 		638CBF4C2B60EAA700778283 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				633190E42B565B93005289E1 /* LabeledTextField.swift */,
 				631D752A2B82FA12002F4279 /* SelectImageButton.swift */,
 				6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */,
+				635314902B872DB10014AC3C /* ProfileButton.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
 				638CBF5A2B63DF3E00778283 /* LilacWorkspaceService.swift in Sources */,
 				631D75192B82EF59002F4279 /* WorkspaceTabBarController.swift in Sources */,
+				635314912B872DB10014AC3C /* ProfileButton.swift in Sources */,
 				633190E72B568789005289E1 /* LoginViewModel.swift in Sources */,
 				633190EE2B57E208005289E1 /* SignUpViewModel.swift in Sources */,
 				638CBF532B610D8E00778283 /* LilacAuthService.swift in Sources */,
