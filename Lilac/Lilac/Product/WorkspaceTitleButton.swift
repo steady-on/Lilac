@@ -12,6 +12,7 @@ final class WorkspaceTitleButton: UIButton {
         super.init(frame: .zero)
         
         configureButton()
+        setEmpty()
     }
     
     private func configureButton() {
@@ -39,7 +40,7 @@ final class WorkspaceTitleButton: UIButton {
         configuration?.attributedTitle = AttributedString(name)
     }
     
-    func setEmpty() {
+    private func setEmpty() {
         configuration?.image = UIImage.Workspace.default.resize(targetSize: .init(width: 32, height: 32))
         configuration?.attributedTitle = AttributedString("No Workspace")
     }
