@@ -127,7 +127,7 @@ extension WelcomeViewController {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
         let rootViewController = WorkspaceTabBarController()
-        sceneDelegate?.window?.rootViewController = navigationController
+        sceneDelegate?.window?.rootViewController = rootViewController
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
