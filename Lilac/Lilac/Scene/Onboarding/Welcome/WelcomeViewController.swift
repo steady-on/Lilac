@@ -105,11 +105,8 @@ final class WelcomeViewController: BaseViewController {
     
     override func bind() {
         createWorkspaceButton.rx.tap
-            .asDriver()
-            .drive(with: self) { owner, _ in
-                let addWorkspaceView = AddWorkspaceViewController(viewModel: AddWorkspaceViewModel())
-                let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkspaceView)
-                owner.present(wrappedNavigationContoller, animated: true)
+            .subscribe(with: self) { owner, _ in
+                owner.presentAddWorksapceView()
             }
             .disposed(by: disposeBag)
         
@@ -133,5 +130,11 @@ extension WelcomeViewController {
         let navigationController = UINavigationController(rootViewController: ViewController())
         sceneDelegate?.window?.rootViewController = navigationController
         sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
+    private func presentAddWorksapceView() {
+        let addWorkspaceView = AddWorkspaceViewController(viewModel: AddWorkspaceViewModel())
+        let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkspaceView)
+        present(wrappedNavigationContoller, animated: true)
     }
 }
