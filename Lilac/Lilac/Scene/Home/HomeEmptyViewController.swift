@@ -92,6 +92,14 @@ final class HomeEmptyViewController: BaseViewController {
                 owner.setProfileImage(for: profile.profileImage)
             }
             .disposed(by: disposeBag)
+        
+        User.shared.workspaces
+            .subscribe(with: self) { owner, workspaces in
+                guard workspaces.isEmpty == false else { return }
+                owner.dismiss(animated: false)
+            }
+            .disposed(by: disposeBag)
+        
         createWorkspaceButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 owner.presentAddWorksapceView()
