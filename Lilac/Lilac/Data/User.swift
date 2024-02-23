@@ -26,6 +26,11 @@ final class User {
     let profile = BehaviorRelay(value: MyProfile())
     let workspaces = BehaviorRelay(value: [Workspace]())
     
+    var selectedWorkspace: Workspace? {
+        guard let lastVisitedWorkspaceId else { return nil }
+        return _workspaces.first { $0.workspaceId == lastVisitedWorkspaceId }
+    }
+    
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
         nickname = myProfile.nickname
@@ -46,6 +51,8 @@ final class User {
     }
     
     func fetch(for workspacesData: [Responder.Workspace.Workspace]) {
+        guard workspacesData.isEmpty == false else { return }
+        
         let workspaces = workspacesData.map { Workspace(from: $0) }
         self._workspaces = workspaces
         
