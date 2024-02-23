@@ -186,7 +186,8 @@ enum Responder {
                 let createdAt = try container.decode(String.self, forKey: .createdAt)
                 self.createdAt = createdAt.convertedDate
                 
-                self.isPrivate = try container.decode(Bool.self, forKey: Responder.Workspace.Channel.CodingKeys.isPrivate)
+                let isPrivate = try container.decode(Int.self, forKey: .isPrivate)
+                self.isPrivate = isPrivate == 1
             }
         }
         
