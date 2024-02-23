@@ -81,8 +81,15 @@ final class HomeEmptyViewController: BaseViewController {
     }
     
     override func configureNavigationBar() {
+        let titleView = UIView()
+        titleView.addSubview(workspaceTitleButton)
+        workspaceTitleButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+        }
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: workspaceTitleButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: titleView)
         
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
