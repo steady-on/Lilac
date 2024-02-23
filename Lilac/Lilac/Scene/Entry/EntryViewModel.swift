@@ -19,6 +19,7 @@ final class EntryViewModel {
     @KeychainStorage(itemType: .accessToken) private var accessToken
     
     @UserDefault(key: .isFirst, defaultValue: true) private var isFirst
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) private var lastVisitedWorkspaceId
     
     private lazy var lilacAuthService = LilacAuthService.shared
     private lazy var lilacUserService = LilacUserService()
@@ -41,6 +42,7 @@ extension EntryViewModel: ViewModel {
         
         let isTokenRefresh = PublishRelay<Void>()
         let isLoadedProfile = PublishRelay<Void>()
+        let isLoadedWorkspaces = PublishRelay<Void>()
         
         guard isFirst == false else {
             refreshToken = nil
@@ -82,6 +84,7 @@ extension EntryViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        // User의 프로필 정보를 받아옴
         isTokenRefresh
             .flatMap { [unowned self] _ in
                 lilacUserService.loadMyProfile()
@@ -99,16 +102,42 @@ extension EntryViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        // User가 속한 workspace 정보를 받아옴
         isLoadedProfile
             .flatMap { [unowned self] _ in
-                return lilacWorkspaceService.loadAll()
+                lilacWorkspaceService.loadAll()
             }
             .subscribe { result in
                 switch result {
                 case .success(let workspaces):
                     User.shared.fetch(for: workspaces)
-                    goToHome.accept(())
+                    isLoadedWorkspaces.accept(())
                 case .failure(_):
+                    goToOnboarding.accept(true)
+                }
+            } onError: { _ in
+                goToOnboarding.accept(true)
+            }
+            .disposed(by: disposeBag)
+        
+        isLoadedWorkspaces
+            .filter { [unowned self] _ in
+                guard let lastVisitedWorkspaceId else {
+                    goToHome.accept(())
+                    return false
+                }
+                
+                return true
+            }
+            .flatMap { [unowned self] _ in
+                lilacWorkspaceService.loadSpecified(id: lastVisitedWorkspaceId!)
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let workspace):
+                    User.shared.updateWorkspaceDetail(for: workspace)
+                    goToHome.accept(())
+                case .failure(let error):
                     goToOnboarding.accept(true)
                 }
             } onError: { _ in
