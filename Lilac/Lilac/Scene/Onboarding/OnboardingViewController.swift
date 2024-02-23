@@ -13,6 +13,8 @@ final class OnboardingViewController: BaseViewController {
         print("deinit OnboardingViewController")
     }
     
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkspaceId
+    
     private let messageLabel: BasicLabel = {
         let label = BasicLabel(style: .title1)
         label.text = "라일락을 사용하면 어디서나\n팀을 모을 수 있습니다"
@@ -28,6 +30,8 @@ final class OnboardingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lastVisitedWorkspaceId = nil
     }
 
     override func configureHiararchy() {
