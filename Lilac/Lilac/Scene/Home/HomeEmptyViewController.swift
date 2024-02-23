@@ -87,6 +87,8 @@ final class HomeEmptyViewController: BaseViewController {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
+        
+        setWorkspaceTitleButton()
     }
     
     override func bind() {
@@ -113,27 +115,50 @@ final class HomeEmptyViewController: BaseViewController {
 }
 
 extension HomeEmptyViewController {
-    private func setProfileImage(for endPoint: String?) {
-        let defaultImages: [UIImage] = [.Profile.noPhotoA, .Profile.noPhotoB, .Profile.noPhotoC]
-        
-        guard let endPoint, let imageURL = URL(string: BaseURL.v1.server + endPoint) else {
-            profileButton.setProfile(for: defaultImages.randomElement()!)
-            return
-        }
-        
-        KingfisherManager.shared.retrieveImage(with: imageURL) { [unowned self] result in
-            switch result {
-            case .success(let imageData):
-                profileButton.setProfile(for: imageData.image)
-            case .failure(_):
-                profileButton.setProfile(for: defaultImages.randomElement()!)
-            }
-        }
-    }
-    
     private func presentAddWorksapceView() {
         let addWorkspaceView = AddWorkspaceViewController(viewModel: AddWorkspaceViewModel())
         let wrappedNavigationContoller = UINavigationController(rootViewController: addWorkspaceView)
         present(wrappedNavigationContoller, animated: true)
+    }
+}
+
+extension HomeEmptyViewController {
+    private func setProfileImage(for endPoint: String?) {
+        let defaultImages: [UIImage] = [.Profile.noPhotoA, .Profile.noPhotoB, .Profile.noPhotoC]
+        
+        loadServerImage(to: endPoint) { [unowned self] image in
+            guard let image else {
+                profileButton.setProfile(for: defaultImages.randomElement()!)
+                return
+            }
+            
+            profileButton.setProfile(for: image)
+        }
+    }
+    
+    private func setWorkspaceTitleButton() {
+        guard let workspace = User.shared.selectedWorkspace else { return }
+        
+        loadServerImage(to: workspace.thumbnail) { [unowned self] image in
+            workspaceTitleButton.setWorkspace(for: workspace.name, thumbnail: image)
+        }
+    }
+}
+
+extension HomeEmptyViewController {
+    private func loadServerImage(to endPoint: String?, completion: @escaping (UIImage?) -> Void) {
+        guard let endPoint, let imageURL = URL(string: BaseURL.v1.server + endPoint) else {
+            completion(nil)
+            return
+        }
+        
+        KingfisherManager.shared.retrieveImage(with: imageURL) { result in
+            switch result {
+            case .success(let imageData):
+                completion(imageData.image)
+            case .failure(_):
+                completion(nil)
+            }
+        }
     }
 }

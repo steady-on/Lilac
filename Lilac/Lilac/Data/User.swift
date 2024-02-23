@@ -74,7 +74,6 @@ final class User {
 extension User {
     private func manageLastVisitedWorkspace() {
         guard _workspaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkspaceId }) == nil else {
-            print("???")
             return
         }
         
