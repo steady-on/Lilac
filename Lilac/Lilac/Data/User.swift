@@ -15,7 +15,7 @@ final class User {
     
     @UserDefault(key: .nickname, defaultValue: "") var nickname
     @UserDefault(key: .email, defaultValue: "") var email
-    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkspaceId
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) var lastVisitedWorkspaceId
     
     private var _workspaces = [Workspace]() {
         didSet {
@@ -27,7 +27,7 @@ final class User {
     let workspaces = BehaviorRelay(value: [Workspace]())
     
     var selectedWorkspace: Workspace? {
-        guard let lastVisitedWorkspaceId else { return nil }
+        guard lastVisitedWorkspaceId > 0 else { return nil }
         return _workspaces.first { $0.workspaceId == lastVisitedWorkspaceId }
     }
     
@@ -74,6 +74,7 @@ final class User {
 extension User {
     private func manageLastVisitedWorkspace() {
         guard _workspaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkspaceId }) == nil else {
+            print("???")
             return
         }
         

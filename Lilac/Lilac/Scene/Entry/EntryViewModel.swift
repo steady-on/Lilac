@@ -19,7 +19,7 @@ final class EntryViewModel {
     @KeychainStorage(itemType: .accessToken) private var accessToken
     
     @UserDefault(key: .isFirst, defaultValue: true) private var isFirst
-    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) private var lastVisitedWorkspaceId
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) var lastVisitedWorkspaceId
     
     private lazy var lilacAuthService = LilacAuthService.shared
     private lazy var lilacUserService = LilacUserService()
@@ -122,7 +122,7 @@ extension EntryViewModel: ViewModel {
         
         isLoadedWorkspaces
             .filter { [unowned self] _ in
-                guard let lastVisitedWorkspaceId else {
+                guard lastVisitedWorkspaceId > 0 else {
                     goToHome.accept(())
                     return false
                 }
@@ -130,14 +130,14 @@ extension EntryViewModel: ViewModel {
                 return true
             }
             .flatMap { [unowned self] _ in
-                lilacWorkspaceService.loadSpecified(id: lastVisitedWorkspaceId!)
+                lilacWorkspaceService.loadSpecified(id: lastVisitedWorkspaceId)
             }
             .subscribe { result in
                 switch result {
                 case .success(let workspace):
                     User.shared.updateWorkspaceDetail(for: workspace)
                     goToHome.accept(())
-                case .failure(let error):
+                case .failure(_):
                     goToOnboarding.accept(true)
                 }
             } onError: { _ in

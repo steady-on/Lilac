@@ -13,7 +13,7 @@ final class OnboardingViewController: BaseViewController {
         print("deinit OnboardingViewController")
     }
     
-    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: Optional<Int>(nil)) var lastVisitedWorkspaceId
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) var lastVisitedWorkspaceId
     
     private let messageLabel: BasicLabel = {
         let label = BasicLabel(style: .title1)
@@ -31,7 +31,7 @@ final class OnboardingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lastVisitedWorkspaceId = nil
+        lastVisitedWorkspaceId = -1
     }
 
     override func configureHiararchy() {
