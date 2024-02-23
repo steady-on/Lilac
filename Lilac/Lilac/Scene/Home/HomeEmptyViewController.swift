@@ -94,8 +94,6 @@ final class HomeEmptyViewController: BaseViewController {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
-        
-        setWorkspaceTitleButton()
     }
     
     override func bind() {
@@ -140,14 +138,6 @@ extension HomeEmptyViewController {
             }
             
             profileButton.setProfile(for: image)
-        }
-    }
-    
-    private func setWorkspaceTitleButton() {
-        guard let workspace = User.shared.selectedWorkspace else { return }
-        
-        loadServerImage(to: workspace.thumbnail) { [unowned self] image in
-            workspaceTitleButton.setWorkspace(for: workspace.name, thumbnail: image)
         }
     }
 }
