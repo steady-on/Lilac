@@ -142,7 +142,7 @@ extension HomeViewController {
         }
     }
     
-    private func createCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
+    private func createChannelCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
             var content = cell.defaultContentConfiguration()
             content.text = item.text
@@ -158,10 +158,29 @@ extension HomeViewController {
         }
     }
     
+    private func createDMCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, Item> { [unowned self] cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.text
+            content.textProperties.font = .brandedFont(.body)
+            content.textProperties.color = .Text.secondary
+            
+            loadServerImage(to: item.image) { image in
+                content.image = image ?? .Profile.noPhotoC
+            }
+            
+            content.imageToTextPadding = 8
+            content.imageProperties.maximumSize = .init(width: 24, height: 24)
+
+            cell.contentConfiguration = content
+            cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
+        }
+    }
+    
     private func configureDataSource() {
         let headerRegistration = createHeaderRegistration()
         let footerRegistration = createFooterRegistration()
-        let cellRegistration = createCellRegistration()
+        let channelCellRegistration = createChannelCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<Header, Item>(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.type {
@@ -169,8 +188,10 @@ extension HomeViewController {
                 return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item.text)
             case .footer:
                 return collectionView.dequeueConfiguredReusableCell(using: footerRegistration, for: indexPath, item: item.text)
-            case .item:
-                return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+            case .channel:
+                return collectionView.dequeueConfiguredReusableCell(using: channelCellRegistration, for: indexPath, item: item)
+            case .dm:
+                return collectionView.dequeueConfiguredReusableCell(using: channelCellRegistration, for: indexPath, item: item)
             }
         }
     }

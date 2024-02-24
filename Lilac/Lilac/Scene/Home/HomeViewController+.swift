@@ -56,7 +56,7 @@ extension HomeViewController {
         }
         
         init(from channel: Channel) {
-            self.init(id: channel.channelId, text: channel.name, image: nil, type: .item)
+            self.init(id: channel.channelId, text: channel.name, image: nil, type: .channel)
         }
         
         init(from footer: Footer) {
@@ -66,7 +66,8 @@ extension HomeViewController {
         enum ItemType {
             case header
             case footer
-            case item
+            case channel
+            case dm
         }
     }
 }
