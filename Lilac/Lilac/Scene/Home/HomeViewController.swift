@@ -18,7 +18,7 @@ final class HomeViewController: BaseViewController {
     private let profileButton = ProfileButton()
     
     private var collectionView: UICollectionView! = nil
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Header, Item>! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +30,8 @@ final class HomeViewController: BaseViewController {
             return
         }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections(Section.allCases)
+        var snapshot = NSDiffableDataSourceSnapshot<Header, Item>()
+        snapshot.appendSections(Header.allCases)
         dataSource.apply(snapshot)
         
         var sectionChannelSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
@@ -188,7 +188,7 @@ extension HomeViewController {
             cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<Header, Item>(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.type {
             case .header:
                 return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item.text)
@@ -202,21 +202,6 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
-    private func configureKingFisherDefaultOptions() {
-        @KeychainStorage(itemType: .accessToken) var accessToken
-        
-        guard let accessToken else { return }
-        
-        let modifier = AnyModifier { request in
-            var request = request
-            request.setValue(accessToken, forHTTPHeaderField: "Authorization")
-            request.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
-            return request
-        }
-        
-        KingfisherManager.shared.defaultOptions += [.requestModifier(modifier)]
-    }
-    
     private func coverToEmptyWorkspace() {
         let workspaceEmptyView = HomeEmptyViewController()
         let wrappedNavigationController = UINavigationController(rootViewController: workspaceEmptyView)
@@ -249,6 +234,21 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
+    private func configureKingFisherDefaultOptions() {
+        @KeychainStorage(itemType: .accessToken) var accessToken
+        
+        guard let accessToken else { return }
+        
+        let modifier = AnyModifier { request in
+            var request = request
+            request.setValue(accessToken, forHTTPHeaderField: "Authorization")
+            request.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
+            return request
+        }
+        
+        KingfisherManager.shared.defaultOptions += [.requestModifier(modifier)]
+    }
+    
     private func loadServerImage(to endPoint: String?, completion: @escaping (UIImage?) -> Void) {
         guard let endPoint, let imageURL = URL(string: BaseURL.v1.server + endPoint) else {
             completion(nil)
@@ -262,70 +262,6 @@ extension HomeViewController {
             case .failure(_):
                 completion(nil)
             }
-        }
-    }
-}
-
-extension HomeViewController {
-    enum Section: Int, CaseIterable {
-        case channel
-        case directMessage
-        case member
-        
-        var title: String {
-            switch self {
-            case .channel: return "채널"
-            case .directMessage: return "다이렉트 메시지"
-            case .member: return ""
-            }
-        }
-    }
-    
-    enum Footer: Int {
-        case addChannel
-        case newMessage
-        case inviteMember
-        
-        var title: String {
-            switch self {
-            case .addChannel: return "채널 추가"
-            case .newMessage: return "새 메시지 시작"
-            case .inviteMember: return "팀원 추가"
-            }
-        }
-    }
-    
-    struct Item: Hashable {
-        let id: Int
-        let text: String
-        let image: String?
-        let type: ItemType
-//        let unreads: Int?
-        
-        init(id: Int, text: String, image: String?, type: ItemType) {
-            self.id = id
-            self.text = text
-            self.image = image
-//            self.unreads = unreads
-            self.type = type
-        }
-        
-        init(from section: Section) {
-            self.init(id: section.rawValue, text: section.title, image: nil, type: .header)
-        }
-        
-        init(from channel: Channel) {
-            self.init(id: channel.channelId, text: channel.name, image: nil, type: .item)
-        }
-        
-        init(from footer: Footer) {
-            self.init(id: footer.rawValue, text: footer.title, image: nil, type: .footer)
-        }
-        
-        enum ItemType {
-            case header
-            case footer
-            case item
         }
     }
 }

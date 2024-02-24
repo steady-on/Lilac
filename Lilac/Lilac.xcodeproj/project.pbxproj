@@ -81,6 +81,7 @@
 		638CBF562B6232E000778283 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF552B6232E000778283 /* EntryViewController.swift */; };
 		638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF572B623CAD00778283 /* EntryViewModel.swift */; };
 		638CBF5A2B63DF3E00778283 /* LilacWorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* LilacWorkspaceService.swift */; };
+		63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +155,7 @@
 		638CBF552B6232E000778283 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		638CBF572B623CAD00778283 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
 		638CBF592B63DF3E00778283 /* LilacWorkspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LilacWorkspaceService.swift; sourceTree = "<group>"; };
+		63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				631D751B2B82EFAC002F4279 /* HomeViewController.swift */,
+				63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */,
 				635314922B87375C0014AC3C /* HomeEmptyViewController.swift */,
 			);
 			path = Home;
@@ -581,6 +584,7 @@
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				635314932B87375C0014AC3C /* HomeEmptyViewController.swift in Sources */,
 				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
+				63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */,
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				631D750A2B7F56D2002F4279 /* Workspace.swift in Sources */,
