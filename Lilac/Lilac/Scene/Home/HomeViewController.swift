@@ -29,15 +29,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        User.shared.workspaces
-            .asDriver()
-            .drive(with: self) { owner, workspaces in
-                guard workspaces.isEmpty == false else {
-                    owner.coverToEmptyWorkspace()
-                    return
-                }
-            }
-            .disposed(by: disposeBag)
+        isWorkspaceEmpty()
     }
     
     override func configureHiararchy() {
@@ -222,6 +214,11 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
+    private func isWorkspaceEmpty() {
+        guard User.shared.isNotBelongToWorkspace else { return }
+        coverToEmptyWorkspace()
+    }
+    
     private func coverToEmptyWorkspace() {
         let workspaceEmptyView = HomeEmptyViewController()
         let wrappedNavigationController = UINavigationController(rootViewController: workspaceEmptyView)

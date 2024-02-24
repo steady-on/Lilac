@@ -31,6 +31,10 @@ final class User {
         return _workspaces.first { $0.workspaceId == lastVisitedWorkspaceId }
     }
     
+    var isNotBelongToWorkspace: Bool {
+        _workspaces.isEmpty
+    }
+    
     func update(for profile: Responder.User.MyProfile) {
         let myProfile = MyProfile(from: profile)
         nickname = myProfile.nickname
