@@ -36,7 +36,7 @@ struct Workspace {
     }
 }
 
-struct Channel {
+struct Channel: Hashable {
     let workspaceId: Int
     let channelId: Int
     let name: String

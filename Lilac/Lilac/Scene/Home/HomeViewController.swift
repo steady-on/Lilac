@@ -17,10 +17,44 @@ final class HomeViewController: BaseViewController {
     private let workspaceTitleButton = WorkspaceTitleButton()
     private let profileButton = ProfileButton()
     
+    private var collectionView: UICollectionView! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureKingFisherDefaultOptions()
+        
+        guard let channels = User.shared.selectedWorkspace?.channels else {
+            print("채널 없음")
+            return
+        }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections(Section.allCases)
+        dataSource.apply(snapshot)
+        
+        var sectionChannelSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let channelHeaderItem = Item(from: .channel)
+        let channelFooterItem = Item(from: .addChannel)
+        sectionChannelSnapshot.append([channelHeaderItem])
+        
+        sectionChannelSnapshot.append(channels.map { Item(from: $0) } + [channelFooterItem], to: channelHeaderItem)
+        sectionChannelSnapshot.expand([channelHeaderItem])
+        dataSource.apply(sectionChannelSnapshot, to: .channel)
+        
+        var sectionDMSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let dmHeaderItem = Item(from: .directMessage)
+        let dmFooterItem = Item(from: .newMessage)
+        sectionDMSnapshot.append([dmHeaderItem])
+        
+        sectionDMSnapshot.append([dmFooterItem], to: dmHeaderItem)
+        sectionDMSnapshot.expand([dmHeaderItem])
+        
+        let memberFooterItem = Item(from: .inviteMember)
+        sectionDMSnapshot.append([memberFooterItem])
+        
+        dataSource.apply(sectionDMSnapshot, to: .directMessage)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +75,16 @@ final class HomeViewController: BaseViewController {
         view.backgroundColor = .Background.secondary
         definesPresentationContext = true
         
+        configureCollectionView()
+        configureDataSource()
+        
+        view.addSubview(collectionView)
+    }
+    
+    override func setConstraints() {
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func configureNavigationBar() {
@@ -68,6 +112,80 @@ final class HomeViewController: BaseViewController {
                 owner.setProfileImage(for: profile.profileImage)
             }
             .disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController {
+    private func createLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, layoutEnvironment in
+            var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
+            config.headerMode = .firstItemInSection
+            config.backgroundColor = .Background.secondary
+            
+            let section = NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
+            section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+            
+            return section
+        }
+    }
+}
+
+extension HomeViewController {
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    private func configureDataSource() {
+        let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item
+            content.textProperties.font = .brandedFont(.title2)
+            
+            cell.contentConfiguration = content
+            cell.accessories = [.outlineDisclosure(options: .init(style: .header, tintColor: .black))]
+            cell.directionalLayoutMargins = .init(top: 12, leading: 16, bottom: 12, trailing: 16)
+        }
+        
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.text
+            content.textProperties.font = .brandedFont(.body)
+            content.textProperties.color = .Text.secondary
+            
+            content.image = .Hashtag.thin
+            content.imageToTextPadding = 8
+            content.imageProperties.maximumSize = .init(width: 18, height: 18)
+
+            cell.contentConfiguration = content
+            cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
+        }
+        
+        let footerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item
+            content.textProperties.font = .brandedFont(.body)
+            content.textProperties.color = .Text.secondary
+            
+            content.image = .Icon.plus
+            content.imageToTextPadding = 8
+            content.imageProperties.maximumSize = .init(width: 18, height: 18)
+            
+            cell.contentConfiguration = content
+            cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
+            switch item.type {
+            case .header:
+                return collectionView.dequeueConfiguredReusableCell(using: headerRegistration, for: indexPath, item: item.text)
+            case .footer:
+                return collectionView.dequeueConfiguredReusableCell(using: footerRegistration, for: indexPath, item: item.text)
+            case .item:
+                return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+            }
+        }
     }
 }
 
@@ -132,6 +250,68 @@ extension HomeViewController {
             case .failure(_):
                 completion(nil)
             }
+        }
+    }
+}
+
+extension HomeViewController {
+    enum Section: Int, CaseIterable {
+        case channel
+        case directMessage
+        
+        var title: String {
+            switch self {
+            case .channel: return "채널"
+            case .directMessage: return "다이렉트 메시지"
+            }
+        }
+    }
+    
+    enum Footer: Int {
+        case addChannel
+        case newMessage
+        case inviteMember
+        
+        var title: String {
+            switch self {
+            case .addChannel: return "채널 추가"
+            case .newMessage: return "새 메시지 시작"
+            case .inviteMember: return "팀원 추가"
+            }
+        }
+    }
+    
+    struct Item: Hashable {
+        let id: Int
+        let text: String
+        let image: String?
+        let type: ItemType
+//        let unreads: Int?
+        
+        init(id: Int, text: String, image: String?, type: ItemType) {
+            self.id = id
+            self.text = text
+            self.image = image
+//            self.unreads = unreads
+            self.type = type
+        }
+        
+        init(from section: Section) {
+            self.init(id: section.rawValue, text: section.title, image: nil, type: .header)
+        }
+        
+        init(from channel: Channel) {
+            self.init(id: channel.channelId, text: channel.name, image: nil, type: .item)
+        }
+        
+        init(from footer: Footer) {
+            self.init(id: footer.rawValue, text: footer.title, image: nil, type: .footer)
+        }
+        
+        enum ItemType {
+            case header
+            case footer
+            case item
         }
     }
 }
