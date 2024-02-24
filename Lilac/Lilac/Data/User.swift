@@ -13,9 +13,9 @@ final class User {
     static let shared = User()
     private init() {}
     
-    @UserDefault(key: .nickname, defaultValue: "") var nickname
-    @UserDefault(key: .email, defaultValue: "") var email
-    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) var lastVisitedWorkspaceId
+    @UserDefault(key: .nickname, defaultValue: "") private var nickname
+    @UserDefault(key: .email, defaultValue: "") private var email
+    @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) private var lastVisitedWorkspaceId
     
     private var _workspaces = [Workspace]() {
         didSet {
@@ -25,7 +25,7 @@ final class User {
     
     let profile = BehaviorRelay(value: MyProfile())
     let workspaces = BehaviorRelay(value: [Workspace]())
-    let lastVisited = BehaviorRelay(value: -1)
+    let selectedWorkspaceId = BehaviorRelay(value: -1)
     
     var selectedWorkspace: Workspace? {
         guard lastVisitedWorkspaceId > 0 else { return nil }
@@ -73,13 +73,14 @@ final class User {
     
     func visitWorkspace(id: Int) {
         lastVisitedWorkspaceId = id
+        selectedWorkspaceId.accept(lastVisitedWorkspaceId)
     }
 }
 
 extension User {
     private func manageLastVisitedWorkspace() {
         guard _workspaces.contains(where: { $0.workspaceId == lastVisitedWorkspaceId }) == false else {
-            lastVisited.accept(lastVisitedWorkspaceId)
+            selectedWorkspaceId.accept(lastVisitedWorkspaceId)
             return
         }
         
