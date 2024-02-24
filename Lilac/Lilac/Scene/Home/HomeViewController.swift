@@ -24,38 +24,6 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         
         configureKingFisherDefaultOptions()
-        
-        guard let channels = User.shared.selectedWorkspace?.channels else {
-            print("채널 없음")
-            return
-        }
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Header, Item>()
-        snapshot.appendSections(Header.allCases)
-        dataSource.apply(snapshot)
-        
-        var sectionChannelSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
-        let channelHeaderItem = Item(from: .channel)
-        let channelFooterItem = Item(from: .addChannel)
-        sectionChannelSnapshot.append([channelHeaderItem])
-        
-        sectionChannelSnapshot.append(channels.map { Item(from: $0) } + [channelFooterItem], to: channelHeaderItem)
-        sectionChannelSnapshot.expand([channelHeaderItem])
-        dataSource.apply(sectionChannelSnapshot, to: .channel)
-        
-        var sectionDMSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
-        let dmHeaderItem = Item(from: .directMessage)
-        let dmFooterItem = Item(from: .newMessage)
-        sectionDMSnapshot.append([dmHeaderItem])
-        
-        sectionDMSnapshot.append([dmFooterItem], to: dmHeaderItem)
-        sectionDMSnapshot.expand([dmHeaderItem])
-        dataSource.apply(sectionDMSnapshot, to: .directMessage)
-        
-        var sectionMemberSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
-        let memberFooterItem = Item(from: .inviteMember)
-        sectionMemberSnapshot.append([memberFooterItem])
-        dataSource.apply(sectionMemberSnapshot, to: .member)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,6 +46,9 @@ final class HomeViewController: BaseViewController {
         
         configureCollectionView()
         configureDataSource()
+        configureInitialSnapshot()
+        // TODO: DM 기능 개발 시 적절한 타이밍에 호출하도록 함
+        configureDMSnapshot()
         
         view.addSubview(collectionView)
     }
@@ -210,6 +181,43 @@ extension HomeViewController {
                 return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
             }
         }
+    }
+}
+
+// MARK: Related Snapshot
+extension HomeViewController {
+    private func configureInitialSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Header, Item>()
+        snapshot.appendSections(Header.allCases)
+        dataSource.apply(snapshot)
+        
+        var sectionMemberSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let memberFooterItem = Item(from: .inviteMember)
+        sectionMemberSnapshot.append([memberFooterItem])
+        dataSource.apply(sectionMemberSnapshot, to: .member)
+    }
+    
+    private func configureChannelSnapshot(for channels: [Channel]) {
+        var sectionChannelSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let channelHeaderItem = Item(from: .channel)
+        let channelFooterItem = Item(from: .addChannel)
+        sectionChannelSnapshot.append([channelHeaderItem])
+        
+        sectionChannelSnapshot.append(channels.map { Item(from: $0) } + [channelFooterItem], to: channelHeaderItem)
+        sectionChannelSnapshot.expand([channelHeaderItem])
+        dataSource.apply(sectionChannelSnapshot, to: .channel)
+    }
+    
+    // TODO: DM 기능 개발 시 매개변수로 DM 배열을 넘기도록 함
+    private func configureDMSnapshot() {
+        var sectionDMSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let dmHeaderItem = Item(from: .directMessage)
+        let dmFooterItem = Item(from: .newMessage)
+        sectionDMSnapshot.append([dmHeaderItem])
+        
+        sectionDMSnapshot.append([dmFooterItem], to: dmHeaderItem)
+        sectionDMSnapshot.expand([dmHeaderItem])
+        dataSource.apply(sectionDMSnapshot, to: .directMessage)
     }
 }
 
