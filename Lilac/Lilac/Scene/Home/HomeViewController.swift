@@ -181,6 +181,7 @@ extension HomeViewController {
         let headerRegistration = createHeaderRegistration()
         let footerRegistration = createFooterRegistration()
         let channelCellRegistration = createChannelCellRegistration()
+        let dmCellRegistration = createDMCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<Header, Item>(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.type {
@@ -191,7 +192,7 @@ extension HomeViewController {
             case .channel:
                 return collectionView.dequeueConfiguredReusableCell(using: channelCellRegistration, for: indexPath, item: item)
             case .dm:
-                return collectionView.dequeueConfiguredReusableCell(using: channelCellRegistration, for: indexPath, item: item)
+                return collectionView.dequeueConfiguredReusableCell(using: dmCellRegistration, for: indexPath, item: item)
             }
         }
     }
