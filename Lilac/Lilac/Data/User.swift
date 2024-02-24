@@ -25,6 +25,7 @@ final class User {
     
     let profile = BehaviorRelay(value: MyProfile())
     let workspaces = BehaviorRelay(value: [Workspace]())
+    let lastVisited = BehaviorRelay(value: -1)
     
     var selectedWorkspace: Workspace? {
         guard lastVisitedWorkspaceId > 0 else { return nil }
@@ -77,13 +78,14 @@ final class User {
 
 extension User {
     private func manageLastVisitedWorkspace() {
-        guard _workspaces.firstIndex(where: { $0.workspaceId == lastVisitedWorkspaceId }) == nil else {
+        guard _workspaces.contains(where: { $0.workspaceId == lastVisitedWorkspaceId }) == false else {
+            lastVisited.accept(lastVisitedWorkspaceId)
             return
         }
         
         let sortedWorkspaces = _workspaces.sorted(by: { $0.createdAt > $1.createdAt })
         guard let latestCreatedWorkspace = sortedWorkspaces.first else { return }
         
-        lastVisitedWorkspaceId = latestCreatedWorkspace.workspaceId
+        visitWorkspace(id: latestCreatedWorkspace.workspaceId)
     }
 }
