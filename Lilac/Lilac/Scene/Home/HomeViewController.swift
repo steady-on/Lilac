@@ -116,7 +116,14 @@ final class HomeViewController: BaseViewController {
     }
 }
 
+// MARK: Related CollectionView
 extension HomeViewController {
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+    }
+    
     private func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, layoutEnvironment in
             var configuration = UICollectionLayoutListConfiguration(appearance: .sidebar)
@@ -142,15 +149,10 @@ extension HomeViewController {
     }
 }
 
+// MARK: Relataed DataSource
 extension HomeViewController {
-    private func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-    }
-    
-    private func configureDataSource() {
-        let headerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
+    private func createHeaderRegistration() ->  UICollectionView.CellRegistration<UICollectionViewListCell, String> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
             var content = cell.defaultContentConfiguration()
             content.text = item
             content.textProperties.font = .brandedFont(.title2)
@@ -159,22 +161,10 @@ extension HomeViewController {
             cell.accessories = [.outlineDisclosure(options: .init(style: .header, tintColor: .black))]
             cell.directionalLayoutMargins = .init(top: 12, leading: 16, bottom: 12, trailing: 16)
         }
-        
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
-            var content = cell.defaultContentConfiguration()
-            content.text = item.text
-            content.textProperties.font = .brandedFont(.body)
-            content.textProperties.color = .Text.secondary
-            
-            content.image = .Hashtag.thin
-            content.imageToTextPadding = 8
-            content.imageProperties.maximumSize = .init(width: 18, height: 18)
-
-            cell.contentConfiguration = content
-            cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
-        }
-        
-        let footerRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
+    }
+    
+    private func createFooterRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, String> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
             var content = cell.defaultContentConfiguration()
             content.text = item
             content.textProperties.font = .brandedFont(.body)
@@ -187,6 +177,28 @@ extension HomeViewController {
             cell.contentConfiguration = content
             cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
         }
+    }
+    
+    private func createCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, Item> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.text
+            content.textProperties.font = .brandedFont(.body)
+            content.textProperties.color = .Text.secondary
+            
+            content.image = .Hashtag.thin
+            content.imageToTextPadding = 8
+            content.imageProperties.maximumSize = .init(width: 18, height: 18)
+
+            cell.contentConfiguration = content
+            cell.directionalLayoutMargins = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
+        }
+    }
+    
+    private func configureDataSource() {
+        let headerRegistration = createHeaderRegistration()
+        let footerRegistration = createFooterRegistration()
+        let cellRegistration = createCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<Header, Item>(collectionView: collectionView) { collectionView, indexPath, item in
             switch item.type {
@@ -210,6 +222,7 @@ extension HomeViewController {
     }
 }
 
+// MARK: Related Setting Image
 extension HomeViewController {
     private func setProfileImage(for endPoint: String?) {
         let defaultImages: [UIImage] = [.Profile.noPhotoA, .Profile.noPhotoB, .Profile.noPhotoC]
@@ -233,6 +246,7 @@ extension HomeViewController {
     }
 }
 
+// MARK: Related KingFisher
 extension HomeViewController {
     private func configureKingFisherDefaultOptions() {
         @KeychainStorage(itemType: .accessToken) var accessToken
