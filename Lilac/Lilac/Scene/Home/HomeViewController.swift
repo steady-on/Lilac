@@ -50,11 +50,12 @@ final class HomeViewController: BaseViewController {
         
         sectionDMSnapshot.append([dmFooterItem], to: dmHeaderItem)
         sectionDMSnapshot.expand([dmHeaderItem])
-        
-        let memberFooterItem = Item(from: .inviteMember)
-        sectionDMSnapshot.append([memberFooterItem])
-        
         dataSource.apply(sectionDMSnapshot, to: .directMessage)
+        
+        var sectionMemberSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+        let memberFooterItem = Item(from: .inviteMember)
+        sectionMemberSnapshot.append([memberFooterItem])
+        dataSource.apply(sectionMemberSnapshot, to: .member)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,11 +119,22 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController {
     private func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, layoutEnvironment in
-            var config = UICollectionLayoutListConfiguration(appearance: .sidebar)
-            config.headerMode = .firstItemInSection
-            config.backgroundColor = .Background.secondary
+            var configuration = UICollectionLayoutListConfiguration(appearance: .sidebar)
+            configuration.headerMode = .firstItemInSection
+            configuration.backgroundColor = .Background.secondary
+            configuration.itemSeparatorHandler = { indexPath, listSeparatorConfiguration in
+                var configuration = listSeparatorConfiguration
+                
+                if indexPath.row == indexPath.startIndex {
+                    configuration.topSeparatorVisibility = .visible
+                    configuration.bottomSeparatorVisibility = .hidden
+                    configuration.topSeparatorInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+                }
+                
+                return configuration
+            }
             
-            let section = NSCollectionLayoutSection.list(using: config, layoutEnvironment: layoutEnvironment)
+            let section = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
             section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
             
             return section
@@ -258,11 +270,13 @@ extension HomeViewController {
     enum Section: Int, CaseIterable {
         case channel
         case directMessage
+        case member
         
         var title: String {
             switch self {
             case .channel: return "채널"
             case .directMessage: return "다이렉트 메시지"
+            case .member: return ""
             }
         }
     }
