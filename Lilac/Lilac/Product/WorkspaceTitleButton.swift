@@ -33,6 +33,8 @@ final class WorkspaceTitleButton: UIButton {
         
         imageView?.layer.cornerRadius = 8
         imageView?.backgroundColor = .accent
+        imageView?.clipsToBounds = true
+        imageView?.contentMode = .scaleAspectFill
     }
     
     func setWorkspace(for name: String, thumbnail: UIImage?) {
