@@ -42,7 +42,6 @@ extension EntryViewModel: ViewModel {
         
         let isTokenRefresh = PublishRelay<Void>()
         let isLoadedProfile = PublishRelay<Void>()
-        let isLoadedWorkspaces = PublishRelay<Void>()
         
         guard isFirst == false else {
             refreshToken = nil
@@ -111,31 +110,6 @@ extension EntryViewModel: ViewModel {
                 switch result {
                 case .success(let workspaces):
                     User.shared.fetch(for: workspaces)
-                    isLoadedWorkspaces.accept(())
-                case .failure(_):
-                    goToOnboarding.accept(true)
-                }
-            } onError: { _ in
-                goToOnboarding.accept(true)
-            }
-            .disposed(by: disposeBag)
-        
-        isLoadedWorkspaces
-            .filter { [unowned self] _ in
-                guard lastVisitedWorkspaceId > 0 else {
-                    goToHome.accept(())
-                    return false
-                }
-                
-                return true
-            }
-            .flatMap { [unowned self] _ in
-                lilacWorkspaceService.loadSpecified(id: lastVisitedWorkspaceId)
-            }
-            .subscribe { result in
-                switch result {
-                case .success(let workspace):
-                    User.shared.updateWorkspaceDetail(for: workspace)
                     goToHome.accept(())
                 case .failure(_):
                     goToOnboarding.accept(true)
