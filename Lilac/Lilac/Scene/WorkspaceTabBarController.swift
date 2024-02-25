@@ -9,7 +9,7 @@ import UIKit
 
 final class WorkspaceTabBarController: UITabBarController {
     
-    private let home = HomeViewController()
+    private let home = HomeViewController(viewModel: HomeViewModel())
     private let directMessage = DirectMessageViewController()
     private let search = SearchViewController()
     private let settings = SettingsViewController()

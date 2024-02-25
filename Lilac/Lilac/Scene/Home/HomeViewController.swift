@@ -12,6 +12,13 @@ import Kingfisher
 
 final class HomeViewController: BaseViewController {
     
+    private let viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
     private let disposeBag = DisposeBag()
     
     private let workspaceTitleButton = WorkspaceTitleButton()
@@ -65,8 +72,6 @@ final class HomeViewController: BaseViewController {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
-        
-        setWorkspaceTitleButton()
     }
     
     override func bind() {
@@ -74,6 +79,17 @@ final class HomeViewController: BaseViewController {
             .asDriver()
             .drive(with: self) { owner, profile in
                 owner.setProfileImage(for: profile.profileImage)
+            }
+            .disposed(by: disposeBag)
+        
+        let input = HomeViewModel.Input()
+        
+        let output = viewModel.transform(input: input)
+        
+        output.selectedWorkspace
+            .subscribe(with: self) { owner, workspace in
+                owner.setWorkspaceTitleButton(for: workspace.name, thumbnail: workspace.thumbnail)
+                owner.configureChannelSnapshot(for: workspace.channels)
             }
             .disposed(by: disposeBag)
     }
@@ -211,13 +227,15 @@ extension HomeViewController {
         dataSource.apply(sectionMemberSnapshot, to: .member)
     }
     
-    private func configureChannelSnapshot(for channels: [Channel]) {
+    private func configureChannelSnapshot(for channels: [Channel]?) {
+        let channels = channels?.map({ Item(from: $0) }) ?? []
+        
         var sectionChannelSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
         let channelHeaderItem = Item(from: .channel)
         let channelFooterItem = Item(from: .addChannel)
         sectionChannelSnapshot.append([channelHeaderItem])
         
-        sectionChannelSnapshot.append(channels.map { Item(from: $0) } + [channelFooterItem], to: channelHeaderItem)
+        sectionChannelSnapshot.append(channels + [channelFooterItem], to: channelHeaderItem)
         sectionChannelSnapshot.expand([channelHeaderItem])
         dataSource.apply(sectionChannelSnapshot, to: .channel)
     }
@@ -264,11 +282,9 @@ extension HomeViewController {
         }
     }
     
-    private func setWorkspaceTitleButton() {
-        guard let workspace = User.shared.selectedWorkspace else { return }
-        
-        loadServerImage(to: workspace.thumbnail) { [unowned self] image in
-            workspaceTitleButton.setWorkspace(for: workspace.name, thumbnail: image)
+    private func setWorkspaceTitleButton(for name: String, thumbnail: String) {
+        loadServerImage(to: thumbnail) { [unowned self] image in
+            workspaceTitleButton.setWorkspace(for: name, thumbnail: image)
         }
     }
 }
