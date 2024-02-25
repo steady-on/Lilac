@@ -30,6 +30,10 @@ final class WorkspaceTabBarController: UITabBarController {
         }
         
         setViewControllers(viewControllers, animated: true)
+        
+        let barAppearance = UITabBarAppearance()
+        barAppearance.backgroundColor = .Background.secondary
+        tabBar.scrollEdgeAppearance = barAppearance
     }
 }
 
