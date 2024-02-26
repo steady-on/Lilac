@@ -39,6 +39,6 @@ protocol WorkspaceService: AnyObject {
     /// 워크스페이스에 속한 모든 멤버 조회
     func loadAllMembers(id: Int) -> Single<Result<[Responder.Workspace.Member], Error>>
     
-    /// 워크스페이스에 속한 특정 멤버 조회    
+    /// 워크스페이스에 속한 특정 멤버 조회
     func loadAnyMember(id: Int) -> Single<Result<Responder.Workspace.Member, Error>>
 }
