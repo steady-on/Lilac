@@ -47,7 +47,7 @@ extension AuthInterceptor: RequestInterceptor {
             return
         }
         
-        let refreshResponse = LilacAuthService.shared.refreshAccessToken()
+        let refreshResponse = AuthServiceImpl.shared.refreshAccessToken()
         
         refreshResponse
             .subscribe(with: self) { owner, result in
