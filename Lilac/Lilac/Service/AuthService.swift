@@ -9,5 +9,6 @@ import Foundation
 import RxSwift
 
 protocol AuthService: AnyObject {
+    /// 토큰 갱신
     func refreshAccessToken() -> Single<Result<Responder.Auth.TokenRefresh, Error>>
 }
