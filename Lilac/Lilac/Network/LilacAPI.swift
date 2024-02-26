@@ -51,4 +51,19 @@ enum LilacAPI {
             case load(userId: Int)
         }
     }
+    
+    enum Channel {
+        case create(workspaceId: Int, name: String, description: String)
+        case loadAll(workspaceId: Int)
+        case loadBelongTo(workspceId: Int)
+        case load(workspaceId: Int, channelName: String)
+        case update(workspaceId: Int, channelName: String, name: String?, description: String?)
+        case delete(workspaceId: Int, channelName: String)
+        case sendChatting(workspaceId: Int, channelName: String, content: Data, files: [Data]?)
+        case loadChatting(workspaceId: Int, channelName: String, cursorDate: Date?)
+        case countUnreads(workspaceId: Int, channelName: String, after: Date?)
+        case member(workspaceId: Int, channelName: String)
+        case leave(workspaceId: Int, channelName: String)
+        case changeAdmin(workspaceId: Int, channelName: String, userId: Int)
+    }
 }
