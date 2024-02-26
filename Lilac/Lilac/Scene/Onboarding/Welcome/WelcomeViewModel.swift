@@ -16,7 +16,7 @@ final class WelcomeViewModel {
     
     var disposeBag = DisposeBag()
     
-    private lazy var lilacWorkspaceService = LilacWorkspaceService()
+    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
 }
 
 extension WelcomeViewModel: ViewModel {

@@ -19,7 +19,7 @@ final class AuthViewModel {
     
     private lazy var kakaoLoginService = KakaoLoginServiceImpl()
     private lazy var lilacUserService = UserServiceImpl()
-    private lazy var lilacWorkspaceService = LilacWorkspaceService()
+    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
     
     private func kakaoLogin() -> Observable<Result<Responder.User.ProfileWithToken, Error>> {
         return kakaoLoginService.kakaoLogin()

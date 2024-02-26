@@ -17,7 +17,7 @@ final class LoginViewModel {
     var disposeBag = DisposeBag()
     
     private lazy var lilacUserService = UserServiceImpl()
-    private lazy var lilacWorkspaceService = LilacWorkspaceService()
+    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
 }
 
 extension LoginViewModel: ViewModel {

@@ -23,7 +23,7 @@ final class EntryViewModel {
     
     private lazy var lilacAuthService = AuthServiceImpl.shared
     private lazy var lilacUserService = UserServiceImpl()
-    private lazy var lilacWorkspaceService = LilacWorkspaceService()
+    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
     
     var disposeBag = DisposeBag()
 }

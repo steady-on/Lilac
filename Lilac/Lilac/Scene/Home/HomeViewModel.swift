@@ -12,7 +12,7 @@ import RxCocoa
 final class HomeViewModel {
     var disposeBag = DisposeBag()
     
-    private lazy var lilacWorkspaceService = LilacWorkspaceService()
+    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
 }
 
 extension HomeViewModel: ViewModel {
