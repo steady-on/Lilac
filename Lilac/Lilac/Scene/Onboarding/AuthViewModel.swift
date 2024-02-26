@@ -17,7 +17,7 @@ final class AuthViewModel {
     
     var disposeBag = DisposeBag()
     
-    private lazy var kakaoLoginService = KakaoLoginService()
+    private lazy var kakaoLoginService = KakaoLoginServiceImpl()
     private lazy var lilacUserService = UserServiceImpl()
     private lazy var lilacWorkspaceService = LilacWorkspaceService()
     

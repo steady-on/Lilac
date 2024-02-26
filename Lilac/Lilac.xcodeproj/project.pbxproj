@@ -50,7 +50,7 @@
 		633190BD2B51B818005289E1 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190BC2B51B818005289E1 /* AuthViewController.swift */; };
 		633190CF2B53DBEA005289E1 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 633190CE2B53DBEA005289E1 /* RxKakaoSDKUser */; };
 		633190D12B53DEF0005289E1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D02B53DEF0005289E1 /* AuthViewModel.swift */; };
-		633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D52B550CD3005289E1 /* KakaoLoginService.swift */; };
+		633190D62B550CD3005289E1 /* KakaoLoginServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D52B550CD3005289E1 /* KakaoLoginServiceImpl.swift */; };
 		633190DA2B550EAF005289E1 /* UserServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190D92B550EAF005289E1 /* UserServiceImpl.swift */; };
 		633190DD2B552180005289E1 /* UserDefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DC2B552180005289E1 /* UserDefaultItem.swift */; };
 		633190E02B5530B9005289E1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633190DF2B5530B9005289E1 /* ViewModel.swift */; };
@@ -129,7 +129,7 @@
 		633190B92B5069A8005289E1 /* FilledColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledColorButton.swift; sourceTree = "<group>"; };
 		633190BC2B51B818005289E1 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		633190D02B53DEF0005289E1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		633190D52B550CD3005289E1 /* KakaoLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginService.swift; sourceTree = "<group>"; };
+		633190D52B550CD3005289E1 /* KakaoLoginServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginServiceImpl.swift; sourceTree = "<group>"; };
 		633190D92B550EAF005289E1 /* UserServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceImpl.swift; sourceTree = "<group>"; };
 		633190DC2B552180005289E1 /* UserDefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultItem.swift; sourceTree = "<group>"; };
 		633190DF2B5530B9005289E1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -351,7 +351,7 @@
 		633190D22B550CAD005289E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				633190D52B550CD3005289E1 /* KakaoLoginService.swift */,
+				633190D52B550CD3005289E1 /* KakaoLoginServiceImpl.swift */,
 				638CBF522B610D8E00778283 /* LilacAuthService.swift */,
 				63513EB82B8C8D2E00F1E460 /* UserService.swift */,
 				633190D92B550EAF005289E1 /* UserServiceImpl.swift */,
@@ -547,7 +547,7 @@
 				633190DA2B550EAF005289E1 /* UserServiceImpl.swift in Sources */,
 				638CBF492B60D7DC00778283 /* Workspace + TargetType.swift in Sources */,
 				6317EE882B480D20007662A5 /* APIKey.swift in Sources */,
-				633190D62B550CD3005289E1 /* KakaoLoginService.swift in Sources */,
+				633190D62B550CD3005289E1 /* KakaoLoginServiceImpl.swift in Sources */,
 				6317EEAA2B4ABF34007662A5 /* NetworkingError.swift in Sources */,
 				6317EEB12B4AD89C007662A5 /* BaseTableViewCell.swift in Sources */,
 				638CBF512B610B2C00778283 /* AuthInterceptor.swift in Sources */,

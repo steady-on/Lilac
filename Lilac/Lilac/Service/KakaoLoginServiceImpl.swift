@@ -1,5 +1,5 @@
 //
-//  KakaoLoginService.swift
+//  KakaoLoginServiceImpl.swift
 //  Lilac
 //
 //  Created by Roen White on 1/15/24.
@@ -10,7 +10,7 @@ import RxSwift
 import KakaoSDKUser
 import RxKakaoSDKUser
 
-final class KakaoLoginService {
+final class KakaoLoginServiceImpl {
     deinit {
         print("deinit KakaoLoginService")
     }
