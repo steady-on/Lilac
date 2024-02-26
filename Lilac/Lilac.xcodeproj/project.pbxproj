@@ -73,6 +73,7 @@
 		63513EB92B8C8D2E00F1E460 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EB82B8C8D2E00F1E460 /* UserService.swift */; };
 		63513EBB2B8C9BF200F1E460 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EBA2B8C9BF200F1E460 /* AuthService.swift */; };
 		63513EBD2B8C9D2000F1E460 /* WorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EBC2B8C9D1F00F1E460 /* WorkspaceService.swift */; };
+		63513EBF2B8CDBA400F1E460 /* ChannelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EBE2B8CDBA400F1E460 /* ChannelService.swift */; };
 		6353148C2B87131F0014AC3C /* WorkspaceTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */; };
 		635314912B872DB10014AC3C /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635314902B872DB10014AC3C /* ProfileButton.swift */; };
 		635314932B87375C0014AC3C /* HomeEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635314922B87375C0014AC3C /* HomeEmptyViewController.swift */; };
@@ -153,6 +154,7 @@
 		63513EB82B8C8D2E00F1E460 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		63513EBA2B8C9BF200F1E460 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		63513EBC2B8C9D1F00F1E460 /* WorkspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceService.swift; sourceTree = "<group>"; };
+		63513EBE2B8CDBA400F1E460 /* ChannelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelService.swift; sourceTree = "<group>"; };
 		6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTitleButton.swift; sourceTree = "<group>"; };
 		635314902B872DB10014AC3C /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		635314922B87375C0014AC3C /* HomeEmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyViewController.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				633190D92B550EAF005289E1 /* UserServiceImpl.swift */,
 				63513EBC2B8C9D1F00F1E460 /* WorkspaceService.swift */,
 				638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */,
+				63513EBE2B8CDBA400F1E460 /* ChannelService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				6317EECA2B4BF370007662A5 /* ToastAlert.swift in Sources */,
 				635314932B87375C0014AC3C /* HomeEmptyViewController.swift in Sources */,
 				631D75082B7E65EE002F4279 /* MyProfile.swift in Sources */,
+				63513EBF2B8CDBA400F1E460 /* ChannelService.swift in Sources */,
 				63513EB22B8C767400F1E460 /* Channel + TargetType.swift in Sources */,
 				63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */,
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,

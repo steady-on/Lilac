@@ -169,9 +169,10 @@ enum Responder {
             let ownerId: Int
             let isPrivate: Bool
             let createdAt: Date
+            let channelMembers: [Member]?
             
             enum CodingKeys: String, CodingKey {
-                case workspaceId, channelId, name, description, ownerId, createdAt
+                case workspaceId, channelId, name, description, ownerId, createdAt, channelMembers
                 case isPrivate = "private"
             }
             
@@ -188,10 +189,51 @@ enum Responder {
                 
                 let isPrivate = try container.decode(Int.self, forKey: .isPrivate)
                 self.isPrivate = isPrivate == 1
+                
+                self.channelMembers = try container.decodeIfPresent([Member].self, forKey: .channelMembers)
             }
         }
         
         // workspace member invite, load
+        struct Member: Decodable {
+            let userId: Int
+            let email: String
+            let nickname: String
+            let profileImage: String?
+        }
+    }
+    
+    enum Chatting {
+        /// 채널의 채팅
+        /// Be returned Channel.sendChatting
+        struct Channel {
+            /// 채널 아이디
+            let channelId: Int
+            /// 채널명
+            let channelName: String
+            /// 채팅 ID
+            let chatId: Int
+            /// 채팅 내용; 빈값 가능
+            let content: String?
+            /// 채팅 생성 날짜
+            let createdAt: Date
+            /// 채팅에 보낸 파일들; 파일이 없는 경우 빈 배열 not null
+            let files: [String]
+            /// 채팅을 보낸 유저의 계정 정보
+            let user: Member
+        }
+        
+        /// 채널의 읽지 않은 채팅 개수
+        /// Be returned Channel.countUnreads
+        struct CountOfUnreadChannelMessage {
+            /// 채널 아이디
+            let channelId: Int
+            /// 채널명
+            let name: String
+            /// 특정 날짜 기준으로 쌓인 채팅개수
+            let count: Int
+        }
+        
         struct Member: Decodable {
             let userId: Int
             let email: String
@@ -215,8 +257,4 @@ extension Responder.User {
         case kakao
         case apple
     }
-}
-
-extension Responder.Workspace {
-    
 }
