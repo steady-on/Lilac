@@ -256,7 +256,7 @@ enum Responder {
         
         /// Be returned single for case .sendChatting
         /// Be returned array for case .loadChatting
-        struct Chatting {
+        struct Chatting: Decodable {
             /// 채널 아이디
             let channelId: Int
             /// 채널명
@@ -275,7 +275,7 @@ enum Responder {
         
         /// 채널의 읽지 않은 채팅 개수
         /// Be returned .countUnreads
-        struct CountOfUnreadChannelMessage {
+        struct CountOfUnreadChannelMessage: Decodable {
             /// 채널 아이디
             let channelId: Int
             /// 채널명
