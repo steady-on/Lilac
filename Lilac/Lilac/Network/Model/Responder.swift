@@ -8,21 +8,23 @@
 import Foundation
 
 enum Responder {
+    /// responder for LilacAPI.Auth
     enum Auth {
-        // auth/refresh
+        /// Be returned .refresh
         struct TokenRefresh: Decodable {
             let accessToken: String
         }
     }
     
+    /// responder for LilacAPI.User
     enum User {
-        // v1/users/login
+        /// Be returned .login(.email)
         struct SimpleProfileWithToken: Decodable {
             let userId: Int
             let nickname, accessToken, refreshToken: String
         }
         
-        // users/login/kakao, apple, users/signUp
+        /// Be returned .login(.kakao, .apple), .signUp
         struct ProfileWithToken: Decodable {
             let userId: Int
             let email, nickname: String
@@ -58,7 +60,7 @@ enum Responder {
             }
         }
         
-        // users/my
+        /// Be returned .myProfile
         struct MyProfile: Decodable {
             let userId: Int
             let email, nickname: String
@@ -94,7 +96,7 @@ enum Responder {
             }
         }
         
-        // users/{id}
+        /// Be returned .otherUserProfile
         struct UserProfile: Decodable {
             let userId: Int
             let email, nickname: String
@@ -122,8 +124,10 @@ enum Responder {
         }
     }
     
+    /// responder for LilacAPI.Workspace
     enum Workspace {
-        // workspace create, load, update, search, leave, admin
+        /// Be returned single for case .create, .load, .update, .search, .leave, admin
+        /// Be returned array for case .loadAll, .leave
         struct Workspace: Decodable {
             let workspaceId: Int
             let name: String
@@ -194,7 +198,8 @@ enum Responder {
             }
         }
         
-        // workspace member invite, load
+        /// Be returned single for case .member(.invite, .load)
+        /// Be returned array for case .member(.loadAll)
         struct Member: Decodable {
             let userId: Int
             let email: String
@@ -203,10 +208,55 @@ enum Responder {
         }
     }
     
-    enum Chatting {
-        /// 채널의 채팅
-        /// Be returned Channel.sendChatting
-        struct Channel {
+    /// responder for LilacAPI.Channel
+    enum Channel {
+        /// Be returned single for case .create, .update, .changeAdmin
+        /// Be returned array for case .loadAll, .loadBelongTo, .leave
+        /// Be returned with members for case .load
+        struct Channel: Decodable {
+            let workspaceId: Int
+            let channelId: Int
+            let name: String
+            let description: String?
+            let ownerId: Int
+            let isPrivate: Bool
+            let createdAt: Date
+            let channelMembers: [Member]?
+            
+            enum CodingKeys: String, CodingKey {
+                case workspaceId, channelId, name, description, ownerId, createdAt, channelMembers
+                case isPrivate = "private"
+            }
+            
+            init(from decoder: Decoder) throws {
+                let container: KeyedDecodingContainer<Responder.Workspace.Channel.CodingKeys> = try decoder.container(keyedBy: Responder.Workspace.Channel.CodingKeys.self)
+                self.workspaceId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.workspaceId)
+                self.channelId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.channelId)
+                self.name = try container.decode(String.self, forKey: Responder.Workspace.Channel.CodingKeys.name)
+                self.description = try container.decodeIfPresent(String.self, forKey: Responder.Workspace.Channel.CodingKeys.description)
+                self.ownerId = try container.decode(Int.self, forKey: Responder.Workspace.Channel.CodingKeys.ownerId)
+                
+                let createdAt = try container.decode(String.self, forKey: .createdAt)
+                self.createdAt = createdAt.convertedDate
+                
+                let isPrivate = try container.decode(Int.self, forKey: .isPrivate)
+                self.isPrivate = isPrivate == 1
+                
+                self.channelMembers = try container.decodeIfPresent([Member].self, forKey: .channelMembers)
+            }
+        }
+        
+        /// Be returned array for case .loadAllMembers
+        struct Member: Decodable {
+            let userId: Int
+            let email: String
+            let nickname: String
+            let profileImage: String?
+        }
+        
+        /// Be returned single for case .sendChatting
+        /// Be returned array for case .loadChatting
+        struct Chatting {
             /// 채널 아이디
             let channelId: Int
             /// 채널명
@@ -224,7 +274,7 @@ enum Responder {
         }
         
         /// 채널의 읽지 않은 채팅 개수
-        /// Be returned Channel.countUnreads
+        /// Be returned .countUnreads
         struct CountOfUnreadChannelMessage {
             /// 채널 아이디
             let channelId: Int
@@ -232,13 +282,6 @@ enum Responder {
             let name: String
             /// 특정 날짜 기준으로 쌓인 채팅개수
             let count: Int
-        }
-        
-        struct Member: Decodable {
-            let userId: Int
-            let email: String
-            let nickname: String
-            let profileImage: String?
         }
     }
 
