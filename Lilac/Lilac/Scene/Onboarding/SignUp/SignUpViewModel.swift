@@ -16,7 +16,7 @@ final class SignUpViewModel {
     
     var disposeBag = DisposeBag()
         
-    private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacUserService = UserServiceImpl()
 }
 
 extension SignUpViewModel: ViewModel {

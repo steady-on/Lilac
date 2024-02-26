@@ -18,7 +18,7 @@ final class AuthViewModel {
     var disposeBag = DisposeBag()
     
     private lazy var kakaoLoginService = KakaoLoginService()
-    private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacUserService = UserServiceImpl()
     private lazy var lilacWorkspaceService = LilacWorkspaceService()
     
     private func kakaoLogin() -> Observable<Result<Responder.User.ProfileWithToken, Error>> {

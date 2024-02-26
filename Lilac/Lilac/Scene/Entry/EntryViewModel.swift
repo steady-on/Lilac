@@ -22,7 +22,7 @@ final class EntryViewModel {
     @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) var lastVisitedWorkspaceId
     
     private lazy var lilacAuthService = LilacAuthService.shared
-    private lazy var lilacUserService = LilacUserService()
+    private lazy var lilacUserService = UserServiceImpl()
     private lazy var lilacWorkspaceService = LilacWorkspaceService()
     
     var disposeBag = DisposeBag()
