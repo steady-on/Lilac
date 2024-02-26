@@ -275,7 +275,7 @@ enum Responder {
         
         /// 채널의 읽지 않은 채팅 개수
         /// Be returned .countUnreads
-        struct CountOfUnreadChannelMessage: Decodable {
+        struct CountOfUnread: Decodable {
             /// 채널 아이디
             let channelId: Int
             /// 채널명

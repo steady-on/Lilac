@@ -34,7 +34,7 @@ protocol ChannelService: AnyObject {
     func loadChatting(workspaceId: Int, channelName: String, cursorDate: String?) -> Single<Result<[Responder.Channel.Chatting], Error>>
     
     /// 읽지 않은 채널 채팅 개수; cursorDate가 nil이면 count가 0으로 반환됨
-    func countUnreads(workspaceId: Int, channelName: String, after: String?) -> Single<Result<Responder.Channel.CountOfUnreadChannelMessage, Error>>
+    func countUnreads(workspaceId: Int, channelName: String, after: String?) -> Single<Result<Responder.Channel.CountOfUnread, Error>>
     
     /// 채널 멤버 조회
     func loadAllMembers(workspaceId: Int, channelName: String) -> Single<Result<[Responder.Channel.Member], Error>>
