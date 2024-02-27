@@ -9,40 +9,40 @@ import Foundation
 import RealmSwift
 
 struct RealmRepository<T: Object> {
-    private let realm = try? Realm()
-    
-    func create(_ item: T) throws {
-        guard let realm else { throw RealmError.failToInitialized }
-        
+    private var realm: Realm? {
         do {
-            try realm.write { realm.add(item) }
+            return try Realm()
         } catch {
-            throw RealmError.failToCreate
+            print("Realm initialized Error!")
+            return nil
         }
     }
     
-    func read() throws -> Results<T> {
-        guard let realm else { throw RealmError.failToInitialized }
-        return realm.objects(T.self)
-    }
-    
-    func update(completion: @escaping () -> Void) throws {
-        guard let realm else { throw RealmError.failToInitialized }
-        
+    func create(_ item: T) {
         do {
-            try realm.write { completion() }
+            try realm?.write { realm!.add(item) }
         } catch {
-            throw RealmError.failToUpdate
+            print("Realm Create Error:", error)
         }
     }
     
-    func delete(_ item: T) throws {
-        guard let realm else { throw RealmError.failToInitialized }
-        
+    func read() -> Results<T>? {
+        return realm?.objects(T.self)
+    }
+    
+    func update(completion: @escaping () -> Void) {
         do {
-            try realm.write { realm.delete(item) }
+            try realm?.write { completion() }
         } catch {
-            throw RealmError.failToDelete
+            print("Realm Update Error:", error)
+        }
+    }
+    
+    func delete(_ item: T) {
+        do {
+            try realm?.write { realm!.delete(item) }
+        } catch {
+            print("Realm Delete Error:", error)
         }
     }
 }
