@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
-final class RealmRepository {
+final class RealmRepository<T: Object> {
     private let realm = try? Realm()
     
-    func create<T: Object>(_ item: T) throws {
+    func create(_ item: T) throws {
         guard let realm else { throw RealmError.failToInitialized }
         
         do {
@@ -21,11 +21,9 @@ final class RealmRepository {
         }
     }
     
-    func read<T: Object>(for type: T.Type) throws -> Results<T> {
+    func read() throws -> Results<T> {
         guard let realm else { throw RealmError.failToInitialized }
-        let results = realm.objects(type.self)
-        
-        return realm.objects(type.self)
+        return realm.objects(T.self)
     }
     
     func update(completion: @escaping () -> Void) throws {
@@ -38,13 +36,11 @@ final class RealmRepository {
         }
     }
     
-    func delete<T: Object>(_ item: T) throws {
+    func delete(_ item: T) throws {
         guard let realm else { throw RealmError.failToInitialized }
         
         do {
-            try realm.write {
-                realm.delete(item)
-            }
+            try realm.write { realm.delete(item) }
         } catch {
             throw RealmError.failToDelete
         }
