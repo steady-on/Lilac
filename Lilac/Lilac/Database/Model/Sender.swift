@@ -15,6 +15,8 @@ final class Sender: EmbeddedObject {
     @Persisted var profileImage: String?
     
     convenience init(from member: Responder.Channel.Member) {
+        self.init()
+        
         self.userId = member.userId
         self.email = member.email
         self.nickname = member.nickname
