@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class RealmRepository<T: Object> {
+struct RealmRepository<T: Object> {
     private let realm = try? Realm()
     
     func create(_ item: T) throws {
