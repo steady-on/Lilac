@@ -82,6 +82,7 @@
 		63513ECE2B8DBDD000F1E460 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513ECD2B8DBDD000F1E460 /* RealmRepository.swift */; };
 		63513ED02B8DD26A00F1E460 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513ECF2B8DD26A00F1E460 /* RealmError.swift */; };
 		63513EDB2B8DF27600F1E460 /* ChannelChattingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EDA2B8DF27600F1E460 /* ChannelChattingService.swift */; };
+		63513EDF2B8E524D00F1E460 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EDE2B8E524D00F1E460 /* ChannelViewController.swift */; };
 		63513EE12B8E537600F1E460 /* ChannelTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EE02B8E537600F1E460 /* ChannelTitleView.swift */; };
 		63513EE32B8E5FEC00F1E460 /* ChattingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63513EE22B8E5FEC00F1E460 /* ChattingTextField.swift */; };
 		6353148C2B87131F0014AC3C /* WorkspaceTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */; };
@@ -171,6 +172,7 @@
 		63513ECD2B8DBDD000F1E460 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		63513ECF2B8DD26A00F1E460 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		63513EDA2B8DF27600F1E460 /* ChannelChattingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelChattingService.swift; sourceTree = "<group>"; };
+		63513EDE2B8E524D00F1E460 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		63513EE02B8E537600F1E460 /* ChannelTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTitleView.swift; sourceTree = "<group>"; };
 		63513EE22B8E5FEC00F1E460 /* ChattingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTextField.swift; sourceTree = "<group>"; };
 		6353148B2B87131F0014AC3C /* WorkspaceTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTitleButton.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				633190B62B5064AE005289E1 /* Onboarding */,
 				631D75252B82F6F9002F4279 /* WorkSpace */,
 				635314882B87101D0014AC3C /* Home */,
+				63513EDC2B8E521C00F1E460 /* Chennel */,
 				631D751D2B82EFE9002F4279 /* DirectMessageViewController.swift */,
 				631D751F2B82F00B002F4279 /* SearchViewController.swift */,
 				631D75222B82F028002F4279 /* SettingsViewController.swift */,
@@ -548,6 +551,14 @@
 				63513EDA2B8DF27600F1E460 /* ChannelChattingService.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		63513EDC2B8E521C00F1E460 /* Chennel */ = {
+			isa = PBXGroup;
+			children = (
+				63513EDE2B8E524D00F1E460 /* ChannelViewController.swift */,
+			);
+			path = Chennel;
 			sourceTree = "<group>";
 		};
 		635314882B87101D0014AC3C /* Home */ = {
