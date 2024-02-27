@@ -19,6 +19,16 @@ enum LilacAPIError: String, Error {
     case unknownedRoutePath = "E97"
     case overCall = "E98"
     case serverError = "E99"
+    case notDefinedError
+    
+    init(for rawValue: String) {
+        guard let error = LilacAPIError.init(rawValue: rawValue) else {
+            self = .notDefinedError
+            return
+        }
+        
+        self = error
+    }
 }
 
 extension LilacAPIError: CustomDebugStringConvertible {
@@ -46,6 +56,8 @@ extension LilacAPIError: CustomDebugStringConvertible {
             return "과호출 입니다."
         case .serverError:
             return "내부 서버에 오류가 있습니다."
+        case .notDefinedError:
+            return "정의되지 않은 오류입니다."
         }
     }
 }
