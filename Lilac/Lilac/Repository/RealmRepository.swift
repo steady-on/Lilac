@@ -18,6 +18,7 @@ struct RealmRepository<T: Object> {
         }
     }
     
+    /// realm에 item 생성 후 저장
     func create(_ item: T) {
         do {
             try realm?.write { realm!.add(item) }
@@ -26,10 +27,12 @@ struct RealmRepository<T: Object> {
         }
     }
     
-    func read() -> Results<T>? {
-        return realm?.objects(T.self)
+    /// realm table 불러오기
+    func read() -> Results<T> {
+        return realm!.objects(T.self)
     }
     
+    /// item 수정
     func update(completion: @escaping () -> Void) {
         do {
             try realm?.write { completion() }
@@ -38,9 +41,19 @@ struct RealmRepository<T: Object> {
         }
     }
     
+    /// item 삭제
     func delete(_ item: T) {
         do {
             try realm?.write { realm!.delete(item) }
+        } catch {
+            print("Realm Delete Error:", error)
+        }
+    }
+    
+    /// 여러 item 삭제
+    func delete(_ items: Results<T>) {
+        do {
+            try realm?.write { realm!.delete(items) }
         } catch {
             print("Realm Delete Error:", error)
         }

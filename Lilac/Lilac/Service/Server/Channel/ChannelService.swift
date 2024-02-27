@@ -30,7 +30,7 @@ protocol ChannelService: AnyObject {
     /// 채널에 채팅 보내기
     func sendChatting(workspaceId: Int, channelName: String, content: Data?, files: [Data]?) -> Single<Result<Responder.Channel.Chatting, Error>>
     
-    /// 채널 채팅 조회; cursorDate가 nil이며 해당 채널 전체 채팅 데이터를 가져옴
+    /// 채널 채팅 조회; cursorDate가 nil이면 해당 채널 전체 채팅 데이터를 가져옴
     func loadChatting(workspaceId: Int, channelName: String, cursorDate: String?) -> Single<Result<[Responder.Channel.Chatting], Error>>
     
     /// 읽지 않은 채널 채팅 개수; cursorDate가 nil이면 count가 0으로 반환됨
