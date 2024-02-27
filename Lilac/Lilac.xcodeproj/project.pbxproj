@@ -243,11 +243,10 @@
 				6317EE872B480D20007662A5 /* APIKey.swift */,
 				6317EE892B480D84007662A5 /* BaseURL.swift */,
 				6317EE932B487543007662A5 /* LilacAPI.swift */,
-				6317EEA32B4A93FE007662A5 /* LilacRepository.swift */,
 				638CBF502B610B2C00778283 /* AuthInterceptor.swift */,
+				6317EE9A2B487BE5007662A5 /* LilacAPIError.swift */,
 				6317EEA92B4ABF34007662A5 /* NetworkingError.swift */,
 				6317EE9C2B487DAF007662A5 /* TargetType */,
-				6317EE9A2B487BE5007662A5 /* LilacAPIError.swift */,
 				6317EE952B4877EF007662A5 /* Model */,
 			);
 			path = Network;
@@ -371,15 +370,8 @@
 		633190D22B550CAD005289E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				633190D52B550CD3005289E1 /* KakaoLoginServiceImpl.swift */,
-				63513EBA2B8C9BF200F1E460 /* AuthService.swift */,
-				638CBF522B610D8E00778283 /* AuthServiceImpl.swift */,
-				63513EB82B8C8D2E00F1E460 /* UserService.swift */,
-				633190D92B550EAF005289E1 /* UserServiceImpl.swift */,
-				63513EBC2B8C9D1F00F1E460 /* WorkspaceService.swift */,
-				638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */,
-				63513EBE2B8CDBA400F1E460 /* ChannelService.swift */,
-				63513EC02B8CF33200F1E460 /* ChannelServiceImpl.swift */,
+				63513ED22B8DF09B00F1E460 /* KakaoLogin */,
+				63513ED72B8DF0DB00F1E460 /* Server */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -446,6 +438,7 @@
 				6317EE6F2B470EAC007662A5 /* Product */,
 				6317EEAB2B4AD540007662A5 /* BaseUI */,
 				633190D22B550CAD005289E1 /* Service */,
+				63513ED82B8DF13800F1E460 /* Repository */,
 				63513EC22B8DA78000F1E460 /* Database */,
 				6317EE862B480D00007662A5 /* Network */,
 				633190DE2B5530AB005289E1 /* Protocol */,
@@ -461,7 +454,6 @@
 		63513EC22B8DA78000F1E460 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				63513ECD2B8DBDD000F1E460 /* RealmRepository.swift */,
 				63513ECF2B8DD26A00F1E460 /* RealmError.swift */,
 				63513EC82B8DA9AC00F1E460 /* Model */,
 			);
@@ -475,6 +467,70 @@
 				63513ECB2B8DACD400F1E460 /* Sender.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		63513ED22B8DF09B00F1E460 /* KakaoLogin */ = {
+			isa = PBXGroup;
+			children = (
+				633190D52B550CD3005289E1 /* KakaoLoginServiceImpl.swift */,
+			);
+			path = KakaoLogin;
+			sourceTree = "<group>";
+		};
+		63513ED32B8DF0AD00F1E460 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				63513EBA2B8C9BF200F1E460 /* AuthService.swift */,
+				638CBF522B610D8E00778283 /* AuthServiceImpl.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		63513ED42B8DF0B800F1E460 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				63513EB82B8C8D2E00F1E460 /* UserService.swift */,
+				633190D92B550EAF005289E1 /* UserServiceImpl.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		63513ED52B8DF0BF00F1E460 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				63513EBC2B8C9D1F00F1E460 /* WorkspaceService.swift */,
+				638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
+		63513ED62B8DF0CA00F1E460 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				63513EBE2B8CDBA400F1E460 /* ChannelService.swift */,
+				63513EC02B8CF33200F1E460 /* ChannelServiceImpl.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		63513ED72B8DF0DB00F1E460 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				63513ED32B8DF0AD00F1E460 /* Auth */,
+				63513ED42B8DF0B800F1E460 /* User */,
+				63513ED52B8DF0BF00F1E460 /* Workspace */,
+				63513ED62B8DF0CA00F1E460 /* Channel */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		63513ED82B8DF13800F1E460 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				6317EEA32B4A93FE007662A5 /* LilacRepository.swift */,
+				63513ECD2B8DBDD000F1E460 /* RealmRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		635314882B87101D0014AC3C /* Home */ = {
