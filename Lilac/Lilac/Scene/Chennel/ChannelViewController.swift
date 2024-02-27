@@ -9,14 +9,20 @@ import UIKit
 
 final class ChannelViewController: BaseViewController {
     
+    private let viewModel: ChannelViewModel
+    
+    init(viewModel: ChannelViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+    
     private let titleView = ChannelTitleView()
     
     private let chattingTextField = ChattingTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func configureHiararchy() {
