@@ -44,8 +44,9 @@ struct Channel: Hashable {
     let ownerId: Int
     let isPrivate: Bool
     let createdAt: Date
+    let channelMembers: [Member]?
     
-    init(workspaceId: Int, channelId: Int, name: String, description: String?, ownerId: Int, isPrivate: Bool, createdAt: Date) {
+    init(workspaceId: Int, channelId: Int, name: String, description: String?, ownerId: Int, isPrivate: Bool, createdAt: Date, channelMembers: [Member]?) {
         self.workspaceId = workspaceId
         self.channelId = channelId
         self.name = name
@@ -53,18 +54,21 @@ struct Channel: Hashable {
         self.ownerId = ownerId
         self.isPrivate = isPrivate
         self.createdAt = createdAt
+        self.channelMembers = channelMembers
     }
     
     init(from channel: Responder.Workspace.Channel) {
-        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
+        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt, channelMembers: nil)
     }
     
     init(from channel: Responder.Channel.Channel) {
-        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
+        let members = channel.channelMembers?.map { Member(from: $0) }
+        
+        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt, channelMembers: members)
     }
 }
 
-struct Member {
+struct Member: Hashable {
     let userId: Int
     let email: String
     let nickname: String
@@ -78,6 +82,10 @@ struct Member {
     }
     
     init(from member: Responder.Workspace.Member) {
+        self.init(userId: member.userId, email: member.email, nickname: member.nickname, profileImage: member.profileImage)
+    }
+    
+    init(from member: Responder.Channel.Member) {
         self.init(userId: member.userId, email: member.email, nickname: member.nickname, profileImage: member.profileImage)
     }
 }
