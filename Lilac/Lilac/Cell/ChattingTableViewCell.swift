@@ -140,12 +140,7 @@ extension ChattingTableViewCell {
         
         let mark = hour < 12 ? "오전" : "오후"
         
-        let hourString =
-        if hour < 10 { "0\(hour)" }
-        else if hour > 12 { "\(hour - 12)" }
-        else { "\(hour)"}
-        
-        let timeString = "\(mark) \(hourString):\(minute)"
+        let timeString = "\(mark) \(String(format: "%02d", hour)):\(String(format: "%02d", minute))"
 
         let dateString = if year != todayComponents.year {
             "\(year)/\(month)/\(day)\n"
