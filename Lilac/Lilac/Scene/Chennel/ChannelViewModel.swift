@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxRealm
 
 final class ChannelViewModel {
     private let channelId = BehaviorRelay(value: -1)
@@ -56,12 +57,12 @@ extension ChannelViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         let chattingHistory = channelId
-            .map { [unowned self] id in
-                let channelChattingResults = channelChattingService.loadChattingHistory(for: id)
-                return Array(channelChattingResults)
+            .flatMap { [unowned self] id in
+                let allChattingRecords = channelChattingService.loadChattingHistory(for: id)
+                return Observable.array(from: allChattingRecords)
             }
             .debug()
-        
+            
         chattingHistory
             .filter { $0.isEmpty }
             .flatMap { [unowned self] _ in
@@ -78,7 +79,24 @@ extension ChannelViewModel: ViewModel {
                 print("Error: ", error)
             }
             .disposed(by: disposeBag)
-
+        
+        chattingHistory
+            .filter { $0.isEmpty == false }
+            .map { $0.last!.createdAt.convertFormmtedString }
+            .flatMap { [unowned self] cursorDate in
+                channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: cursorDate)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let allChattingData):
+                    owner.channelChattingService.saveChattings(allChattingData)
+                case .failure(let failure):
+                    print("failure: ", failure)
+                }
+            } onError: { _, error in
+                print("Error: ", error)
+            }
+            .disposed(by: disposeBag)
         
         return Output(
             channel: channel
