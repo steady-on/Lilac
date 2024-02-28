@@ -32,6 +32,7 @@ final class ChannelViewController: BaseViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.showsHorizontalScrollIndicator = false
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     

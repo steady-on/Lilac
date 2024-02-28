@@ -54,6 +54,7 @@ final class ChattingTextField: UITextField {
     }
     
     private func configureTextField() {
+        delegate = self
         backgroundColor = .Background.primary
         layer.cornerRadius = 8
         
@@ -72,11 +73,35 @@ final class ChattingTextField: UITextField {
         
         rightView = sendButton
         rightViewMode = .always
+        
+        addTarget(self, action: #selector(textValueChanged), for: .allEditingEvents)
     }
 
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ChattingTextField: UITextFieldDelegate {
+    @objc private func textValueChanged() {
+        guard let text else { return }
+        
+        if text.isEmpty {
+            sendButton.setImage(.Icon.send, for: .normal)
+        } else {
+            sendButton.setImage(.Icon.sendActive, for: .normal)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text else { return }
+        let newText = text.trimmingCharacters(in: .whitespaces)
+        self.text = newText
+        
+        if newText.isEmpty {
+            sendButton.setImage(.Icon.send, for: .normal)
+        }
     }
 }
