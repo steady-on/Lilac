@@ -80,7 +80,6 @@ final class ChannelViewController: BaseViewController {
     }
     
     override func bind() {
-        
         let sendButtonTapped = chattingTextField.sendButton.rx.tap
         let chattingInputValue = chattingTextField.rx.text.orEmpty
         
