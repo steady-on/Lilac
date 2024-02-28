@@ -106,6 +106,7 @@
 		63A7FA562B8FD8D600A312D4 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA552B8FD8D600A312D4 /* WebSocketManager.swift */; };
 		63A7FA5A2B8FF1E800A312D4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA592B8FF1E800A312D4 /* FirebaseAnalytics */; };
 		63A7FA5C2B8FF1E800A312D4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA5B2B8FF1E800A312D4 /* FirebaseMessaging */; };
+		63A7FA5F2B8FF2F700A312D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63A7FA5E2B8FF2F700A312D4 /* GoogleService-Info.plist */; };
 		63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */; };
 		63C7C0402B89F7910081DFB6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -201,6 +202,7 @@
 		63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingContentLabel.swift; sourceTree = "<group>"; };
 		63A7FA552B8FD8D600A312D4 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		63A7FA5D2B8FF1FB00A312D4 /* Lilac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lilac.entitlements; sourceTree = "<group>"; };
+		63A7FA5E2B8FF2F700A312D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+.swift"; sourceTree = "<group>"; };
 		63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -483,6 +485,7 @@
 				633CB4672B46B6EA00448E9B /* Assets.xcassets */,
 				633CB4692B46B6EA00448E9B /* LaunchScreen.storyboard */,
 				633CB46C2B46B6EA00448E9B /* Info.plist */,
+				63A7FA5E2B8FF2F700A312D4 /* GoogleService-Info.plist */,
 			);
 			path = Lilac;
 			sourceTree = "<group>";
@@ -701,6 +704,7 @@
 			files = (
 				633CB46B2B46B6EA00448E9B /* LaunchScreen.storyboard in Resources */,
 				633CB4682B46B6EA00448E9B /* Assets.xcassets in Resources */,
+				63A7FA5F2B8FF2F700A312D4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
