@@ -15,7 +15,7 @@ final class ChannelChatting: Object {
     @Persisted var content: String?
     @Persisted var createdAt: Date
     @Persisted var files: List<String>
-    @Persisted var sender: Sender
+    @Persisted var sender: Sender!
     
     convenience init(from chatting: Responder.Channel.Chatting) {
         self.init()

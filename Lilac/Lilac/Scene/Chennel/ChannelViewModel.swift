@@ -54,8 +54,31 @@ extension ChannelViewModel: ViewModel {
                 print("Error: ", error)
             }
             .disposed(by: disposeBag)
-
         
+        let chattingHistory = channelId
+            .map { [unowned self] id in
+                let channelChattingResults = channelChattingService.loadChattingHistory(for: id)
+                return Array(channelChattingResults)
+            }
+            .debug()
+        
+        chattingHistory
+            .filter { $0.isEmpty }
+            .flatMap { [unowned self] _ in
+                channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: nil)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let allChattingData):
+                    owner.channelChattingService.saveChattings(allChattingData)
+                case .failure(let failure):
+                    print("failure: ", failure)
+                }
+            } onError: { _, error in
+                print("Error: ", error)
+            }
+            .disposed(by: disposeBag)
+
         
         return Output(
             channel: channel
