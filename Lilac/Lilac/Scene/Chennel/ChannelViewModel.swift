@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxRealm
+import RealmSwift
 
 final class ChannelViewModel {
     private let channelId = BehaviorRelay(value: -1)
@@ -34,6 +35,7 @@ extension ChannelViewModel: ViewModel {
     
     struct Output {
         let channel: PublishRelay<Channel>
+        let chattingRecords: Observable<[ChannelChatting]>
     }
     
     func transform(input: Input) -> Output {
@@ -56,14 +58,14 @@ extension ChannelViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
-        let chattingHistory = channelId
+        let chattingRecords = channelId
             .flatMap { [unowned self] id in
                 let allChattingRecords = channelChattingService.loadChattingHistory(for: id)
                 return Observable.array(from: allChattingRecords)
             }
             .debug()
             
-        chattingHistory
+        chattingRecords
             .filter { $0.isEmpty }
             .flatMap { [unowned self] _ in
                 channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: nil)
@@ -80,7 +82,7 @@ extension ChannelViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
-        chattingHistory
+        chattingRecords
             .filter { $0.isEmpty == false }
             .map { $0.last!.createdAt.convertFormmtedString }
             .flatMap { [unowned self] cursorDate in
@@ -99,7 +101,8 @@ extension ChannelViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         return Output(
-            channel: channel
+            channel: channel,
+            chattingRecords: chattingRecords
         )
     }
 }

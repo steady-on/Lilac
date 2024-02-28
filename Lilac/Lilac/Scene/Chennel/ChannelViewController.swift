@@ -44,6 +44,8 @@ final class ChannelViewController: BaseViewController {
     override func configureHiararchy() {
         view.backgroundColor = .Background.secondary
         
+        configureDataSource()
+        
         let components = [chattingTableView, chattingTextField]
         components.forEach { component in
             view.addSubview(component)
@@ -81,6 +83,12 @@ final class ChannelViewController: BaseViewController {
         output.channel
             .subscribe(with: self) { owner, channel in
                 owner.titleView.setChannel(for: channel.name, countOfMember: channel.channelMembers?.count ?? 1)
+            }
+            .disposed(by: disposeBag)
+        
+        output.chattingRecords
+            .subscribe(with: self) { owner, chattings in
+                owner.configureSnapshot(for: chattings)
             }
             .disposed(by: disposeBag)
     }
