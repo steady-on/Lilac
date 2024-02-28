@@ -17,6 +17,7 @@ final class UserServiceImpl: UserService {
     
     @KeychainStorage(itemType: .refreshToken) var refreshToken
     @KeychainStorage(itemType: .accessToken) var accessToken
+    @UserDefault(key: .deviceToken, defaultValue: "") var deviceToken
     
     func signUp(for newUser: Requester.NewUser) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
         
@@ -28,11 +29,11 @@ final class UserServiceImpl: UserService {
     }
     
     func emailLogin(email: String, password: String) -> Single<Result<Responder.User.SimpleProfileWithToken, Error>> {
-        return repository.request(.signIn(vendor: .email(email: email, password: password)), responder: Responder.User.SimpleProfileWithToken.self)
+        return repository.request(.signIn(vendor: .email(email: email, password: password), deviceToken: deviceToken), responder: Responder.User.SimpleProfileWithToken.self)
     }
     
     func kakaoLogin(for accessToken: String) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
-        return repository.request(.signIn(vendor: .kakao(accessToken: accessToken)), responder: Responder.User.ProfileWithToken.self)
+        return repository.request(.signIn(vendor: .kakao(accessToken: accessToken), deviceToken: deviceToken), responder: Responder.User.ProfileWithToken.self)
     }
     
     func signOut() -> Single<Result<Void, Error>> {

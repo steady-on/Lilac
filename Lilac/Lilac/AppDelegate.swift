@@ -69,6 +69,9 @@ extension AppDelegate: MessagingDelegate {
             object: nil,
             userInfo: dataDict
         )
+        
+        @UserDefault(key: .deviceToken, defaultValue: fcmToken) var fcmToken
+        
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }

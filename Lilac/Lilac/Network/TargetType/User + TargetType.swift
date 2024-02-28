@@ -19,7 +19,7 @@ extension LilacAPI.User: TargetType {
             return "join"
         case .validateEmail: 
             return "validation/email"
-        case .signIn(let vendor):
+        case .signIn(let vendor, _):
             return switch vendor {
             case .email: "login"
             case .kakao: "login/kakao"
@@ -63,18 +63,18 @@ extension LilacAPI.User: TargetType {
             ]
         case .validateEmail(let email):
             ["email" : email]
-        case .signIn(let vendor):
+        case .signIn(let vendor, let token):
             switch vendor {
             case .email(let email, let password):
                 [
                     "email" : email,
                     "password" : password,
-                    "deviceToken" : "",
+                    "deviceToken" : token ?? "",
                 ]
             case .kakao(let accessToken):
                 [
                     "oauthToken" : accessToken,
-                    "deviceToken" : "",
+                    "deviceToken" : token ?? "",
                 ]
             case .apple:
                 [
@@ -83,9 +83,8 @@ extension LilacAPI.User: TargetType {
                     "deviceToken" : ""
                 ]
             }
-        case .saveDeviceToken:
-            // TODO: keycahin setting 후 가져오기
-            ["deviceToken" : ""]
+        case .saveDeviceToken(let token):
+            ["deviceToken" : token]
         case .myProfile(let type):
             switch type {
             case .load:
