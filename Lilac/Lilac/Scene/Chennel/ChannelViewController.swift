@@ -25,6 +25,8 @@ final class ChannelViewController: BaseViewController {
 
     private let chattingTextField = ChattingTextField()
     
+    private var isNotFirstSnapshot = false
+    
     private let chattingTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ChattingTableViewCell.self, forCellReuseIdentifier: ChattingTableViewCell.identifier)
@@ -129,6 +131,14 @@ extension ChannelViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(chattings)
         dataSource.apply(snapshot, animatingDifferences: true)
+        
+        guard let lastChatting = chattings.last,
+        let lastIndexPath = dataSource.indexPath(for: lastChatting) else { return }
+                
+        DispatchQueue.main.async { [unowned self] in
+            chattingTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: isNotFirstSnapshot)
+            isNotFirstSnapshot = true
+        }
     }
 }
 
