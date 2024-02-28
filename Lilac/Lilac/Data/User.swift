@@ -91,6 +91,7 @@ final class User {
         return _workspaces[index]
     }
     
+    /// 마지막으로 방문한 워크스페이스 저장
     func visitWorkspace(id: Int) {
         lastVisitedWorkspaceId = id
         selectedWorkspaceId.accept(lastVisitedWorkspaceId)

@@ -366,7 +366,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case .footer:
             print("Footer:", item.text)
         case .channel:
-            pushChannelView(for: item.id)
+            pushChannelView(for: item)
         case .dm:
             print("dm 클릭")
         default:
@@ -375,8 +375,9 @@ extension HomeViewController: UICollectionViewDelegate {
     }
     
     /// ChannelView로 이동
-    private func pushChannelView(for channelId: Int) {
-        let channelView = ChannelViewController(viewModel: ChannelViewModel(channelId: channelId))
+    private func pushChannelView(for item: Item) {
+        let channelViewModel = ChannelViewModel(channelId: item.id, workspaceId: item.workspaceId, channelName: item.text)
+        let channelView = ChannelViewController(viewModel: channelViewModel)
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.pushViewController(channelView, animated: true)
     }
