@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "rxrealm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxRealm.git",
+      "state" : {
+        "revision" : "fafdc8209b64a2d5ba22437a86532872bdb1efe3",
+        "version" : "5.0.6"
+      }
+    },
+    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",

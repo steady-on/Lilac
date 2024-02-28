@@ -98,6 +98,7 @@
 		638CBF562B6232E000778283 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF552B6232E000778283 /* EntryViewController.swift */; };
 		638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF572B623CAD00778283 /* EntryViewModel.swift */; };
 		638CBF5A2B63DF3E00778283 /* WorkspaceServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */; };
+		63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA462B8F6ECE00A312D4 /* RxRealm */; };
 		63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */; };
 		63C7C0402B89F7910081DFB6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -201,6 +202,7 @@
 				633CB4792B46B83F00448E9B /* SnapKit in Frameworks */,
 				635314962B874C1C0014AC3C /* Kingfisher in Frameworks */,
 				63513EC72B8DA8E300F1E460 /* RealmSwift in Frameworks */,
+				63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */,
 				6317EE842B480C83007662A5 /* Alamofire in Frameworks */,
 				633CB4762B46B82F00448E9B /* RxSwift in Frameworks */,
 				6317EE922B487414007662A5 /* Moya in Frameworks */,
@@ -610,6 +612,7 @@
 				635314952B874C1C0014AC3C /* Kingfisher */,
 				63513EC42B8DA8E300F1E460 /* Realm */,
 				63513EC62B8DA8E300F1E460 /* RealmSwift */,
+				63A7FA462B8F6ECE00A312D4 /* RxRealm */,
 			);
 			productName = Lilac;
 			productReference = 633CB45B2B46B6E900448E9B /* Lilac.app */;
@@ -647,6 +650,7 @@
 				633190CD2B53DBEA005289E1 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
 				635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				63513EC32B8DA8E200F1E460 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				63A7FA452B8F6ECE00A312D4 /* XCRemoteSwiftPackageReference "RxRealm" */,
 			);
 			productRefGroup = 633CB45C2B46B6E900448E9B /* Products */;
 			projectDirPath = "";
@@ -1043,6 +1047,14 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		63A7FA452B8F6ECE00A312D4 /* XCRemoteSwiftPackageReference "RxRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1090,6 +1102,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		63A7FA462B8F6ECE00A312D4 /* RxRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63A7FA452B8F6ECE00A312D4 /* XCRemoteSwiftPackageReference "RxRealm" */;
+			productName = RxRealm;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
