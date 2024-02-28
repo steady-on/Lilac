@@ -8,6 +8,9 @@
 import UIKit
 
 final class ChattingTableViewCell: BaseTableViewCell {
+    
+    static let identifier = "ChattingTableViewCell"
+    
     var chatting: ChannelChatting! {
         didSet {
             configureComponents()
