@@ -121,9 +121,14 @@ extension ChattingTableViewCell {
     }
     
     private func setTimeLabel(for createdAt: Date) {
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: createdAt)
-        let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date.now)
+        let calendar = Calendar.autoupdatingCurrent
+        
+        let timezone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT = timezone.secondsFromGMT(for: createdAt)
+        let unlocalizedCreatedAt = createdAt.addingTimeInterval(TimeInterval(-secondsFromGMT))
+
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: unlocalizedCreatedAt)
+        let todayComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date.now)
         
         guard let year = dateComponents.year,
               let month = dateComponents.month,
@@ -141,13 +146,13 @@ extension ChattingTableViewCell {
         else { "\(hour)"}
         
         let timeString = "\(mark) \(hourString):\(minute)"
-        
+
         let dateString = if year != todayComponents.year {
             "\(year)/\(month)/\(day)\n"
-        } else if (month == todayComponents.month && day == todayComponents.day) == false {
-            "\(month)/\(day)\n"
-        } else {
+        } else if month == todayComponents.month && day == todayComponents.day {
             ""
+        } else {
+            "\(month)/\(day)\n"
         }
         
         timeLabel.text = dateString + timeString
