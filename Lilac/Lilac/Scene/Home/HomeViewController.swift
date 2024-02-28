@@ -20,6 +20,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private let disposeBag = DisposeBag()
+    private let isRefresh = PublishRelay<Void>()
     
     private let workspaceTitleButton = WorkspaceTitleButton()
     private let profileButton = ProfileButton()
@@ -82,7 +83,9 @@ final class HomeViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        let input = HomeViewModel.Input()
+        let input = HomeViewModel.Input(
+            isRefresh: isRefresh
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -101,6 +104,21 @@ extension HomeViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
+        
+        configureRefreshControl()
+    }
+    
+    private func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        
+        refreshControl.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+        refreshControl.tintColor = .accent
+        refreshControl.attributedTitle = NSAttributedString(
+                string: "당겨서 새로고침",
+                attributes: [.foregroundColor : UIColor.Text.secondary]
+            )
+        
+        collectionView.refreshControl = refreshControl
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -124,6 +142,17 @@ extension HomeViewController {
             section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
             
             return section
+        }
+    }
+}
+
+// MARK: Related CollectionView RefreshContol
+extension HomeViewController {
+    @objc private func handleRefreshControl() {
+        isRefresh.accept(())
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [unowned self] in
+            collectionView.refreshControl?.endRefreshing()
         }
     }
 }
@@ -253,6 +282,7 @@ extension HomeViewController {
     }
 }
 
+// MARK: Related HomeEmptyView
 extension HomeViewController {
     private func isWorkspaceEmpty() {
         guard User.shared.isNotBelongToWorkspace else { return }
@@ -322,3 +352,4 @@ extension HomeViewController {
         }
     }
 }
+

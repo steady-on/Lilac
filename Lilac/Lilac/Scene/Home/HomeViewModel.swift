@@ -49,10 +49,21 @@ extension HomeViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.isRefresh
+            .withLatestFrom(selectedWorkspaceId) { _, workspaceId in workspaceId }
             .flatMap { [unowned self] id in
+                channelService.loadBelongTo(workspaceId: id)
             }
             .subscribe { result in
                 switch result {
+                case .success(let channelData):
+                    guard let updatedWorkspace = User.shared.fetchChannelToWorkspace(channelData) else {
+                        // TODO: 토스트메세지
+                        return
+                    }
+                    selectedWorkspace.accept(updatedWorkspace)
+                case .failure(let failure):
+                    print("Fail:", failure)
                 }
             } onError: { error in
                 print("Error", error)
