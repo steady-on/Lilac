@@ -93,3 +93,4 @@ iOSInjectionProject/
 **/.DS_Store
 **/APIKey.swift
 **/BaseURL.swift
+**/GoogleService-Info.plist
