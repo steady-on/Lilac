@@ -14,7 +14,7 @@ struct Workspace {
     let thumbnail: String
     let ownerId: Int
     let createdAt: Date
-    let channels: [Channel]?
+    var channels: [Channel]?
     let workspaceMembers: [Member]?
     
     init(workspaceId: Int, name: String, description: String?, thumbnail: String, ownerId: Int, createdAt: Date, channels: [Channel]?, workspaceMembers: [Member]?) {
@@ -56,6 +56,10 @@ struct Channel: Hashable {
     }
     
     init(from channel: Responder.Workspace.Channel) {
+        self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
+    }
+    
+    init(from channel: Responder.Channel.Channel) {
         self.init(workspaceId: channel.workspaceId, channelId: channel.channelId, name: channel.name, description: channel.description, ownerId: channel.ownerId, isPrivate: channel.isPrivate, createdAt: channel.createdAt)
     }
 }
