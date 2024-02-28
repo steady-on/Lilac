@@ -29,6 +29,7 @@ struct RealmRepository<T: Object> {
     
     /// realm table 불러오기
     func read() -> Results<T> {
+        print(realm?.configuration.fileURL)
         return realm!.objects(T.self)
     }
     
