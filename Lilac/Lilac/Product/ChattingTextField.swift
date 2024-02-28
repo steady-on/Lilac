@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class ChattingTextField: UITextField {
     
@@ -23,9 +24,12 @@ final class ChattingTextField: UITextField {
     
     let sendButton: UIButton = {
         let button = UIButton()
-        button.setImage(.Icon.send, for: .normal)
+        button.setImage(.Icon.send, for: .disabled)
+        button.setImage(.Icon.sendActive, for: .normal)
         return button
     }()
+    
+    private let disposeBag = DisposeBag()
     
     private let textInsets = UIEdgeInsets(top: 10, left: 42, bottom: 10, right: 44)
     
@@ -74,7 +78,12 @@ final class ChattingTextField: UITextField {
         rightView = sendButton
         rightViewMode = .always
         
-        addTarget(self, action: #selector(textValueChanged), for: .allEditingEvents)
+        rx.text.orEmpty
+            .map { $0.isEmpty == false }
+            .bind(with: self) { owner, bool in
+                owner.sendButton.isEnabled = bool
+            }
+            .disposed(by: disposeBag)
     }
 
     
@@ -85,16 +94,6 @@ final class ChattingTextField: UITextField {
 }
 
 extension ChattingTextField: UITextFieldDelegate {
-    @objc private func textValueChanged() {
-        guard let text else { return }
-        
-        if text.isEmpty {
-            sendButton.setImage(.Icon.send, for: .normal)
-        } else {
-            sendButton.setImage(.Icon.sendActive, for: .normal)
-        }
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text else { return }
         let newText = text.trimmingCharacters(in: .whitespaces)
