@@ -31,7 +31,7 @@ final class ChannelViewController: BaseViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-        tableView.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
+        tableView.showsHorizontalScrollIndicator = false
         return tableView
     }()
     
@@ -54,11 +54,12 @@ final class ChannelViewController: BaseViewController {
     
     override func setConstraints() {
         chattingTableView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         chattingTextField.snp.makeConstraints { make in
-            make.top.equalTo(chattingTableView.snp.bottom)
+            make.top.equalTo(chattingTableView.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-12)
         }

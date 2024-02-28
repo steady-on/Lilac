@@ -85,13 +85,12 @@ final class ChattingTableViewCell: BaseTableViewCell {
         stackContainer.snp.makeConstraints { make in
             make.top.equalTo(backdropView.layoutMarginsGuide)
             make.leading.equalTo(profileImageView.snp.trailing).offset(8)
-            make.bottom.lessThanOrEqualTo(backdropView.layoutMarginsGuide).offset(8)
+            make.bottom.equalTo(backdropView.layoutMarginsGuide)
         }
         
         timeLabel.snp.makeConstraints { make in
             make.leading.equalTo(stackContainer.snp.trailing).offset(8)
-            make.trailing.greaterThanOrEqualTo(backdropView.layoutMarginsGuide)
-            make.bottom.equalTo(backdropView.snp.bottom)
+            make.bottom.equalTo(backdropView.layoutMarginsGuide)
         }
     }
 }
