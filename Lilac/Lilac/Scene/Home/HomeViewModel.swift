@@ -12,12 +12,12 @@ import RxCocoa
 final class HomeViewModel {
     var disposeBag = DisposeBag()
     
-    private lazy var lilacWorkspaceService = WorkspaceServiceImpl()
+    private lazy var channelService = ChannelServiceImpl()
 }
 
 extension HomeViewModel: ViewModel {
     struct Input {
-        
+        let isRefresh: PublishRelay<Void>
     }
     
     struct Output {
@@ -27,17 +27,32 @@ extension HomeViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let selectedWorkspace = PublishRelay<Workspace>()
         
-        User.shared.selectedWorkspaceId
+        let selectedWorkspaceId = User.shared.selectedWorkspaceId
+        
+        selectedWorkspaceId
             .flatMap { [unowned self] id in
-                lilacWorkspaceService.loadSpecified(id: id)
+                channelService.loadBelongTo(workspaceId: id)
             }
             .subscribe { result in
                 switch result {
-                case .success(let workspace):
-                    User.shared.updateWorkspaceDetail(for: workspace)
-                    selectedWorkspace.accept(Workspace(from: workspace))
-                case .failure(let error):
-                    print("failure", error)
+                case .success(let channelData):
+                    guard let updatedWorkspace = User.shared.fetchChannelToWorkspace(channelData) else {
+                        // TODO: 토스트메세지
+                        return
+                    }
+                    selectedWorkspace.accept(updatedWorkspace)
+                case .failure(let failure):
+                    print("Fail:", failure)
+                }
+            } onError: { error in
+                print("Error!", error)
+            }
+            .disposed(by: disposeBag)
+        
+            .flatMap { [unowned self] id in
+            }
+            .subscribe { result in
+                switch result {
                 }
             } onError: { error in
                 print("Error", error)
