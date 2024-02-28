@@ -102,6 +102,7 @@
 		63A7FA492B8F711700A312D4 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA482B8F711700A312D4 /* Date+.swift */; };
 		63A7FA4D2B8F746600A312D4 /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */; };
 		63A7FA4F2B8F82BB00A312D4 /* ChattingContentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */; };
+		63A7FA542B8FD7D800A312D4 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA532B8FD7D800A312D4 /* SocketIO */; };
 		63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */; };
 		63C7C0402B89F7910081DFB6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -209,6 +210,7 @@
 				635314962B874C1C0014AC3C /* Kingfisher in Frameworks */,
 				63513EC72B8DA8E300F1E460 /* RealmSwift in Frameworks */,
 				63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */,
+				63A7FA542B8FD7D800A312D4 /* SocketIO in Frameworks */,
 				6317EE842B480C83007662A5 /* Alamofire in Frameworks */,
 				633CB4762B46B82F00448E9B /* RxSwift in Frameworks */,
 				6317EE922B487414007662A5 /* Moya in Frameworks */,
@@ -630,6 +632,7 @@
 				63513EC42B8DA8E300F1E460 /* Realm */,
 				63513EC62B8DA8E300F1E460 /* RealmSwift */,
 				63A7FA462B8F6ECE00A312D4 /* RxRealm */,
+				63A7FA532B8FD7D800A312D4 /* SocketIO */,
 			);
 			productName = Lilac;
 			productReference = 633CB45B2B46B6E900448E9B /* Lilac.app */;
@@ -668,6 +671,7 @@
 				635314942B874C1C0014AC3C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				63513EC32B8DA8E200F1E460 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				63A7FA452B8F6ECE00A312D4 /* XCRemoteSwiftPackageReference "RxRealm" */,
+				63A7FA522B8FD7D700A312D4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 633CB45C2B46B6E900448E9B /* Products */;
 			projectDirPath = "";
@@ -1075,6 +1079,14 @@
 				minimumVersion = 5.0.6;
 			};
 		};
+		63A7FA522B8FD7D700A312D4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1127,6 +1139,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63A7FA452B8F6ECE00A312D4 /* XCRemoteSwiftPackageReference "RxRealm" */;
 			productName = RxRealm;
+		};
+		63A7FA532B8FD7D800A312D4 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63A7FA522B8FD7D700A312D4 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
