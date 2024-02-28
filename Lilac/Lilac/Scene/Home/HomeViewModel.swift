@@ -29,6 +29,7 @@ extension HomeViewModel: ViewModel {
         
         let selectedWorkspaceId = User.shared.selectedWorkspaceId
         
+        /// 선택한 워크스페이스에 따라 해당 워크스페이스에서 사용자가 속한 채널리스트를 업데이트
         selectedWorkspaceId
             .flatMap { [unowned self] id in
                 channelService.loadBelongTo(workspaceId: id)
@@ -49,6 +50,7 @@ extension HomeViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        /// collectionView를 당겨서 새로고침 시 채널리스트를 업데이트
         input.isRefresh
             .withLatestFrom(selectedWorkspaceId) { _, workspaceId in workspaceId }
             .flatMap { [unowned self] id in

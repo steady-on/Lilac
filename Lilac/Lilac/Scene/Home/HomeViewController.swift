@@ -104,6 +104,7 @@ extension HomeViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.delegate = self
         
         configureRefreshControl()
     }
@@ -353,3 +354,30 @@ extension HomeViewController {
     }
 }
 
+// MARK: Related Channel Selected
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            return
+        }
+        
+        switch item.type {
+        case .footer:
+            print("Footer:", item.text)
+        case .channel:
+            pushChannelView(for: item.id)
+        case .dm:
+            print("dm 클릭")
+        default:
+            break
+        }
+    }
+    
+    /// ChannelView로 이동
+    private func pushChannelView(for channelId: Int) {
+        let channelView = ChannelViewController(viewModel: ChannelViewModel(channelId: channelId))
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.pushViewController(channelView, animated: true)
+    }
+}

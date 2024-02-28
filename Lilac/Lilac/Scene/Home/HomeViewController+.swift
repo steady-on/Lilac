@@ -37,8 +37,11 @@ extension HomeViewController {
     }
     
     struct Item: Hashable {
+        /// channelId or dmId, header/footer인 경우 rawValue
         let id: Int
+        /// channelName, DM user명, header/footer인 경우 title
         let text: String
+        /// channel, header/footer인 경우 nil, DM인 경우 profile Image url
         let image: String?
         let type: ItemType
 //        let unreads: Int?
