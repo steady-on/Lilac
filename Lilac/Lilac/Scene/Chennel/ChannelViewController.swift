@@ -78,7 +78,14 @@ final class ChannelViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = ChannelViewModel.Input()
+        
+        let sendButtonTapped = chattingTextField.sendButton.rx.tap
+        let chattingInputValue = chattingTextField.rx.text.orEmpty
+        
+        let input = ChannelViewModel.Input(
+            sendButtonTapped: sendButtonTapped,
+            chattingInputValue: chattingInputValue
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -92,6 +99,11 @@ final class ChannelViewController: BaseViewController {
             .subscribe(with: self) { owner, chattings in
                 owner.configureSnapshot(for: chattings)
             }
+            .disposed(by: disposeBag)
+        
+        output.emptyTextField
+            .map { "" }
+            .bind(to: chattingTextField.rx.text)
             .disposed(by: disposeBag)
     }
 }
@@ -108,6 +120,8 @@ extension ChannelViewController {
             cell.chatting = item
             return cell
         }
+        
+        dataSource.defaultRowAnimation = .bottom
     }
     
     private func configureSnapshot(for chattings: [ChannelChatting]) {

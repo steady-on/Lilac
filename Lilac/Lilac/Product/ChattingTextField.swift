@@ -80,9 +80,7 @@ final class ChattingTextField: UITextField {
         
         rx.text.orEmpty
             .map { $0.isEmpty == false }
-            .bind(with: self) { owner, bool in
-                owner.sendButton.isEnabled = bool
-            }
+            .bind(to: sendButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
 

@@ -30,16 +30,19 @@ final class ChannelViewModel {
 
 extension ChannelViewModel: ViewModel {
     struct Input {
-        
+        let sendButtonTapped: ControlEvent<Void>
+        let chattingInputValue: ControlProperty<String>
     }
     
     struct Output {
         let channel: PublishRelay<Channel>
         let chattingRecords: Observable<[ChannelChatting]>
+        let emptyTextField: PublishRelay<Void>
     }
     
     func transform(input: Input) -> Output {
         let channel = PublishRelay<Channel>()
+        let emptyTextField = PublishRelay<Void>()
         
         channelId
             .flatMap { [unowned self] id in
@@ -63,7 +66,6 @@ extension ChannelViewModel: ViewModel {
                 let allChattingRecords = channelChattingService.loadChattingHistory(for: id)
                 return Observable.array(from: allChattingRecords)
             }
-            .debug()
             
         chattingRecords
             .filter { $0.isEmpty }
@@ -100,9 +102,30 @@ extension ChannelViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.sendButtonTapped
+            .withLatestFrom(input.chattingInputValue) { _, inputValue in inputValue }
+            .map { $0.data(using: .utf8) }
+            .flatMap { [unowned self] contentData in
+                channelService.sendChatting(workspaceId: workspaceId, channelName: channelName, content: contentData, files: nil)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let sendedChatting):
+                    owner.channelChattingService.saveChatting(sendedChatting)
+                    emptyTextField.accept(())
+                case .failure(let failure):
+                    print("failure: ", failure)
+                }
+            } onError: { _, error in
+                print("Error: ", error)
+            }
+            .disposed(by: disposeBag)
+            
+                    
         return Output(
             channel: channel,
-            chattingRecords: chattingRecords
+            chattingRecords: chattingRecords,
+            emptyTextField: emptyTextField
         )
     }
 }
