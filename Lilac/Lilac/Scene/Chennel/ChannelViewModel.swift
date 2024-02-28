@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class ChannelViewModel {
-    private let channelId = PublishRelay<Int>()
+    private let channelId = BehaviorRelay(value: -1)
     private let workspaceId: Int
     private let channelName: String
     
@@ -22,6 +22,7 @@ final class ChannelViewModel {
     
     var disposeBag = DisposeBag()
     
+    private let channelService = ChannelServiceImpl()
     private let channelChattingService = ChannelChattingService()
 }
 
@@ -31,10 +32,33 @@ extension ChannelViewModel: ViewModel {
     }
     
     struct Output {
-        
+        let channel: PublishRelay<Channel>
     }
     
     func transform(input: Input) -> Output {
-        return Output()
+        let channel = PublishRelay<Channel>()
+        
+        channelId
+            .flatMap { [unowned self] id in
+                channelService.load(workspaceId: workspaceId, channelName: channelName)
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let channelData):
+                    let fetchedChannel = Channel(from: channelData)
+                    channel.accept(fetchedChannel)
+                case .failure(let failure):
+                    print("failure: ", failure)
+                }
+            } onError: { error in
+                print("Error: ", error)
+            }
+            .disposed(by: disposeBag)
+
+        
+        
+        return Output(
+            channel: channel
+        )
     }
 }

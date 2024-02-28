@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class ChannelViewController: BaseViewController {
     
@@ -16,6 +18,8 @@ final class ChannelViewController: BaseViewController {
         
         super.init()
     }
+    
+    private let disposeBag = DisposeBag()
     
     private let titleView = ChannelTitleView()
     
@@ -53,7 +57,15 @@ final class ChannelViewController: BaseViewController {
     }
     
     override func bind() {
+        let input = ChannelViewModel.Input()
         
+        let output = viewModel.transform(input: input)
+        
+        output.channel
+            .subscribe(with: self) { owner, channel in
+                owner.titleView.setChannel(for: channel.name, countOfMember: channel.channelMembers?.count ?? 1)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
