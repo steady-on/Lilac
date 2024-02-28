@@ -37,33 +37,36 @@ extension HomeViewController {
     }
     
     struct Item: Hashable {
-        /// channelId or dmId, header/footer인 경우 rawValue
+        /// channelId or roomId, header/footer인 경우 rawValue
         let id: Int
-        /// channelName, DM user명, header/footer인 경우 title
+        /// channelName or DM.user.nickname, header/footer인 경우 title
         let text: String
+        /// workspaceId, header/footer인 경우 -1
+        let workspaceId: Int
         /// channel, header/footer인 경우 nil, DM인 경우 profile Image url
         let image: String?
         let type: ItemType
 //        let unreads: Int?
         
-        init(id: Int, text: String, image: String?, type: ItemType) {
+        init(id: Int, text: String, workspaceId: Int, image: String?, type: ItemType) {
             self.id = id
             self.text = text
+            self.workspaceId = workspaceId
             self.image = image
 //            self.unreads = unreads
             self.type = type
         }
         
         init(from section: Header) {
-            self.init(id: section.rawValue, text: section.title, image: nil, type: .header)
+            self.init(id: section.rawValue, text: section.title, workspaceId: -1, image: nil, type: .header)
         }
         
         init(from channel: Channel) {
-            self.init(id: channel.channelId, text: channel.name, image: nil, type: .channel)
+            self.init(id: channel.channelId, text: channel.name, workspaceId: channel.workspaceId, image: nil, type: .channel)
         }
         
         init(from footer: Footer) {
-            self.init(id: footer.rawValue, text: footer.title, image: nil, type: .footer)
+            self.init(id: footer.rawValue, text: footer.title, workspaceId: -1, image: nil, type: .footer)
         }
         
         enum ItemType {
