@@ -15,44 +15,29 @@ final class WebSocketManager: NSObject {
         super.init()
     }
     
-    @KeychainStorage(itemType: .accessToken) var accessToken
-    
     private var manager: SocketManager! = nil
     private var socket: SocketIOClient! = nil
     
-    // {baseURL}/ws-channel-{channel_id}
-    // {baseURL}/ws-dm-{room_id}
-    func openWebSocket(for id: Int, type: SocketType) {
-        print(#function)
-        guard let url = URL(string: BaseURL.serverURL + "ws-\(type.rawValue)-\(id)") else { return }
+    func openWebSocket(for id: Int, type: SocketType, completion: @escaping (Data) -> Void) {
+        guard let url = URL(string: BaseURL.serverURL) else { return }
         
-        let headers: [String : String] = [
-            "Authorization" : accessToken ?? "",
-            "SesacKey" : APIKey.secretKey
-        ]
-        
-        manager = SocketManager(socketURL: url, config: [.log(false), .compress, .extraHeaders(headers)])
-        socket = manager.defaultSocket
-        
-        socket.on(clientEvent: .connect) { data, ack in
-            print("SOCKET IS CONNECTED", data, ack)
+        manager = SocketManager(socketURL: url, config: [.compress])
+        socket = manager.socket(forNamespace: "/ws-\(type.rawValue)-\(id)")
+
+        socket.on(type.rawValue) { response, _ in
+            guard let response = response.first,
+                  let data = try? JSONSerialization.data(withJSONObject: response) else { return}
+
+            completion(data)
         }
         
-        receive(type: type)
-    }
-    
-    private func receive(type: SocketType) {
-        print(#function)
-        socket.on(type.rawValue) { dataArray, ack in
-            print("CHANNEL RECEIVED", dataArray, ack)
-        }
+        socket.connect()
     }
     
     func closeWebSocket() {
-        print(#function)
-        socket.on(clientEvent: .disconnect) { data, ack in
-            print("SOCKET IS DISCONNECTED", data, ack)
-        }
+        socket.disconnect()
+        socket.removeAllHandlers()
+        manager.disconnect()
     }
 }
 

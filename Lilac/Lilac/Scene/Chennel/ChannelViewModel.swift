@@ -15,7 +15,7 @@ final class ChannelViewModel {
     
     deinit {
         print("deinit ChannelViewModel")
-        WebSocketManager.shared.closeWebSocket()
+        WebSocketService.shared.disconnetSocket()
     }
     
     private let startLoading = BehaviorRelay(value: -1)
@@ -72,17 +72,18 @@ extension ChannelViewModel: ViewModel {
         
         let records = channelChattingService.loadChattingHistory(for: channelId)
         let chattingRecords = Observable.array(from: records)
-            
-        chattingRecords
-            .filter { $0.isEmpty }
-            .flatMap { [unowned self] _ in
-                channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: nil)
+        
+        startLoading
+            .map { _ in records }
+            .flatMap { [unowned self] records in
+                let cursorDate = records.last?.createdAt
+                return channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: cursorDate?.convertFormmtedString)
             }
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let allChattingData):
                     owner.channelChattingService.saveChattings(allChattingData)
-                    isOpenSocket.accept(())
+                    WebSocketService.shared.connectChannelSocket(for: owner.channelId)
                 case .failure(let failure):
                     print("failure: ", failure)
                 }
@@ -91,28 +92,9 @@ extension ChannelViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
-        chattingRecords
-            .filter { $0.isEmpty == false }
-            .map { $0.last!.createdAt.convertFormmtedString }
-            .flatMap { [unowned self] cursorDate in
-                channelService.loadChatting(workspaceId: workspaceId, channelName: channelName, cursorDate: cursorDate)
-            }
-            .subscribe(with: self) { owner, result in
-                switch result {
-                case .success(let allChattingData):
-                    owner.channelChattingService.saveChattings(allChattingData)
-                    isOpenSocket.accept(())
-                case .failure(let failure):
-                    print("failure: ", failure)
-                }
-            } onError: { _, error in
-                print("Error: ", error)
-            }
-            .disposed(by: disposeBag)
-        
-        isOpenSocket
-            .subscribe(with: self) { owner, bool in
-                WebSocketManager.shared.openWebSocket(for: owner.channelId, type: .channel)
+        WebSocketService.shared.channelReceiver
+            .subscribe(with: self) { owner, chattingData in
+                owner.channelChattingService.saveChatting(chattingData)
             }
             .disposed(by: disposeBag)
         
@@ -124,8 +106,7 @@ extension ChannelViewModel: ViewModel {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let sendedChatting):
-                    owner.channelChattingService.saveChatting(sendedChatting)
+                case .success(_):
                     emptyTextField.accept(())
                 case .failure(let failure):
                     print("failure: ", failure)

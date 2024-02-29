@@ -78,6 +78,7 @@ extension EntryViewModel: ViewModel {
                         goToOnboarding.accept(true)
                     }
                 }
+                print("AccessToken", self.accessToken)
             } onFailure: { owner, error in
                 goToOnboarding.accept(true)
             }
@@ -109,6 +110,7 @@ extension EntryViewModel: ViewModel {
             .subscribe { result in
                 switch result {
                 case .success(let workspaces):
+                    print("workspaces", workspaces)
                     User.shared.fetch(for: workspaces)
                     goToHome.accept(())
                 case .failure(_):

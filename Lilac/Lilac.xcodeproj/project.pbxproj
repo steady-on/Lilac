@@ -107,6 +107,7 @@
 		63A7FA5A2B8FF1E800A312D4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA592B8FF1E800A312D4 /* FirebaseAnalytics */; };
 		63A7FA5C2B8FF1E800A312D4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA5B2B8FF1E800A312D4 /* FirebaseMessaging */; };
 		63A7FA5F2B8FF2F700A312D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63A7FA5E2B8FF2F700A312D4 /* GoogleService-Info.plist */; };
+		63A7FA622B9036AA00A312D4 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA612B9036AA00A312D4 /* WebSocketService.swift */; };
 		63C7C03E2B89DA4A0081DFB6 /* HomeViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */; };
 		63C7C0402B89F7910081DFB6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -203,6 +204,7 @@
 		63A7FA552B8FD8D600A312D4 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		63A7FA5D2B8FF1FB00A312D4 /* Lilac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lilac.entitlements; sourceTree = "<group>"; };
 		63A7FA5E2B8FF2F700A312D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63A7FA612B9036AA00A312D4 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
 		63C7C03D2B89DA4A0081DFB6 /* HomeViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+.swift"; sourceTree = "<group>"; };
 		63C7C03F2B89F7910081DFB6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -408,6 +410,7 @@
 				63513ED22B8DF09B00F1E460 /* KakaoLogin */,
 				63513ED72B8DF0DB00F1E460 /* Server */,
 				63513ED92B8DF23600F1E460 /* Realm */,
+				63A7FA612B9036AA00A312D4 /* WebSocketService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				631D75022B7B74E3002F4279 /* User.swift in Sources */,
 				638CBF582B623CAD00778283 /* EntryViewModel.swift in Sources */,
 				631D750A2B7F56D2002F4279 /* Workspace.swift in Sources */,
+				63A7FA622B9036AA00A312D4 /* WebSocketService.swift in Sources */,
 				631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */,
 				63A7FA4F2B8F82BB00A312D4 /* ChattingContentLabel.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,

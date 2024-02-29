@@ -47,6 +47,7 @@ final class ChannelViewController: BaseViewController {
     override func configureHiararchy() {
         view.backgroundColor = .Background.secondary
         
+        chattingTableView.delegate = self
         configureDataSource()
         
         let components = [chattingTableView, chattingTextField]
@@ -141,7 +142,11 @@ extension ChannelViewController {
     }
 }
 
-
+extension ChannelViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
 
 extension ChannelViewController {
     @objc private func channelSettingButtonTapped() {

@@ -57,6 +57,8 @@ final class User {
     func add(for newWorkspace: Responder.Workspace.Workspace) {
         let workspace = Workspace(from: newWorkspace)
         self._workspaces.append(workspace)
+        
+        visitWorkspace(id: workspace.workspaceId)
     }
     
     /// 유저가 속한 워크스페이스 업데이트
