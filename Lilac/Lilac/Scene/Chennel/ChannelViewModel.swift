@@ -51,7 +51,6 @@ extension ChannelViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let channel = PublishRelay<Channel>()
         let emptyTextField = PublishRelay<Void>()
-        let isOpenSocket = PublishRelay<Void>()
         
         startLoading
             .flatMap { [unowned self] id in
