@@ -28,7 +28,7 @@ protocol UserService: AnyObject {
     func signOut() -> Single<Result<Void, Error>>
     
     /// FCM deviceToken 저장
-//    func saveDeviceToken
+    func saveDeviceToken() -> Single<Result<Void, Error>>
     
     /// 내 프로필 정보 조회
     func loadMyProfile() -> Single<Result<Responder.User.MyProfile, Error>>

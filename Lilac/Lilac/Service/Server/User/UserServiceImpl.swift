@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 final class UserServiceImpl: UserService {
+    
     deinit {
         print("deinit UserService")
     }
@@ -20,8 +21,7 @@ final class UserServiceImpl: UserService {
     @UserDefault(key: .deviceToken, defaultValue: "") var deviceToken
     
     func signUp(for newUser: Requester.NewUser) -> Single<Result<Responder.User.ProfileWithToken, Error>> {
-        
-        return repository.request(.signUp(userInfo: newUser), responder: Responder.User.ProfileWithToken.self)
+        return repository.request(.signUp(userInfo: newUser, deviceToken: deviceToken), responder: Responder.User.ProfileWithToken.self)
     }
     
     func checkEmailDuplicated(email: String) -> Single<Result<Void, Error>> {
@@ -40,6 +40,10 @@ final class UserServiceImpl: UserService {
         refreshToken = nil
         accessToken = nil
         return repository.request(.signOut)
+    }
+    
+    func saveDeviceToken() -> Single<Result<Void, Error>> {
+        return repository.request(.saveDeviceToken(deviceToken: deviceToken))
     }
     
     func loadMyProfile() -> Single<Result<Responder.User.MyProfile, Error>> {
