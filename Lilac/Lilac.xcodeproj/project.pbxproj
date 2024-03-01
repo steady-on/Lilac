@@ -101,6 +101,7 @@
 		6398ADC52B91CD8C003008F0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */; };
 		6398ADC92B91E270003008F0 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */; };
 		6398ADCE2B91ECD4003008F0 /* Store + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADCD2B91ECD4003008F0 /* Store + TargetType.swift */; };
+		6398ADD12B91EE16003008F0 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADD02B91EE16003008F0 /* StoreService.swift */; };
 		63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA462B8F6ECE00A312D4 /* RxRealm */; };
 		63A7FA492B8F711700A312D4 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA482B8F711700A312D4 /* Date+.swift */; };
 		63A7FA4D2B8F746600A312D4 /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */; };
@@ -204,6 +205,7 @@
 		6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		6398ADCD2B91ECD4003008F0 /* Store + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store + TargetType.swift"; sourceTree = "<group>"; };
+		6398ADD02B91EE16003008F0 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		63A7FA482B8F711700A312D4 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingContentLabel.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				63513ED42B8DF0B800F1E460 /* User */,
 				63513ED52B8DF0BF00F1E460 /* Workspace */,
 				63513ED62B8DF0CA00F1E460 /* Channel */,
+				6398ADCF2B91EDEE003008F0 /* Store */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -627,6 +630,14 @@
 				6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */,
 			);
 			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		6398ADCF2B91EDEE003008F0 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6398ADD02B91EE16003008F0 /* StoreService.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		63A7FA4A2B8F743200A312D4 /* Cell */ = {
@@ -817,6 +828,7 @@
 				63A7FA622B9036AA00A312D4 /* WebSocketService.swift in Sources */,
 				631D75132B7FBB3E002F4279 /* WelcomeViewController.swift in Sources */,
 				63A7FA4F2B8F82BB00A312D4 /* ChattingContentLabel.swift in Sources */,
+				6398ADD12B91EE16003008F0 /* StoreService.swift in Sources */,
 				638CBF562B6232E000778283 /* EntryViewController.swift in Sources */,
 				638CBF5A2B63DF3E00778283 /* WorkspaceServiceImpl.swift in Sources */,
 				631D75192B82EF59002F4279 /* WorkspaceTabBarController.swift in Sources */,

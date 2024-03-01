@@ -219,6 +219,30 @@ enum Responder {
             let count: Int
         }
     }
+    
+    enum Store {
+        struct BillingResult {
+            /// 결제 내역에 대한 아이디
+            let billingId: Int
+            /// 결제 시 등록한 상점 고유 번호
+            let merchantUid: String
+            /// 결제 금액
+            let amount: Int
+            /// 충전된 새싹 코인
+            let sesacCoin: Int
+            /// 결제 영수증 검증 성공 여부
+            let success: Bool
+            /// 결제 내역 생성 날짜
+            let createdAt: Date
+        }
+        
+        struct Item {
+            /// 금액을 결제하면 얻을 수 있는 새싹 코인
+            let item: String
+            /// 해당 새싹코인 아이템 가격
+            let amount: String
+        }
+    }
 
     struct Error: Decodable {
         let errorCode: String
