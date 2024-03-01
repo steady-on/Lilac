@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class MyInfoViewController: BaseViewController {
+    
+    private let viewModel: MyInfoViewModel
+    
+    init(viewModel: MyInfoViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+    
+    private let disposeBag = DisposeBag()
     
     private let profilePhotoButton = SelectImageButton(baseImage: nil)
     
@@ -56,6 +68,18 @@ final class MyInfoViewController: BaseViewController {
         let barAppearance = UINavigationBarAppearance()
         barAppearance.backgroundColor = .Background.secondary
         navigationItem.scrollEdgeAppearance = barAppearance
+    }
+    
+    override func bind() {
+        let input = MyInfoViewModel.Input()
+        
+        let output = viewModel.transform(input: input)
+        
+        output.myProfile
+            .subscribe(with: self) { owner, myProfile in
+                owner.configureSnapshot(for: myProfile)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
