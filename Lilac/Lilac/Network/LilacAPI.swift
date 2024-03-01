@@ -14,15 +14,15 @@ enum LilacAPI {
     
     enum User {
         /// 회원가입
-        case signUp(userInfo: Requester.NewUser)
+        case signUp(userInfo: Requester.NewUser, deviceToken: String)
         /// 이메일 중복 확인
         case validateEmail(email: String)
         /// 로그인
-        case signIn(vendor: Vendor, deviceToken: String?)
+        case signIn(vendor: Vendor, deviceToken: String)
         /// 로그아웃
         case signOut
         /// FCM deviceToken 저장
-        case saveDeviceToken(token: String)
+        case saveDeviceToken(deviceToken: String)
         /// 내 프로필 정보 조회, 수정
         case myProfile(type: MyProfile)
         /// 다른 유저 프로필 조회

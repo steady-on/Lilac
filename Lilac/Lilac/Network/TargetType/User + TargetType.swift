@@ -52,14 +52,14 @@ extension LilacAPI.User: TargetType {
     
     var task: Moya.Task {
         let parameters: [String : Any] = switch self {
-        case .signUp(let userInfo):
+        case .signUp(let userInfo, let deviceToken):
             [
                 "email" : userInfo.email,
                 "password" : userInfo.password,
                 "nickname" : userInfo.nickname,
                 "phone" : userInfo.phone ?? "",
                 // TODO: keycahin setting 후 가져오기
-                "deviceToken" : "",
+                "deviceToken" : deviceToken,
             ]
         case .validateEmail(let email):
             ["email" : email]
@@ -69,12 +69,12 @@ extension LilacAPI.User: TargetType {
                 [
                     "email" : email,
                     "password" : password,
-                    "deviceToken" : token ?? "",
+                    "deviceToken" : token,
                 ]
             case .kakao(let accessToken):
                 [
                     "oauthToken" : accessToken,
-                    "deviceToken" : token ?? "",
+                    "deviceToken" : token,
                 ]
             case .apple:
                 [
