@@ -231,3 +231,15 @@ extension MyInfoViewController {
         }
     }
 }
+
+extension MyInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        
+        if case ItemType.coin = item.type {
+            print("코인 충전 View!")
+        }
+    }
+}
