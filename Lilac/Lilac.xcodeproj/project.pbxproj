@@ -100,6 +100,7 @@
 		638CBF5A2B63DF3E00778283 /* WorkspaceServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */; };
 		6398ADC52B91CD8C003008F0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */; };
 		6398ADC92B91E270003008F0 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */; };
+		6398ADCE2B91ECD4003008F0 /* Store + TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADCD2B91ECD4003008F0 /* Store + TargetType.swift */; };
 		63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA462B8F6ECE00A312D4 /* RxRealm */; };
 		63A7FA492B8F711700A312D4 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA482B8F711700A312D4 /* Date+.swift */; };
 		63A7FA4D2B8F746600A312D4 /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */; };
@@ -202,6 +203,7 @@
 		638CBF592B63DF3E00778283 /* WorkspaceServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceServiceImpl.swift; sourceTree = "<group>"; };
 		6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		6398ADCD2B91ECD4003008F0 /* Store + TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store + TargetType.swift"; sourceTree = "<group>"; };
 		63A7FA482B8F711700A312D4 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingContentLabel.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				6317EE9F2B488A35007662A5 /* User + TargetType.swift */,
 				638CBF482B60D7DC00778283 /* Workspace + TargetType.swift */,
 				63513EB12B8C767400F1E460 /* Channel + TargetType.swift */,
+				6398ADCD2B91ECD4003008F0 /* Store + TargetType.swift */,
 			);
 			path = TargetType;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				63513EBB2B8C9BF200F1E460 /* AuthService.swift in Sources */,
 				6317EEA02B488A35007662A5 /* User + TargetType.swift in Sources */,
 				631D75232B82F028002F4279 /* SettingsViewController.swift in Sources */,
+				6398ADCE2B91ECD4003008F0 /* Store + TargetType.swift in Sources */,
 				6317EE742B470F90007662A5 /* UIFont+.swift in Sources */,
 				63513ED02B8DD26A00F1E460 /* RealmError.swift in Sources */,
 				6317EE942B487543007662A5 /* LilacAPI.swift in Sources */,

@@ -103,4 +103,11 @@ enum LilacAPI {
         /// 채널 관리자 권한 변경; 채널 관리자가 바뀐 채널 정보를 반환
         case changeAdmin(workspaceId: Int, channelName: String, userId: Int)
     }
+    
+    enum Store {
+        /// 새싹 코인 결제 검증
+        case payValidation(impUid: String, merchantIid: String)
+        /// 새싹 코인 스토어 아이템 리스트
+        case itemList
+    }
 }
