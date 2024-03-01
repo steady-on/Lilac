@@ -16,6 +16,8 @@ enum LilacAPIError: String, Error {
     case expiredRefreshToken = "E06"
     case badRequest = "E11"
     case duplicatedData = "E12"
+    case existedPayment = "E81"
+    case invalidPayment = "E82"
     case unknownedRoutePath = "E97"
     case overCall = "E98"
     case serverError = "E99"
@@ -58,6 +60,10 @@ extension LilacAPIError: CustomDebugStringConvertible {
             return "내부 서버에 오류가 있습니다."
         case .notDefinedError:
             return "정의되지 않은 오류입니다."
+        case .existedPayment:
+            return "존재하는 결제건 입니다."
+        case .invalidPayment:
+            return "유효하지 않은 결제건 입니다."
         }
     }
 }
