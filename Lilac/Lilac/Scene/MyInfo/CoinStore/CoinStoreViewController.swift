@@ -11,6 +11,14 @@ import RxCocoa
 
 final class CoinStoreViewController: BaseViewController {
     
+    private let viewModel: CoinStoreViewModel
+    
+    init(viewModel: CoinStoreViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+    
     private let shopTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.backgroundColor = .Background.primary
@@ -22,6 +30,8 @@ final class CoinStoreViewController: BaseViewController {
     
     private var dataSource: UITableViewDiffableDataSource<Section, Item>! = nil
 
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -49,7 +59,15 @@ final class CoinStoreViewController: BaseViewController {
     }
     
     override func bind() {
+        let input = CoinStoreViewModel.Input()
         
+        let output = viewModel.transform(input: input)
+        
+        output.itemList
+            .subscribe(with: self) { owner, itemData in
+                owner.configureSnapshot(myCoin: User.shared.myCoin, itemList: itemData)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

@@ -104,6 +104,7 @@
 		6398ADD12B91EE16003008F0 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADD02B91EE16003008F0 /* StoreService.swift */; };
 		6398ADD32B91F05E003008F0 /* StoreServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADD22B91F05E003008F0 /* StoreServiceImpl.swift */; };
 		6398ADD62B91F150003008F0 /* CoinStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADD52B91F150003008F0 /* CoinStoreViewController.swift */; };
+		6398ADD82B91F67A003008F0 /* CoinStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */; };
 		63A7FA472B8F6ECE00A312D4 /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A7FA462B8F6ECE00A312D4 /* RxRealm */; };
 		63A7FA492B8F711700A312D4 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA482B8F711700A312D4 /* Date+.swift */; };
 		63A7FA4D2B8F746600A312D4 /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */; };
@@ -210,6 +211,7 @@
 		6398ADD02B91EE16003008F0 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		6398ADD22B91F05E003008F0 /* StoreServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceImpl.swift; sourceTree = "<group>"; };
 		6398ADD52B91F150003008F0 /* CoinStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStoreViewController.swift; sourceTree = "<group>"; };
+		6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoinStoreViewModel.swift; path = CoinStore/CoinStoreViewModel.swift; sourceTree = "<group>"; };
 		63A7FA482B8F711700A312D4 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingContentLabel.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */,
+				6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */,
 				6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */,
 				6398ADD42B91F134003008F0 /* CoinStore */,
 			);
@@ -787,6 +790,7 @@
 				63513EE12B8E537600F1E460 /* ChannelTitleView.swift in Sources */,
 				633190B82B5064CA005289E1 /* OnboardingViewController.swift in Sources */,
 				63A7FA562B8FD8D600A312D4 /* WebSocketManager.swift in Sources */,
+				6398ADD82B91F67A003008F0 /* CoinStoreViewModel.swift in Sources */,
 				637A93582B83595000756CA3 /* AddWorkspaceViewModel.swift in Sources */,
 				6317EEAD2B4AD557007662A5 /* BaseViewController.swift in Sources */,
 				63513EBD2B8C9D2000F1E460 /* WorkspaceService.swift in Sources */,

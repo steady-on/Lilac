@@ -17,6 +17,12 @@ final class User {
     @UserDefault(key: .email, defaultValue: "") private var email
     @UserDefault(key: .lastVisitedWorkspaceId, defaultValue: -1) private var lastVisitedWorkspaceId
     
+    private var _profile = MyProfile() {
+        didSet {
+            profile.accept(_profile)
+        }
+    }
+    
     private var _workspaces = [Workspace]() {
         didSet {
             workspaces.accept(_workspaces)
@@ -37,20 +43,22 @@ final class User {
         _workspaces.isEmpty
     }
     
+    var myCoin: Int {
+        _profile.sesacCoin ?? 0
+    }
+    
     /// 유저 프로필 업데이트
     func update(for profile: Responder.User.MyProfile) {
-        let myProfile = MyProfile(from: profile)
-        nickname = myProfile.nickname
-        email = myProfile.email
-        self.profile.accept(myProfile)
+        _profile = MyProfile(from: profile)
+        nickname = _profile.nickname
+        email = _profile.email
     }
     
     /// 유저 프로필 업데이트
     func update(for profile: Responder.User.ProfileWithToken) {
-        let myProfile = MyProfile(from: profile)
-        nickname = myProfile.nickname
-        email = myProfile.email
-        self.profile.accept(myProfile)
+        _profile = MyProfile(from: profile)
+        nickname = _profile.nickname
+        email = _profile.email
     }
     
     /// 워크스페이스 추가
