@@ -44,6 +44,8 @@ final class MyInfoViewController: BaseViewController {
         
         configureDataSource()
         
+        infoTableView.delegate = self
+        
         let components = [profilePhotoButton, infoTableView]
         components.forEach { component in
             view.addSubview(component)
@@ -239,7 +241,15 @@ extension MyInfoViewController: UITableViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         
         if case ItemType.coin = item.type {
-            print("코인 충전 View!")
+            pushCoinStoreView()
         }
+    }
+}
+
+extension MyInfoViewController {
+    private func pushCoinStoreView() {
+        let coinStoreView = CoinStoreViewController(viewModel: CoinStoreViewModel())
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.pushViewController(coinStoreView, animated: true)
     }
 }

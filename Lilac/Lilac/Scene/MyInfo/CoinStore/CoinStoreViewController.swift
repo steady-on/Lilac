@@ -19,17 +19,10 @@ final class CoinStoreViewController: BaseViewController {
         super.init()
     }
     
-    private let shopTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.backgroundColor = .Background.primary
-        tableView.separatorStyle = .none
-        tableView.showsHorizontalScrollIndicator = false
-        tableView.showsVerticalScrollIndicator = false
-        return tableView
-    }()
+    private var shopCollectionView: UICollectionView! = nil
     
-    private var dataSource: UITableViewDiffableDataSource<Section, Item>! = nil
-
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -39,13 +32,14 @@ final class CoinStoreViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
+        configureCollectionView()
         configureDataSource()
         
-        view.addSubview(shopTableView)
+        view.addSubview(shopCollectionView)
     }
-
+    
     override func setConstraints() {
-        shopTableView.snp.makeConstraints { make in
+        shopCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -99,10 +93,27 @@ extension CoinStoreViewController {
 }
 
 extension CoinStoreViewController {
-    private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Section, Item>(tableView: shopTableView) { tableView, indexPath, item in
-            let cell = UITableViewCell()
+    private func configureCollectionView() {
+        shopCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        shopCollectionView.showsVerticalScrollIndicator = false
+        shopCollectionView.showsHorizontalScrollIndicator = false
+        shopCollectionView.delegate = self
+    }
+    
+    private func createLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, layoutEnvironment in
+            var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+            configuration.backgroundColor = .Background.primary
+            configuration.showsSeparators = false
             
+            return NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+        }
+    }
+}
+
+extension CoinStoreViewController {
+    private func configureDataSource() {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
             var content = cell.defaultContentConfiguration()
             
             switch item.section {
@@ -115,7 +126,7 @@ extension CoinStoreViewController {
                     ]
                 )
                 
-                text.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 11))
+                text.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 12))
                 
                 content.attributedText = text
                 
@@ -129,17 +140,24 @@ extension CoinStoreViewController {
                 content.textProperties.color = .Text.primary
             }
             
+            content.prefersSideBySideTextAndSecondaryText = true
+            
             cell.contentConfiguration = content
             
             if case Section.itemList = item.section {
-                let accessoryButton = FilledColorButton(title: item.secondaryText)
-                cell.accessoryView = accessoryButton
+                let secondaryButton = FilledColorButton(title: "₩\(item.secondaryText)")
+                secondaryButton.isUserInteractionEnabled = false
+                cell.accessories = [.customView(configuration: UICellAccessory.CustomViewConfiguration(customView: secondaryButton, placement: .trailing(displayed: .always, at: UICellAccessory.Placement.position(after: .detail()))))]
             }
-            
-            return cell
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: shopCollectionView) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
     }
-    
+}
+
+extension CoinStoreViewController {
     private func configureSnapshot(myCoin: Int, itemList: [Responder.Store.Item]) {
         let myCoinItem = Item(myCoin: myCoin)
         
@@ -149,5 +167,15 @@ extension CoinStoreViewController {
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems([myCoinItem], toSection: .myCoin)
         snapshot.appendItems(items, toSection: .itemList)
+        
+        dataSource.apply(snapshot)
+    }
+}
+
+extension CoinStoreViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        
     }
 }
