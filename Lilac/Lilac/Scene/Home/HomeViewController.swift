@@ -83,6 +83,12 @@ final class HomeViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        profileButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                owner.pushMyInfoView()
+            }
+            .disposed(by: disposeBag)
+        
         let input = HomeViewModel.Input(
             isRefresh: isRefresh
         )
@@ -382,5 +388,13 @@ extension HomeViewController: UICollectionViewDelegate {
         let channelView = ChannelViewController(viewModel: channelViewModel)
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.pushViewController(channelView, animated: true)
+    }
+}
+
+extension HomeViewController {
+    private func pushMyInfoView() {
+        let myInfoView = MyInfoViewController(viewModel: MyInfoViewModel())
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.pushViewController(myInfoView, animated: true)
     }
 }
