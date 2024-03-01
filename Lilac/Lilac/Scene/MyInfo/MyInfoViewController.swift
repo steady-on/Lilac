@@ -155,7 +155,7 @@ extension MyInfoViewController {
                     ]
                 )
                 
-                text.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 6))
+                text.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 0, length: 7))
                 
                 content.attributedText = text
             default:
