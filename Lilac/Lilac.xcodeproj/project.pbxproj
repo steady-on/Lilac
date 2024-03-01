@@ -211,7 +211,7 @@
 		6398ADD02B91EE16003008F0 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		6398ADD22B91F05E003008F0 /* StoreServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceImpl.swift; sourceTree = "<group>"; };
 		6398ADD52B91F150003008F0 /* CoinStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStoreViewController.swift; sourceTree = "<group>"; };
-		6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoinStoreViewModel.swift; path = CoinStore/CoinStoreViewModel.swift; sourceTree = "<group>"; };
+		6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStoreViewModel.swift; sourceTree = "<group>"; };
 		63A7FA482B8F711700A312D4 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		63A7FA4C2B8F746600A312D4 /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		63A7FA4E2B8F82BB00A312D4 /* ChattingContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingContentLabel.swift; sourceTree = "<group>"; };
@@ -633,7 +633,6 @@
 			isa = PBXGroup;
 			children = (
 				6398ADC42B91CD8C003008F0 /* MyInfoViewController.swift */,
-				6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */,
 				6398ADC82B91E270003008F0 /* MyInfoViewModel.swift */,
 				6398ADD42B91F134003008F0 /* CoinStore */,
 			);
@@ -653,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				6398ADD52B91F150003008F0 /* CoinStoreViewController.swift */,
+				6398ADD72B91F67A003008F0 /* CoinStoreViewModel.swift */,
 			);
 			path = CoinStore;
 			sourceTree = "<group>";
