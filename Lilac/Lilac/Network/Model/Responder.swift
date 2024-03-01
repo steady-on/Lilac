@@ -221,7 +221,7 @@ enum Responder {
     }
     
     enum Store {
-        struct BillingResult {
+        struct BillingResult: Decodable {
             /// 결제 내역에 대한 아이디
             let billingId: Int
             /// 결제 시 등록한 상점 고유 번호
@@ -236,7 +236,7 @@ enum Responder {
             let createdAt: Date
         }
         
-        struct Item {
+        struct Item: Decodable {
             /// 금액을 결제하면 얻을 수 있는 새싹 코인
             let item: String
             /// 해당 새싹코인 아이템 가격
