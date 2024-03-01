@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class MyInfoViewController: BaseViewController {
     
@@ -24,8 +25,8 @@ final class MyInfoViewController: BaseViewController {
     private let profilePhotoButton = SelectImageButton(baseImage: nil)
     
     private let infoTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .Background.secondary
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.backgroundColor = .Background.primary
         tableView.separatorStyle = .none
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
@@ -56,8 +57,9 @@ final class MyInfoViewController: BaseViewController {
         }
         
         infoTableView.snp.makeConstraints { make in
-            make.top.equalTo(profilePhotoButton.snp.bottom).offset(35)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.top.equalTo(profilePhotoButton.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -77,6 +79,7 @@ final class MyInfoViewController: BaseViewController {
         
         output.myProfile
             .subscribe(with: self) { owner, myProfile in
+                owner.setProfileImage(for: myProfile.profileImage)
                 owner.configureSnapshot(for: myProfile)
             }
             .disposed(by: disposeBag)
@@ -158,14 +161,19 @@ extension MyInfoViewController {
             default:
                 content.text = item.type.text
                 content.textProperties.font = .brandedFont(.bodyBold)
+                content.textProperties.color = .Text.primary
             }
             
             content.secondaryText = item.type.secondatyText
             content.secondaryTextProperties.font = .brandedFont(.body)
             content.secondaryTextProperties.color = .Text.secondary
             
+            content.prefersSideBySideTextAndSecondaryText = true
+            
+            cell.contentConfiguration = content
+            
             if case Section.info = item.section {
-                cell.accessoryType = .detailDisclosureButton
+                cell.accessoryType = .disclosureIndicator
             }
             
             return cell
@@ -185,9 +193,41 @@ extension MyInfoViewController {
         ]
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections(Section.allCases)
         snapshot.appendItems(infoItems, toSection: .info)
         snapshot.appendItems(accountItems, toSection: .account)
         
         dataSource.apply(snapshot)
+    }
+}
+
+extension MyInfoViewController {
+    private func setProfileImage(for endPoint: String?) {
+        let defaultImages: [UIImage] = [.Profile.noPhotoA, .Profile.noPhotoB, .Profile.noPhotoC]
+        
+        loadServerImage(to: endPoint) { [unowned self] image in
+            guard let image else {
+                profilePhotoButton.changeImage(for: defaultImages.randomElement()!)
+                return
+            }
+            
+            profilePhotoButton.changeImage(for: image)
+        }
+    }
+    
+    private func loadServerImage(to endPoint: String?, completion: @escaping (UIImage?) -> Void) {
+        guard let endPoint, let imageURL = URL(string: BaseURL.v1.server + endPoint) else {
+            completion(nil)
+            return
+        }
+        
+        KingfisherManager.shared.retrieveImage(with: imageURL) { result in
+            switch result {
+            case .success(let imageData):
+                completion(imageData.image)
+            case .failure(_):
+                completion(nil)
+            }
+        }
     }
 }
