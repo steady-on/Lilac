@@ -241,6 +241,11 @@ enum Responder {
             let item: String
             /// 해당 새싹코인 아이템 가격
             let amount: String
+            
+            init(item: String, amount: String) {
+                self.item = item
+                self.amount = amount
+            }
         }
     }
 

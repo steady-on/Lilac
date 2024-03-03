@@ -8,6 +8,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import iamport_ios
+import WebKit
 
 final class CoinStoreViewController: BaseViewController {
     
@@ -19,14 +21,28 @@ final class CoinStoreViewController: BaseViewController {
         super.init()
     }
     
+    private let disposeBag = DisposeBag()
+    
+    private let paySuccess = PublishRelay<(imp_uid: String, merchant_uid: String)>()
+    
     private var shopCollectionView: UICollectionView! = nil
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     
-    private let disposeBag = DisposeBag()
+    private lazy var wkWebView: WKWebView = {
+        var view = WKWebView()
+        view.backgroundColor = .clear
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Iamport.shared.close()
     }
     
     override func configureHiararchy() {
@@ -53,13 +69,21 @@ final class CoinStoreViewController: BaseViewController {
     }
     
     override func bind() {
-        let input = CoinStoreViewModel.Input()
+        let input = CoinStoreViewModel.Input(
+            paySuccess: paySuccess
+        )
         
         let output = viewModel.transform(input: input)
         
-        output.itemList
+        output.coinAndItemList
             .subscribe(with: self) { owner, itemData in
-                owner.configureSnapshot(myCoin: User.shared.myCoin, itemList: itemData)
+                owner.configureSnapshot(myCoin: itemData.0, itemList: itemData.1)
+            }
+            .disposed(by: disposeBag)
+        
+        output.showToast
+            .subscribe(with: self) { owner, toast in
+                owner.showToast(toast, target: self)
             }
             .disposed(by: disposeBag)
     }
@@ -113,6 +137,7 @@ extension CoinStoreViewController {
 
 extension CoinStoreViewController {
     private func configureDataSource() {
+        
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
             var content = cell.defaultContentConfiguration()
             
@@ -176,6 +201,40 @@ extension CoinStoreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
+        guard let item = dataSource.itemIdentifier(for: indexPath),
+              item.section == .itemList else { return }
         
+        let convertedItem = Responder.Store.Item(item: item.text, amount: item.secondaryText)
+        buyItem(convertedItem)
+    }
+}
+
+extension CoinStoreViewController {
+    private func buyItem(_ item: Responder.Store.Item) {
+        let payment = IamportPayment(
+            pg: PG.html5_inicis.makePgRawName(pgId: "INIpayTest"),
+            merchant_uid: "ios_\(APIKey.secretKey)_\(Int(Date().timeIntervalSince1970))",
+            amount: item.amount
+        ).then {
+            $0.pay_method = PayMethod.card.rawValue
+            $0.name = item.item
+            $0.buyer_name = "백수민"
+            $0.app_scheme = "iamport"
+        }
+        
+        guard let navigationController else { return }
+        Iamport.shared.payment(navController: navigationController, userCode: APIKey.portOneUserCode, payment: payment) { [unowned self] response in
+            guard let response, let success = response.success, success else {
+                print("결제 실패!")
+                return
+            }
+            
+            guard let imp_uid = response.imp_uid, let merchant_uid = response.merchant_uid else {
+                print("결제 정보를 알 수 없음")
+                return
+            }
+            
+            paySuccess.accept((imp_uid, merchant_uid))
+        }
     }
 }
