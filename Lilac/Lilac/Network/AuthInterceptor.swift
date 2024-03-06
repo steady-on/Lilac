@@ -20,18 +20,22 @@ final class AuthInterceptor {
 extension AuthInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
 
-        var urlRequest = urlRequest
-        urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
+        var requestWithServerKey = addServerKey(to: urlRequest)
         
-        guard urlRequest.url?.lastPathComponent != LilacAPI.Auth.refresh.rawValue else {
-            let urlRequestWithRefreshToken = addRefreshToken(to: urlRequest)
-            let urlRequestWithToken = addAccessToken(to: urlRequestWithRefreshToken)
-            completion(.success(urlRequestWithToken))
+        guard let accessToken else {
+            completion(.success(requestWithServerKey))
             return
         }
         
-        let urlRequestWithAccessToken = addAccessToken(to: urlRequest)
-        completion(.success(urlRequestWithAccessToken))
+        var requestWithAccessToken = addAccessToken(to: requestWithServerKey)
+        
+        guard requestWithAccessToken.url?.lastPathComponent != LilacAPI.Auth.refresh.rawValue else {
+            let requestWithRefreshToken = addRefreshToken(to: requestWithServerKey)
+            completion(.success(requestWithRefreshToken))
+            return
+        }
+        
+        completion(.success(requestWithAccessToken))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
@@ -75,6 +79,13 @@ extension AuthInterceptor {
         }
         
         return lilacError
+    }
+    
+    private func addServerKey(to urlRequest: URLRequest) -> URLRequest {
+        var urlRequest = urlRequest
+        urlRequest.setValue(APIKey.secretKey, forHTTPHeaderField: "SesacKey")
+        
+        return urlRequest
     }
     
     private func addRefreshToken(to urlRequest: URLRequest) -> URLRequest {
