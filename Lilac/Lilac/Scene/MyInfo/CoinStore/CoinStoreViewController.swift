@@ -83,7 +83,7 @@ final class CoinStoreViewController: BaseViewController {
         
         output.showToast
             .subscribe(with: self) { owner, toast in
-                owner.showToast(toast, target: self)
+                owner.showToast(toast, target: self, position: .low)
             }
             .disposed(by: disposeBag)
     }

@@ -63,4 +63,9 @@ extension ToastAlert {
         let message: String
         let style: Style
     }
+    
+    enum Position {
+        case high
+        case low
+    }
 }

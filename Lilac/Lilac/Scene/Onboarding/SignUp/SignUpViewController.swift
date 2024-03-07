@@ -218,7 +218,7 @@ final class SignUpViewController: BaseViewController {
         
         output.showToastAlert
             .bind(with: self) { owner, toast in
-                owner.showToast(toast, target: self)
+                owner.showToast(toast, target: self, position: .high)
             }
             .disposed(by: disposeBag)
         
